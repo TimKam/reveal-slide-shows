@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JS-son - a Minimal JavaScript BDI Agent Library</title>
+
+		<meta name="description" content="JS-son - a Minimal JavaScript BDI Agent Library">
+		<meta name="author" content="Timotheus Kampik">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">Kampik & Nieves. Umeå University. EMAS 2019.</span>
+					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>JS-son</h1>
+					<h3>A Minimal JavaScript BDI Agent Library</h3>
+					<p>
+						<small>Timotheus Kampik and Juan Carlos Nieves</small> <br>
+						<small>Umeå University</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+					<section data-markdown>
+						* Motivation
+						* Design principles
+						* Reasoning loop
+						* Example code
+						* Potential use cases
+						* Demos
+						* Future outlook
+					</section>
+				</section>
+
+				<section>
+						<h2>Motivation</h2>
+						<section>
+								<fragment data-markdown>
+										* Gap: academic agent programming frameworks & engineering reality
+										* Lack of intuitive, practical entry point for non-experts
+										* Outdated technology stacks in MAS research
+										* Reference point: *Machine Learning* community
+								</fragment>
+								<fragment data-markdown class="tiny left"><br>
+										Mascardi et al. "Engineering Multi-Agent Systems: State of Affairs and the Road Ahead."  
+										Logan. "An agent programming manifesto." 
+								</fragment>
+						</section>
+
+				</section>
+
+				<section>
+						<h2>Design Principles I</h2>
+						<section>
+							<fragment data-markdown>
+								* Usability over intellectual elegance
+								* Flexibility over rigor
+								* Extensibility over out-of-the-box power
+							</fragment>
+							<fragment data-markdown class="tiny left"><br>
+								Inspired by the [Agile Manifesto](https://agilemanifesto.org/)
+							</fragment>
+						</section>
+				</section>
+
+				<section>
+						<h2>Design Principles II</h2>
+						<section>
+						<table class="comparison">
+							<tr>
+								<td><strong>Functional Programming</strong></td>
+								<td><strong>Agent-oriented Programming</strong></td>
+							</tr>
+							<tr>
+								<td>Lisp</td>
+								<td>Jason</td>
+							</tr>
+							<tr>
+								<td data-markdown>``MEMBER`` function (list)</td>
+								<td data-markdown>``(event, context, body)`` plans </td>
+							</tr>
+							<tr>
+								<td data-markdown>``includes`` functor (array)</td>
+								<td data-markdown>``(intention-condition, body)`` plans</td>
+							</tr>
+							<tr>
+								<td data-markdown> Lodash (``_``)</td>
+								<td>JS-son</td>
+							</tr>
+							<tr>
+								<td data-markdown> ES2016</td>
+								<td>???</td>
+							</tr>
+						</table>
+					</section>
+				</section>
+
+				<section>
+						<h2>Reasoning loop</h2>
+						<section data-markdown>
+								![](https://academic.signavio.com/p/model/c135ef6bcc234bb2a5fd0e88521713bf/png?inline&authkey=a976b0673afe8a8651e2a48f11e62a3f116ac41f824dbccf2cdf79365efb39d0)
+								
+						</section>
+				</section>
+
+				<section>
+						<h2>Example code I</h2>
+						<section data-markdown>
+							```JavaScript
+							const beliefs = {
+								...Belief('door', { locked: true }),
+								...Belief('requests', [])
+							}
+							```
+							<small data-markdown>*Comprehensive examples + docmentation: [https://github.com/TimKam/JS-son](https://github.com/TimKam/JS-son)*</small>
+						</section>
+				</section>
+
+				<section>
+						<h2>Example code II</h2>
+						<section data-markdown>
+							```JavaScript
+							const plansPorter = [
+								Plan(
+									beliefs =>
+										!beliefs.door.locked && 
+										beliefs.requests.includes('lock'),
+									() => [{ door: 'lock' }]
+								),
+								Plan(
+									beliefs =>
+										beliefs.door.locked && 
+										beliefs.requests.includes('unlock'),
+									() => [{ door: 'unlock' }]
+								)
+							]
+							```
+						</section>
+				</section>
+
+				<section>
+						<h2>Example code III</h2>
+						<section data-markdown>
+							```JavaScript
+							const porter = new Agent(
+								'porter',
+								beliefs,
+								{},
+								plansPorter
+							)
+							```
+						</section>
+				</section>
+
+				<section>
+						<h2>Use Cases</h2>
+						<section data-markdown>
+							* Data science
+							* Web development
+							* Education
+							* IoT
+							* Prototyping
+						</section>
+				</section>
+
+				<section data-background-iframe="./examples/web/index.html" data-background-interactive>
+				</section>
+
+				<section data-background-iframe="./examples/gridworld/index.html" data-background-interactive>
+				</section>
+
+				<section data-background-iframe="./examples/hci/app/js/third_page.html" data-background-interactive>
+				</section>
+
+				<section data-background-iframe="http://localhost:8888/notebooks/JS-son_Data_Science_Demo.ipynb" data-background-interactive>
+				</section>
+
+				<section>
+						<h2>Future Outlook</h2>
+						<section data-markdown>
+							* Extend library interface
+							* Support distributed environments (out-of-the-box)
+							* JaCaMo equivalent? (artifacts, organizations)
+							* Learning and reasoning extensions
+							* Move towards real-world usage
+							* Python port?
+						</section>
+				</section>
+
+				<section>
+						<h1>Questions?</h1>
+						<small data-markdown>
+							*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+						</small>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

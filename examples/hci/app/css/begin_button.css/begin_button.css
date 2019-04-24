@@ -1,0 +1,33 @@
+<style>
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #2A4765;
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  position: relative;
+  left: 900px;
+}
+
+.button:hover {background-color: white}
+
+.button:active {
+  background-color: white;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</style>
+</head>
+<body>
+
+<button type="button" class="button" onclick="window.open('./second_page.html', '_self')">Begin</button> 
+
+</body>
+</html>

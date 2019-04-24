@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Coin Sharing Game</title>
+    <link rel="icon" type="image/ico" href="umea_logo.png" />
+</head>
+</html>
+
+<html>
+  <head> 
+      <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHR32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossirigin="anonymous">
+      <link rel="stylesheet" href="../css/index.css">
+      <meta charset="utf-8">
+    <title>JS Issue Tracker</title>
+  </head>
+  <body>
+    <script src="main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://chancejs.com/chance.min.js"></script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>JS Issue Tracker</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body onload="fetchIssues()">
+    <div class="progress">
+      <div class="progress-bar progress-bar-introduction" role="progressbar" style="background-color:black;width:20%">
+        Introduction
+      </div>
+      <div class="progress-bar progress-bar-instructions" role="progressbar" style="background-color:#D7B17C; width:20%">
+        Instructions
+      </div>
+      <div class="progress-bar progress-bar-practiceround" role="progressbar" style="background-color:black;width:20%">
+        Practice Round
+      </div>
+        <div class="progress-bar progress-bar-study" role="progressbar" style="background-color:black;width:20%">
+          Study
+        </div>
+        <div class="progress-bar progress-bar-sumary" role="progressbar" style="background-color:black;width:20%">
+          Summary
+      </div>
+    </div> 
+    <div class="container">
+      <h1 >Instructions</h1>
+      <div class="jumbotron" style="background-color:white;">
+        <h3 style="color:#2A4765;background-color:white; position: relative; top: -30px; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">The game is a two-player game and goes over several turns. Each turn goes like this:</h3>
+        
+        <img src="umea_logo.png" style="position: relative; top: -200px; left: -280px; width:150px;" />
+
+        <form style="color:#2A4765;background-color:white; " id="issueInputForm">
+          <div class="form-group">
+            <label for="issueDescInput"  style="color:#2A4765;background-color:white; line-height: 1.8;"> <ul>
+              <li>One player has 100 virtual coins at their disposal, let us call this player the 'proposer'</li>
+              <li>They can split the coins in any way between themselves and the other player</li>
+              <li>They cannot split a single coin into more parts</li>
+              <li>The other player can either accept or reject the offer, we call this player the 'responder'
+                <li>If the responder accepts the offer, both players will receive the coins as split by the proposer</li>
+                <li>If the responder rejects the offer, nobody will receive any coins</li>
+              </li>
+            </ul> </label>
+        
+          
+
+            <style>
+              p.normal {
+                font-weight: normal;
+              }
+           
+              p.thick {
+                font-weight: bold;
+              }
+              
+              </style>
+
+            <label for="issueDescInput" style="position:relative;top:20px;"><p><font size="3">First, the chatbot will play the role of the 'proposer' and you will be the 'responder'.
+
+              Then, we will take turns and change roles. In total, we will play<strong> ten</strong> rounds. Feel free to make notes about the amount of coins you received after each turn. To make sure you know how the game works, you will play <strong>two </strong>rounds of the game for <strong>practice.</strong></font></p></label>
+        
+          <div class="form-group">
+
+            
+              <head>
+                <style>
+                  .button {
+                    display: inline-block;
+                    padding: 15px 25px;
+                    font-size: 24px;
+                    cursor: pointer;
+                    text-align: center;
+                    text-decoration: none;
+                    outline: none;
+                    color: white;
+                    background-color: #2A4765;
+                    border: none;
+                    border-radius: 15px;
+                    position: relative;
+                    left: 900px;
+                    top: 50px;
+                  }
+                  
+                  .button:hover {color:#2A4765; background-color: white;}
+                  
+                  .button:active {
+                    background-color: white;
+                    box-shadow: 0 5px #666;
+                    transform: translateY(4px);
+                  }
+                  </style>
+                  </head>
+                  <body>
+                  
+                  <button type="button" class="button" onclick="window.open('./third_page.html', '_self')">Next</button> 
+                  
+                  </body>
+                  </html>
+                  
+             
+                        
+    
+           
+           
+            
+
+    </div>
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+
+  </body>
+</html>

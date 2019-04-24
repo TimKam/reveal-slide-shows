@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Coin Sharing Game</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/index.css">
+
+  </head>
+  <body>
+    <div class="progress">
+      <div class="progress-bar progress-bar-introduction" role="progressbar" style="background-color:black; width:20%">
+        Introduction
+      </div>
+      <div class="progress-bar progress-bar-instructions" role="progressbar" style="background-color:black; width:20%">
+        Instructions
+      </div>
+      <div class="progress-bar progress-bar-practiceround" role="progressbar" style="background-color:black; width:20%">
+        Practice Round
+      </div>
+        <div class="progress-bar progress-bar-study" role="progressbar" style="background-color:black; width:20%">
+          Study
+        </div>
+        <div class="progress-bar progress-bar-sumary" role="progressbar" style="background-color:#D7B17C; width:20%">
+          Summary
+      </div>
+    </div> 
+    <div class="container">
+            <form id="test-form">
+
+            <div>
+                <label>Gender</label>
+                <input type="text" name="gender" placeholder="Field 1"/>
+            </div>
+            
+            <div>
+                <label>Education</label>
+                <input type="text" name="education" placeholder="Field 2"/>
+            </div>
+
+            <div>
+                <button type="submit"id="submit-form">Submit</button>
+            </div>
+            
+            </form>
+    </div>   
+
+<button type="button" class="button">Next</button> 
+
+    <style>
+    .button {
+      display: inline-block;
+      padding: 15px 25px;
+      font-size: 24px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: white;
+      background-color: #2A4765;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 9px #999;
+      position: relative;
+      left: 900px;
+      top: 300px;
+      
+    }
+    
+    .button:hover {background-color: white}
+    
+    .button:active {
+      background-color: white;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="./dataInterface.js"></script>
+
+    
+</body>
+</html>

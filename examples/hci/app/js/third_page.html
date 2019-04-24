@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Coin Sharing Game</title>
+    <link rel="icon" type="image/ico" href="umea_logo.png" />
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/index.css">
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="speech-bubble" style="">
+        <h2 style="color: #2A4765; background-color: white; padding: 20px 10px;text-align: center; font-family:courier;height: 0px; width: 0px;border-radius: 0cm;" id="agent-interface" class="speech-bubble" type="speech-bubble">
+        </h2>
+      </div>
+
+      <div class="arrow bottom right">
+      <div id="human-interface">
+      <div id="responder">
+          <button id="accept" class="button1">Accept</button>
+          <button id="reject"class="button1">Reject</button>
+      </div>
+      <div class="bot-animation">
+          <div class="bot-head">
+            <div style="margin: 5px;height: 5px;"></div>
+            <div class="bot-face">
+              <div class="bot-eyes">
+                <div class="left-eye eye" >
+                  <div class="left-pupil pupil" ></div>
+                </div>
+                <div class="right-eye eye">
+                  <div class="right-pupil pupil" ></div></div>
+              </div>
+              <div class="bot-mouth"></div>
+            </div>
+          </div>
+          <div class="bot-neck"></div>
+          <div class="bot-torso"></div>
+        </div>
+
+        <div id="proposer" style="position: relative; left: -200px;">
+            <p>Drag the slider to choose the amount you want to share.</p>
+          <div class="slidecontainer">
+            <input type="range" min=1 max=100 value=50 class="slider" id="proposal">
+            <p>Value: <span id="amount"></span></p>
+             <button onclick="myFunction()" id="propose" class="button1">Propose</button>
+          </div>
+              </div>
+          
+          <script>
+          var slider = document.getElementById("proposal");
+          var output = document.getElementById("amount");
+          output.innerHTML = slider.value;
+          
+          slider.oninput = function() {
+            output.innerHTML = this.value;
+          }
+          </script>
+
+  <script>
+      function myFunction() {
+        var x = document.getElementById("myRange").value;
+        document.getElementById("amount").innerHTML = x;
+      }
+      </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="./lib/js-son/JSson.js"></script>
+<script src="./testRun.js"></script>
+</body>
+</html>
