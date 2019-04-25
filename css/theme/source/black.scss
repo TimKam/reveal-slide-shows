@@ -83,6 +83,28 @@ li {
 	font-size: 25px;
 }
 
+.alg {
+	font-family: monospace;
+	font-size: 30px;
+}
+
+.scenario-img {
+	width: 250px;
+	height: 300px;
+}
+
+img.active-1 {
+	border-color: red !important;
+}
+
+img.active-2 {
+	border-color: red !important;
+	border-style: dashed !important;
+}
+
+.active-1, .active-2 {
+	color: red;
+}
 
 // Theme template ------------------------------
 @import "../template/theme";

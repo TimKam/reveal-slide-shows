@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Empathic Agents: A Hybrid Normative/Consequentialistic Approach</title>
+
+		<meta name="description" content="Empathic Agents: A Hybrid Normative/Consequentialistic Approach">
+		<meta name="author" content="Timotheus Kampik">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">T. Kampik. Umeå University. AAMAS DC 2019.</span>
+					<img class="wasp-logo" src="../WASP.png" alt="WASP logo"/>
+					<img class="umu-logo" src="../umu.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Empathic Agents</h1>
+					<h3>A Hybrid Normative/ Consequentialistic Approach</h3>
+					<p>
+						<small>Timotheus Kampik</small> <br>
+						<small>Umeå University</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+					<section data-markdown>
+                        * Motivation
+                        
+                        * Design principles
+
+                        * Empathic equilibria
+
+                        * Managing inconsistent beliefs
+
+                        * Ongoing work
+
+                        * Future work
+					</section>
+				</section>
+
+				<section>
+						<h2>Motivation</h2>
+						<section>
+								<fragment data-markdown>
+                                        * Complex information systems often optimized towards simple metrics:
+                                        
+                                        ``#clicks``, ``#views``
+
+                                        * Challenge: "meet the needs of both the users and the system designers" (Ricci et al.)
+                                        
+                                        * Development of new multi-agent systems concepts to address the problem
+								</fragment>
+								<fragment data-markdown class="tiny left"><br>
+                                        Ricci et al. Recommender Systems: Introduction and Challenges. 2015.    
+                                        Kampik et al. Coercion and Deception in Persuasive Technologies. 2018.
+								</fragment>
+						</section>
+
+                </section>
+                
+                <section>
+                    <h2>Design Principles</h2>
+                    <section>
+                            <fragment data-markdown>
+                                    * Be aware of the utility function or beliefs of others
+                                    * Maintain "self-other differentiation" (Coplan)
+                                    * Be able to comply with rules/norms 
+                                    * Be limitedly receptive to *utility contagion*
+                            </fragment>
+                            <fragment data-markdown class="tiny left"><br>
+                                Coplan. Will the Real Empathy Please Stand Up? A Case for a Narrow Conceptualization. 2011.  
+                                Stueber. Empathy (The Stanford Encyclopedia of Philosophy). 2008.
+                            </fragment>
+                    </section>
+
+                </section>
+
+                <section>
+                    <h2>Empathic Equilibria</h2>
+                    <section>
+                            <fragment data-markdown>
+                                    * ``n`` agents interact in environment
+                                    
+                                    * Each agent has set of actions it can potentially execute
+                                    
+                                    * All agents act simultaneously; only one specific point in time considered
+                                    
+                                    * Each agent has utility function: maps action combination to numerical value
+
+                                    * All agents are of the same *type* (*i.e.:* empathic) -> find equilibrium
+                            </fragment>
+                            <fragment data-markdown class="tiny left"><br>
+                                    Kampik et al. Empathic Autonomous Agents.
+                            </fragment>
+                    </section>
+                </section>
+
+                <section>
+                        <h2>Empathic Equilibria</h2>
+                        <section>
+                                <fragment data-markdown class="alg">
+                                        1. Employ acceptability rules: check if an action combination must not be executed
+
+                                        2. Update utility functions accordingly
+
+                                        3. Determine Nash equilibria (**NE**)
+
+                                        4. If **NE** exist:  
+                                        Pick actions that correspond with **NE** that maximizes shared utility 
+
+                                        5. If no **NE** exist:  
+                                        Pick actions that generally maximize shared utility
+                                </fragment>
+                                <fragment data-markdown class="tiny left"><br>
+                                    Kampik et al. Empathic Autonomous Agents.
+                                </fragment>
+                        </section>
+                </section>
+
+                <section>
+                        <h2>Empathic Equilibria</h2>
+                        <section>
+                                <table class="comparison">
+                                        <tr>
+                                            <td>Alone</td>
+                                            <td>1</td>
+                                            <td >4</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Together</td>
+                                            <td class="active-1">6</td>
+                                            <td class="active-2">5</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Action</td>
+                                            <td><img class="scenario-img active-1" src="./bach.jpg"></td>
+                                            <td><img class="scenario-img active-2" src="./stravinsky.jpg"></td>
+                                            <td><img class="scenario-img" src="./mozart.jpg"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Together</td>
+                                            <td class="active-1">1.1</td>
+                                            <td class="active-2">2</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alone</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                        </tr>
+                                </table>
+                        </section>
+                </section>
+
+                <section>
+                        <h2>Empathic Equilibria</h2>
+                        <section>
+                                <table class="comparison">
+                                        <tr>
+                                            <td>Alone</td>
+                                            <td>1</td>
+                                            <td>4</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Together</td>
+                                            <td>6</td>
+                                            <td>5</td>
+                                            <td class="active-1">3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Action</td>
+                                            <td><img class="scenario-img" src="./bach.jpg"></td>
+                                            <td><img class="scenario-img" src="./stravinsky.jpg"></td>
+                                            <td><img class="scenario-img active-1" src="./mozart.jpg"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Together</td>
+                                            <td>1.1</td>
+                                            <td>2</td>
+                                            <td class="active-1">4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alone</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                        </tr>
+                                </table>
+                        </section>
+                </section>
+
+                <section>
+                        <h2>Empathic Equilibria</h2>
+                        <section>
+                                <table class="comparison">
+                                        <tr>
+                                            <td>Alone</td>
+                                            <td>1</td>
+                                            <td>4</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Together</td>
+                                            <td class="active-1">6</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Action</td>
+                                            <td><img class="scenario-img active-1" src="./bach.jpg"></td>
+                                            <td><img class="scenario-img" src="./stravinsky.jpg"></td>
+                                            <td><img class="scenario-img" src="./mozart.jpg"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Together</td>
+                                            <td class="active-1">1.1</td>
+                                            <td>2</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alone</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                        </tr>
+                                </table>
+                        </section>
+                </section>
+                <section>
+                    <h2>Managing Inconsistent Beliefs</h2>
+                    <section>
+                            <br>
+                            <fragment data-markdown>
+                                * Agents may initially have inconsistent beliefs about acceptability rules.  
+                                  Example: recommender system scenario:
+                                    ```
+                                    // System provider agent:
+                                    acceptable("Show vodka ad", "Show university ad").
+                                    // User agent:
+                                    attack("Show vodka ad", "Alcoholic"). 
+                                    ```
+                                * Apply formal argumentation (Dung-style), *maximal ideal extension*.
+                            </fragment>
+                            <fragment data-markdown class="tiny left"><br>
+                                    Kampik et al. Implementing Argumentation-enabled Empathic Agents.
+                            </fragment>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Ongoing Work</h2>
+                    <section>
+                            <fragment data-markdown>
+                                    * Strengthen theoretical foundation, considering recent microeconomic theory (*i.e.*: Richter and Rubinstein)
+                                    * Develop frameworks and libraries to facilitate the implementation of empathic agents
+                                    * Evaluate empathic agents empirically
+                            </fragment>
+                            <fragment data-markdown class="tiny left"><br>
+                                    Richter and Rubinstein. Normative Equilibrium: The Permissible and the Forbidden as Devices for Bringing Order to Economic Environments.  
+                                    Kampik and Nieves. JS-son - A Minimal JavaScript BDI Agent Library.  
+                                    Kampik et al. Explaining Sympathetic Actions of Rational Agents.
+                            </fragment>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Future Work</h2>
+                    <section>
+                            <fragment data-markdown>
+                                    * Provide a Markovian (temporal) perspective
+                                    * Enable learning & management of partial observability
+                            </fragment>
+                    </section>
+                </section>
+
+				<section>
+                        <h1>Thank you!</h1>
+						<h1>Questions?</h1>
+						<small data-markdown>
+							*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+						</small>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true },
+					{ src: '../plugin/search/search.js', async: true },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
