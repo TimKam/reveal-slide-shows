@@ -58,6 +58,10 @@ img.active-2 {
 .active-1, .active-2 {
   color: red; }
 
+.full-image {
+  height: 50%;
+  width: 50%; }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/

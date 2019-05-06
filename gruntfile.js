@@ -115,7 +115,11 @@ module.exports = grunt => {
 		zip: {
 			bundle: {
 				src: [
+					'aamas-dc/**',
+					'extraamas/**',
 					'index.html',
+					'aamas-dc.html',
+					'extraamas.html',
 					'css/**',
 					'js/**',
 					'lib/**',

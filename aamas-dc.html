@@ -14,12 +14,12 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="../css/reset.css">
-		<link rel="stylesheet" href="../css/reveal.css">
-		<link rel="stylesheet" href="../css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/black.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="../lib/css/monokai.css">
+		<link rel="stylesheet" href="./lib/css/monokai.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -40,8 +40,8 @@
 		<div class="reveal">
 				<div class='footer'>
 					<span class="footer-text">T. Kampik. Umeå University. AAMAS DC 2019.</span>
-					<img class="wasp-logo" src="../WASP.png" alt="WASP logo"/>
-					<img class="umu-logo" src="../umu.png" alt="UmU logo"/>
+					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
 				</div>
 
 			<!-- Any section element inside of this container is displayed as a slide -->
@@ -137,13 +137,11 @@
 
                                         2. Update utility functions accordingly
 
-                                        3. Determine Nash equilibria (**NE**)
+                                        3. Determine Pareto-optimal Nash equilibria ($NE_{po}$).
 
-                                        4. If **NE** exist:  
-                                        Pick actions that correspond with **NE** that maximizes shared utility 
+                                        4. If $NE_{po}$ exist: Pick $first$ (deterministic) action set in $NE_{po}$.
 
-                                        5. If no **NE** exist:  
-                                        Pick actions that generally maximize shared utility
+                                        5. Else: Pick actions that maximize shared utility.
                                 </fragment>
                                 <fragment data-markdown class="tiny left"><br>
                                     Kampik et al. Empathic Autonomous Agents.
@@ -169,9 +167,9 @@
                                         </tr>
                                         <tr>
                                             <td>Action</td>
-                                            <td><img class="scenario-img active-1" src="./bach.jpg"></td>
-                                            <td><img class="scenario-img active-2" src="./stravinsky.jpg"></td>
-                                            <td><img class="scenario-img" src="./mozart.jpg"></td>
+                                            <td><img class="scenario-img active-1" src="./aamas-dc/bach.jpg"></td>
+                                            <td><img class="scenario-img active-2" src="./aamas-dc/stravinsky.jpg"></td>
+                                            <td><img class="scenario-img" src="./aamas-dc/mozart.jpg"></td>
                                         </tr>
                                         <tr>
                                             <td>Together</td>
@@ -207,9 +205,9 @@
                                         </tr>
                                         <tr>
                                             <td>Action</td>
-                                            <td><img class="scenario-img" src="./bach.jpg"></td>
-                                            <td><img class="scenario-img" src="./stravinsky.jpg"></td>
-                                            <td><img class="scenario-img active-1" src="./mozart.jpg"></td>
+                                            <td><img class="scenario-img" src="./aamas-dc/bach.jpg"></td>
+                                            <td><img class="scenario-img" src="./aamas-dc/stravinsky.jpg"></td>
+                                            <td><img class="scenario-img active-1" src="./aamas-dc/mozart.jpg"></td>
                                         </tr>
                                         <tr>
                                             <td>Together</td>
@@ -245,9 +243,9 @@
                                         </tr>
                                         <tr>
                                             <td>Action</td>
-                                            <td><img class="scenario-img active-1" src="./bach.jpg"></td>
-                                            <td><img class="scenario-img" src="./stravinsky.jpg"></td>
-                                            <td><img class="scenario-img" src="./mozart.jpg"></td>
+                                            <td><img class="scenario-img active-1" src="./aamas-dc/bach.jpg"></td>
+                                            <td><img class="scenario-img" src="./aamas-dc/stravinsky.jpg"></td>
+                                            <td><img class="scenario-img" src="./aamas-dc/mozart.jpg"></td>
                                         </tr>
                                         <tr>
                                             <td>Together</td>
@@ -339,12 +337,10 @@
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
-					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../plugin/highlight/highlight.js', async: true },
-					{ src: '../plugin/search/search.js', async: true },
-					{ src: '../plugin/zoom-js/zoom.js', async: true },
-					{ src: '../plugin/notes/notes.js', async: true }
+					{ src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/highlight/highlight.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
 				]
 			});
 
