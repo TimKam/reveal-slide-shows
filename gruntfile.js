@@ -120,6 +120,7 @@ module.exports = grunt => {
 					'index.html',
 					'aamas-dc.html',
 					'extraamas.html',
+					'emas.html',
 					'css/**',
 					'js/**',
 					'lib/**',

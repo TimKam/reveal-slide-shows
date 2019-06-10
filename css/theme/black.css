@@ -42,11 +42,11 @@ li {
 
 .alg {
   font-family: monospace;
-  font-size: 30px; }
+  font-size: 34px !important; }
 
 .scenario-img {
-  width: 250px;
-  height: 300px; }
+  width: 210px;
+  height: 250px; }
 
 img.active-1 {
   border-color: red !important; }
@@ -61,6 +61,16 @@ img.active-2 {
 .full-image {
   height: 50%;
   width: 50%; }
+
+.footnote {
+  font-size: 18px !important; }
+
+.double {
+  height: 200px !important; }
+
+td.double {
+  padding: 0 !important;
+  border: none !important; }
 
 /*********************************************
  * GLOBAL STYLES

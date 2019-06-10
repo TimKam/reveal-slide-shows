@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Empathic Agents: A Hybrid Normative/Consequentialistic Approach</title>
+		<title>Boundedly Altruistic Agents: A Hybrid Normative/Consequentialistic Approach</title>
 
 		<meta name="description" content="Empathic Agents: A Hybrid Normative/Consequentialistic Approach">
 		<meta name="author" content="Timotheus Kampik">
@@ -39,7 +39,7 @@
 
 		<div class="reveal">
 				<div class='footer'>
-					<span class="footer-text">T. Kampik. Umeå University. AAMAS DC 2019.</span>
+					<span class="footer-text">T. Kampik. Umeå University. Doctoral Student Days 2019.</span>
 					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
 					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
 				</div>
@@ -47,8 +47,8 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Empathic Agents</h1>
-					<h3>A Hybrid Normative/ Consequentialistic Approach</h3>
+					<h1>Boundedly Altruistic Agents</h1>
+					<small>A Hybrid Normative/ Consequentialistic Approach</small>
 					<p>
 						<small>Timotheus Kampik</small> <br>
 						<small>Umeå University</small>
@@ -62,7 +62,7 @@
                         
                         * Design principles
 
-                        * Empathic equilibria
+                        * Boundedly altruistic equilibria
 
                         * Managing inconsistent beliefs
 
@@ -91,9 +91,30 @@
 						</section>
 
                 </section>
-                
                 <section>
-                    <h2>Design Principles</h2>
+                <h2>Motivation</h2>
+                                <section>
+                                        <fragment data-markdown>
+                                                * *Bounded rationality* has strong influence on economics, psychology, and AI
+
+                                                * Empirical: Kahneman
+
+                                                * Theoretical: Simon, Rubinstein
+                                                
+                                                * Design agents of bounded rationality
+
+                                                * Focus on *empathy* (altruism)
+                                        </fragment>
+                                        <fragment data-markdown class="tiny left"><br>
+                                                Kahneman. Maps of bounded rationality: Psychology for behavioral economics. 2003.    
+                                                Rubinstein. Modeling bounded rationality. 1998.  
+                                                Simon. Models of bounded rationality: Empirically grounded economic reason. 1997.
+
+                                        </fragment>
+                                </section>
+                        </section>
+                <section>
+                    <h2>Design Principles - Based on Notion of Empathy</h2>
                     <section>
                             <fragment data-markdown>
                                     * Be aware of the utility function or beliefs of others
@@ -110,7 +131,51 @@
                 </section>
 
                 <section>
-                    <h2>Empathic Equilibria</h2>
+                        <h2>Game Theory 1 X 1</h2>
+                        <section>
+                                        <table>
+                                                <tr>
+                                                        <td><strong>Player 1</trong></td>
+                                                        <td>Stone</td>
+                                                        <td >Paper</td>
+                                                        <td>Scissors</td>
+                                                </tr>
+                                                <tr>
+                                                        <td><strong>Player 2</trong></td>
+                                                        <td>Stone</td>
+                                                        <td >Paper</td>
+                                                        <td>Scissors</td>
+                                                </tr>
+                                        </table>
+                        </section>
+        
+                </section>
+
+                <section>
+                        <h2>Game Theory 1 X 1</h2>
+                        <section>
+                                <table>
+                                        <tr>
+                                                <td><strong>Player 1</trong></td>
+                                                <td>Stone</td>
+                                                <td >Paper</td>
+                                                <td>Scissors</td>
+                                                <td>Joker</td>
+                                        </tr>
+                                        <tr>
+                                                <td><strong>Player 2</trong></td>
+                                                <td>Stone</td>
+                                                <td >Paper</td>
+                                                <td>Scissors</td>
+                                                <td>Joker</td>
+                                        </tr>
+                                </table>
+                </section>
+                
+                </section>
+
+                <section>
+                    <h4> Boundedly Altruistic Equilibria</h4>
                     <section>
                             <fragment data-markdown>
                                     * ``n`` agents interact in environment
@@ -123,14 +188,11 @@
 
                                     * All agents are of the same *type* (*i.e.:* empathic) -> find equilibrium
                             </fragment>
-                            <fragment data-markdown class="tiny left"><br>
-                                    Kampik et al. Empathic Autonomous Agents.
-                            </fragment>
                     </section>
                 </section>
 
                 <section>
-                    <h2>Empathic Equilibria</h2>
+                    <h4> Boundedly Altruistic Equilibria</h4>
                     <section>
                             <fragment class="alg">
                                 \[\begin{aligned}
@@ -149,7 +211,7 @@
             </section>
 
                 <section>
-                        <h2>Empathic Equilibria</h2>
+                        <h4> Boundedly Altruistic Equilibria</h4>
                         <section>
                                 <fragment data-markdown class="alg">
                                         1. Employ acceptability rules: check if an action combination must not be executed
@@ -169,7 +231,7 @@
                 </section>
 
                 <section>
-                        <h2>Empathic Equilibria</h2>
+                        <h4> Boundedly Altruistic Equilibria</h4>
                         <section>
                                 <table class="comparison">
                                         <tr>
@@ -207,7 +269,7 @@
                 </section>
 
                 <section>
-                        <h2>Empathic Equilibria</h2>
+                        <h4>Boundedly Altruistic Equilibria</h4>
                         <section>
                                 <table class="comparison">
                                         <tr>
@@ -245,7 +307,7 @@
                 </section>
 
                 <section>
-                        <h2>Empathic Equilibria</h2>
+                        <h4>Boundedly Altruistic Equilibria</h4>
                         <section>
                                 <table class="comparison">
                                         <tr>
@@ -282,7 +344,7 @@
                         </section>
                 </section>
                 <section>
-                    <h2>Managing Inconsistent Beliefs</h2>
+                    <h4>Managing Inconsistent Beliefs</h4>
                     <section>
                             <br>
                             <fragment data-markdown>
@@ -316,6 +378,12 @@
                                     Kampik et al. Explaining Sympathetic Actions of Rational Agents.
                             </fragment>
                     </section>
+                </section>
+
+                <section data-background-iframe="https://people.cs.umu.se/tkampik/demos/arena/" data-background-interactive>
+                </section>
+
+                <section data-background-iframe="./examples/hci/app/js/third_page.html" data-background-interactive>
                 </section>
 
                 <section>

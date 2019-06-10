@@ -1,0 +1,62 @@
+<head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+    let randomFactor = 0.2
+                        const base = Math.random(5,10)
+                        const traceData1a = [base]
+                        const traceData2a = [base * Math.random(1-randomFactor, 1+randomFactor)]
+                        const traceData1b = [base * Math.random(1-randomFactor, 1+randomFactor)]
+                        const traceData2b = [base * Math.random(1-randomFactor, 1+randomFactor)]
+
+                        window.setInterval(() => {
+                                const newBase = traceData1a[traceData1a.length-1] * Math.random(1-randomFactor, 1+randomFactor) + Math.random(1,1+randomFactor*5)
+                                traceData1a.push(newBase * Math.random(1-randomFactor, 1+randomFactor))
+                                traceData2a.push(newBase * Math.random(1-randomFactor, 1+randomFactor))
+                                traceData1b.push(newBase * Math.random(1-randomFactor, 1+randomFactor))
+                                traceData2b.push(newBase * Math.random(1-randomFactor, 1+randomFactor))
+                                console.log(traceData1a)
+                                randomFactor = randomFactor - 0.05
+                                const trace1a = {
+                                y: traceData1a,
+                                x: Array.apply(null, { length: traceData1a.length }).map(Number.call, Number),
+                                type: 'scatter',
+                                name: 'Public'
+                                }
+
+                                const trace2a = {
+                                y: traceData2a,
+                                x: Array.apply(null, { length: traceData1a.length }).map(Number.call, Number),
+                                type: 'scatter',
+                                name: 'Private'
+                                }
+
+                                const dataA = [trace1a, trace2a]
+
+                                Plotly.newPlot('diagram-1', dataA, { title: 'Transportation: Volume' })
+
+                                const trace1b = {
+                                y: traceData1b,
+                                x: Array.apply(null, { length: traceData1a.length }).map(Number.call, Number),
+                                type: 'scatter',
+                                name: 'Public'
+                                }
+
+                                const trace2b = {
+                                y: traceData2b,
+                                x: Array.apply(null, { length: traceData1a.length }).map(Number.call, Number),
+                                type: 'scatter',
+                                name: 'Private'
+                                }
+
+                                const dataB = [trace1b, trace2b]
+
+                                Plotly.newPlot('diagram-2', dataB, { title: 'Transportation: Price' })
+                        }, 500)
+});
+    </script>
+</head>
+<body>
+        <div id="diagram-1"></div>
+        <div id="diagram-2"></div>
+</body>
