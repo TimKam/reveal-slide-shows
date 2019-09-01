@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Abstract Argumentation for the Rational Man</title>
+
+		<meta name="description" content="Abstract Argumentation for the Rational Man">
+		<meta name="author" content="Timotheus Kampik, Juan Carlos Nieves">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+            // printing
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">T. Kampik & JC Nieves. Umeå University. 2019.</span>
+					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <br>
+                    <br>
+					<h2>Abstract Argumentation for the Rational Man</h2>
+					<p>
+						<small>Timotheus Kampik & Juan Carlos Nieves</small> <br>
+						<small>Umeå University</small>
+					</p>
+				</section>
+
+				<section data-markdown>
+                    ### Agenda I
+
+                    * Introduction/intuition
+
+                    * Preliminaries
+
+                        * Abstract argumentation: 
+
+                          Frameworks, semantics, expansions & principles
+
+                        * The rational economic man
+
+                </section>
+
+
+                <section data-markdown>
+                    ### Agenda II
+
+                    * Rational man's argumentation principles
+
+                    * Argumentation semantics for the rational man?
+
+                    * Argumentation expansions for the rational man
+
+                    * So what?
+
+                    * Future work
+
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                        ### Introduction/Intuition I
+
+                        * idea of computational resolution of arguments precedes artificial intelligence:
+                        
+                          If "*controversies were to arise, there would be no more need of disputation;* *\[it would suffice to say:] let us calculate.*" - Leibnitz
+        
+                        * Dung's (formal) abstract argumentation considered important step towards Leibnitz's vision
+        
+                    </fragment>
+                    <fragment data-markdown class="tiny left">
+                        Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."  
+                        Russell, Bertrand. *The philosophy of Leibniz.*
+                    </fragment>
+    
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    ### Introduction/Intuition II
+
+                    * Not clear how to "best" solve a Dung-style AF
+
+                    * Economic theory offers formal models of *rational* (idiomatic) decision-making
+
+                    </fragment>
+                    <fragment data-markdown class="left-al" style="font-size: 33.6px">
+                    &rarr; Analyze intersection: abstract argumentation - economic rationality
+
+                    &rarr; Derive **economically rational** *semantics* (solving approaches for AF) and/or *expansions* (operations on AF)
+                    </fragment>
+                    <fragment data-markdown class="tiny left">
+                            Rubinstein, Ariel. *Modeling bounded rationality.*
+                    </fragment>
+                </section>
+    
+                <section>
+                    <fragment data-markdown>
+                    ### Abstract Argumentation Framework - Definition
+
+                    An argumentation framework is a pair $AF := (AR, attacks)$, where $AR$ is a finite set of arguments, and $attacks$ is a binary relation on $AR$, *i.e.* $attacks \subseteq AR \times AR$.
+                    </fragment>
+
+                    <fragment data-markdown class="tiny left">
+                    Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."
+                    </fragment>
+            
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                         ### Abstract Argumentation Framework - Example
+                    </fragment>
+                    <fragment class="alg">
+                        \begin{aligned}
+                            AF ={}&(\{Volvo, Polo, Porsche\} , \\
+                            &{} \: \{(Volvo, Polo), (Volvo, Porsche), (Polo, Porsche)\})
+                        \end{aligned}
+                    </fragment>
+                    <fragment>
+                        <div id="af-1" class="af"></div>
+                    </fragment>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-1'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "volvo", label: "Volvo", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "polo", label: "Polo", x: 0, y: 1, size: 25, color: '#fff' },
+                                    { id: "porsche", label: "Porsche", x: 1, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "volvo", target: "polo", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "volvo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                                s.refresh()
+                            }
+                        )
+                    </script>
+                
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                        ### Argumentation Semantics - Definitions I
+                        </fragment>
+
+                        <fragment data-markdown style="font-size: 33.6px">
+                        A set of arguments $S$ is:
+
+                        * *conflict-free* iff there are no arguments $a, b$ in $S$ such that $a$ attacks $b$.
+
+                        * *acceptable* wrt $S$ iff for each argument $b \in AR$: if $b$ attacks $a$, then $b$ is attacked by $S$.
+
+                        * *admissible* iff it is conflict-free and each argument in $S$ is acceptable wrt $S$.
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                        Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."
+                        </fragment>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    ### Argumentation Semantics - Definitions II
+                    </fragment>
+
+                    <fragment data-markdown style="font-size: 33.6px">
+                    A set of arguments $S$ is:
+
+                    * *conflict-free* iff there are no arguments $a, b$ in $S$ such that $a$ attacks $b$.
+
+                    * *acceptable* wrt $S$ iff for each argument $b \in AR$: if $b$ attacks $a$, then $b$ is attacked by $S$.
+
+                    * *admissible* iff it is conflict-free and each argument in $S$ is acceptable wrt $S$.
+                    </fragment>
+
+                    <fragment data-markdown class="tiny left">
+                    Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."
+                    </fragment>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    ### Argumentation Semantics - Definitions III
+
+                    An argumentation framework is a pair $AF := (AR, attacks)$, where $AR$ is a finite set of arguments, and $attacks$ is a binary relation on $AR$, *i.e.* $attacks \subseteq AR \times AR$.
+                    </fragment>
+
+                    <fragment data-markdown class="tiny left">
+                    Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."
+                    </fragment>
+                </section>
+
+                <section data-markdown>
+                    ### Rational Man's Argumentation Principles - Uniqueness
+
+                    * AKA: *absence of ambiguity*
+
+                    * $\nexists AF \\: with \\: len(\sigma(AF)) \neq 1$
+
+                    * Semantics that fulfill uniqueness will be denoted as: $\sigma_u$ with $\sigma'_u := first(\sigma_u)$
+
+    
+                </section>
+
+                <section data-markdown>
+                    ### Rational Man's Argumentation Principles - Reference Independence
+
+                    * AKA *independence of irrelevant alternatives*
+
+                    * Iff for any two argumentation frameworks $AF = (AR, attacks)$ and $AF' = (AR', attacks')$, with $AF \preceq_N AF'$ the following applies:
+                    \begin{aligned}
+                        (\sigma'_u(AF) = \sigma'_u(AF')) \lor \exists Arg \in \sigma'_u(AF') \notin AR
+                    \end{aligned}
+    
+        
+                </section>
+
+                <section data-markdown>
+                        ### Rational Semantics? - Uniqueness
+    
+                        * Fulfilled by: grounded & maximal ideal semantics (possibly more)
+                        
+                        * Fulfilled by most skeptical and lenient semantics 
+    
+                        * Notable exception: stable semantics
+    
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    ### Rational Semantics? - Reference Independence
+
+                    * No fulfilled by "well-established" semantics
+
+                    * Fulfilled by lenient stage semantics
+                    </fragment>
+                    <fragment data-markdown class="left-al" style="font-size: 33.6px">
+                            &rarr; We need to look beyond semantics!
+                    </fragment>
+    
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                                ### Rational Semantics? - Reference Independence - Example
+                           </fragment>
+                           <fragment>
+                                <br>
+                                <br>
+                                <div id="af-ri-a" class="af-split" style="position: absolute; left: -250px"></div>
+                                <div id="af-ri-b" class="af-split" style="position: absolute; right: 250px"></div>
+                        </fragment>
+
+                        <script>
+                            window.addEventListener('load', (event => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-ri-a'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.1
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                const riGraph1 = {
+                                nodes: [
+                                    { id: "a", label: "A", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "b", label: "B", x: 0, y: 1, size: 25, color: '#fff' },
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                ]
+                                }
+
+                                // Load the graph in sigma
+                                s.graph.read(riGraph1)
+
+                                // Start the algorithm:
+                                s.refresh()
+
+                                s2 = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-ri-b'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+                                const riGraph2 = {
+                                nodes: [
+                                    { id: "a", label: "A", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "b", label: "B", x: 0, y: 1, size: 25, color: '#fff' },
+                                    { id: "c", label: "C", x: 1, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s2.graph.read(riGraph2)
+
+                                // Start the algorithm:
+                                s2.refresh()
+                            }))
+                            </script>
+    
+                </section>
+
+                <section data-markdown>
+                        ### Rational Expansions I
+    
+                        * Non-cyclic expansion: $\forall Arg \in AR: Arg \in cycle \\: in \\: AF' \rightarrow Arg \in cycle \\: in \\: AF$
+                        
+                        * Formal: $AF \preceq_{NC} AF'$
+    
+                        * Expansion $AF$ to $AF'$ is rational iff $AF \preceq_N AF' \land AF \preceq_{NC} AF'$
+
+                        * Formal: $AF \preceq_R AF'$
+    
+                </section>
+
+                <section data-markdown>
+                        ### Rational Expansions II
+    
+                        * All *unique* semantics fulfill rational man's argumentation principles given two AFs $AF \preceq_R AF'$.
+    
+                        * Intuition: given $AF \preceq_N AF'$, an $Arg' \in AR'$ can only successfully attack an $Arg \in \sigma'_u(AF)$ if it is not successfully attacked itself OR if it closes a cycle that also contains $Arg$. 
+
+                        * No formal proof, yet
+    
+                </section>
+
+                <section data-markdown>
+                        ### So What?
+
+                        *Rational expansion* can help evaluate feasibility of expansions:
+
+                        * Complete revision of arguments:
+                          expansion does not need to be rational
+
+                        * Addition of new arguments that should not affect relation of existing arguments between each other:  
+                        use only *rational expansion*
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                            ## So What? -  Examples I
+                        </fragment>
+                        <fragment>
+                                <br>
+                                <br>
+                                <div id="af-sw-1-a" class="af-split" style="position: absolute; left: -250px"></div>
+                                <div id="af-sw-1-b" class="af-split" style="position: absolute; right: 250px"></div>
+                        </fragment>
+
+                        <script>
+                            window.addEventListener('load', (event => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-sw-1-a'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.1
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphSimple = {
+                                nodes: [
+                                    { id: "volvo", label: "Volvo", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "polo", label: "Polo", x: 0, y: 1, size: 25, color: '#fff' },
+                                ],
+                                edges: [
+                                    { id: "e0", source: "volvo", target: "polo", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+
+                                // Load the graph in sigma
+                                s.graph.read(carGraphSimple)
+
+                                // Start the algorithm:
+                                s.refresh()
+
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-sw-1-b'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                                s.refresh()
+                            }))
+                        </script>
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                            ## So What? - Examples II
+                        </fragment>
+                        <fragment>
+                                <br>
+                                <br>
+                                <div id="af-sw-2-a" class="af-split" style="position: absolute; left: -250px"></div>
+                                <div id="af-sw-2-b" class="af-split" style="position: absolute; right: 250px"></div>
+                        </fragment>
+
+                        <script>
+                            window.addEventListener('load', (event => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-sw-2-a'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.1
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                const carGraphRevision1 = {
+                                nodes: [
+                                    { id: "volvo", label: "Volvo", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "polo", label: "Polo", x: 0, y: 1, size: 25, color: '#fff' },
+                                    { id: "porsche", label: "Porsche", x: 1, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "polo", target: "volvo", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "volvo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+
+                                // Load the graph in sigma
+                                s.graph.read(carGraphSimple)
+
+                                // Start the algorithm:
+                                s.refresh()
+
+                                s2 = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-sw-2-b'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+                                // Load the graph in sigma
+                                s2.graph.read(carGraphRevision1)
+
+                                // Start the algorithm:
+                                s2.refresh()
+                            }))
+                        </script>
+
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                            ## So What? - Examples II
+                        </fragment>
+                        <fragment>
+                                <br>
+                                <br>
+                                <div id="af-sw-3-a" class="af-split" style="position: absolute; left: -250px"></div>
+                                <div id="af-sw-3-b" class="af-split" style="position: absolute; right: 250px"></div>
+                        </fragment>
+
+                        <script>
+                            window.addEventListener('load', (event => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-sw-3-a'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.1
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphSimple = {
+                                nodes: [
+                                    { id: "volvo", label: "Volvo", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "polo", label: "Polo", x: 0, y: 1, size: 25, color: '#fff' },
+                                ],
+                                edges: [
+                                    { id: "e0", source: "volvo", target: "polo", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+
+                                // Load the graph in sigma
+                                s.graph.read(carGraphSimple)
+
+                                // Start the algorithm:
+                                s.refresh()
+
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-sw-3-b'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: false,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+                                // Create a graph object
+                                const carGraphRevision2 = {
+                                nodes: [
+                                    { id: "volvo", label: "Volvo", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "polo", label: "Polo", x: 0, y: 1, size: 25, color: '#fff' },
+                                    { id: "porsche", label: "Porsche", x: 1, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "volvo", target: "polo", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "porsche", target: "volvo", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphRevision2)
+
+                                // Start the algorithm:
+                                s.refresh()
+                            }))
+                        </script>
+
+                </section>
+
+                <section>
+                        <h3>Future Work</h3>
+
+                        <br><br>
+                        <ul>
+                        <li>(Bounded) rationality and advanced argumentation frameworks.</li>
+
+                        <br><br>
+
+                        <li>Abstract argumentation and (bounded) rationality in multi-agent decision-making.</li>
+                        </ul>
+    
+                </section>
+
+				<section>
+                    <br>
+                    <br>
+                    <h1>Thank you!</h1>
+                    <br>
+                    <small data-markdown>
+							*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+                    </small>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="./js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: false,
+				hash: true,
+                                math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/highlight/highlight.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+				]
+			});
+
+
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Hot Topics in Artificial Intelligence</title>
+
+		<meta name="description" content="Hot Topics in Artificial Intelligence">
+		<meta name="author" content="Timotheus Kampik">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">T. Kampik. Umeå University. Fall 2019.</span>
+					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Hot Topics in Artificial Intelligence</h2>
+					<h4>How "AI" is Transforming Businesses and Products</h4>
+					<p>
+						<small>Timotheus Kampik</small> <br>
+						<small>Umeå University</small>
+					</p>
+				</section>
+
+				<section data-markdown>
+                    ## Agenda I
+
+                    * Who are you? - Who are we?
+                    
+                    * What is AI?
+
+                        * Definitions
+                    
+                        * Good-old Fashioned AI
+
+                        * Machine Learning
+                </section>
+                
+                <section data-markdown>
+                    ## Agenda II
+
+                    * Application Examples
+
+                        * Success Stories
+
+                        * Failures
+
+                        * Research Trends
+
+                    * AI-Driven Innovation
+
+                        * Business Trends
+
+                        * Design Thinking
+
+                        * Osterwalder's Business Canvas
+
+                        * Innovation Exercise
+                </section>
+
+                <section data-markdown>
+                        ## Who are you? - Who are we?
+                </section>
+                
+                <section data-markdown>
+                    # What is AI?
+                </section>
+
+                <section data-markdown>
+                    ## What is AI?
+    
+    
+                </section>
+
+
+				<section>
+                    <fragment data-markdown>
+                    ## What is AI?
+                    </fragment>
+                    <br>
+                    <br>
+                    <fragment data-markdown>
+                    "*The capability of a functional unit to perform functions that are generally associated with human intelligence such as reasoning and learning.*"
+                    </fragment>
+                    <fragment data-markdown>
+                        [ISO definition](https://www.iso.org/obp/ui/#iso:std:iso-iec:2382:-28:ed-1:v1:en)
+                    </fragment>   
+                </section>
+                
+                <section data-markdown>
+                    ## What is AI?
+
+                    Venn
+        
+        
+                </section>
+
+                <section data-markdown>
+                    ## Good-old Fashioned AI
+            
+                </section>
+
+                <section data-markdown>
+                    ## Machine Learning
+                
+                </section>
+
+                <section data-markdown>
+                    # Application Examples
+                </section>
+
+                <section data-markdown>
+                    ## Success Stories
+                    
+                </section>
+
+                <section data-markdown>
+                    ## Failures
+                        
+                </section>
+
+                <section data-markdown>
+                    ## Research Trends
+                            
+                </section>
+
+                <section data-markdown>
+                    # AI-Driven Innovation
+                </section>
+
+                <section data-markdown>
+                    ## Business Trends
+                </section>
+
+                <section data-markdown>
+                    ## Design Thinking
+                </section>
+
+                <section data-markdown>
+                    ## Innovation Exercise
+
+                    * Identify a problem in your organization that "AI" can solve.
+
+                    * Pitch the problem and sketch out a potential solution.
+
+                    * Homework:
+
+                        * Prepare a prototype/mockup
+
+                        * Prepare a business-oriented assessment
+
+                        * Identify technical challenges
+                </section>
+
+				<section>
+                    <br>
+                    <br>
+                    <h1>Thank you!</h1>
+                    <br>
+                    <h1>Questions?</h1>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="./js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: false,
+				hash: true,
+                                math: {
+					// mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/highlight/highlight.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+				]
+			});
+
+
+
+		</script>
+
+	</body>
+</html>

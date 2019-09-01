@@ -124,6 +124,38 @@ td.double {
 	border: none !important;
 }
 
+.left-al {
+  text-align: left;
+}
+
+.smaller {
+	font-size: 32px;
+}
+
+.fit-image {
+	max-width: 70% !important;
+}
+
+.white-bg {
+	background-color: white !important;
+}
+
+.reveal .signavio-logo {
+	width: 5em;
+	float: left;
+	margin-left: 2em;
+}
+
+.af {
+	height: 200px;
+	width: 525px;
+}
+
+.af-split {
+	height: 200px;
+	width: 450px;
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
