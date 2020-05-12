@@ -96,7 +96,7 @@
                     <fragment data-markdown>
                         ### Introduction/Intuition I
 
-                        * idea of computational resolution of arguments precedes artificial intelligence:
+                        * Idea of computational resolution of arguments precedes artificial intelligence:
                         
                           If "*controversies were to arise, there would be no more need of disputation;* *\[it would suffice to say:] let us calculate.*" - Leibnitz
         
@@ -174,7 +174,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.05
                                     }
                                 }
@@ -197,7 +197,7 @@
                                 s.graph.read(carGraphInitial)
 
                                 // Start the algorithm:
-                                s.refresh()
+                               s.refresh()
                             }
                         )
                     </script>
@@ -214,9 +214,9 @@
 
                         * *conflict-free* iff there are no arguments $a, b$ in $S$ such that $a$ attacks $b$.
 
-                        * *acceptable* wrt $S$ iff for each argument $b \in AR$: if $b$ attacks $a$, then $b$ is attacked by $S$.
+                        * *acceptable* wrt. $S$ iff for each argument $b \in AR$: if $b$ attacks $a$, then $b$ is attacked by $S$.
 
-                        * *admissible* iff it is conflict-free and each argument in $S$ is acceptable wrt $S$.
+                        * *admissible* iff it is conflict-free and each argument in $S$ is acceptable wrt. $S$.
                         </fragment>
     
                         <fragment data-markdown class="tiny left">
@@ -225,35 +225,361 @@
                 </section>
 
                 <section>
-                    <fragment data-markdown>
+                    <fragment data-markdown style="font-size: 30px">
                     ### Argumentation Semantics - Definitions II
+                    
+                    Given $AF := (AR, attacks)$, admissible argument set $S \subseteq AR$ is:
+
+                    * *stable extension* iff $S$ attacks each argument that does not belong to $S$
+
+                    * *preferred extension* iff $S$ is a maximal (wrt. set inclusion) admissible set of $AF$
+
+                    * *complete extension* iff each argument that is acceptable wrt. $S$ belongs to $S$
+
+                    * *grounded extension* iff $S$ attacks each argument that does not belong to $S$
+
+                    * ...
                     </fragment>
-
-                    <fragment data-markdown style="font-size: 33.6px">
-                    A set of arguments $S$ is:
-
-                    * *conflict-free* iff there are no arguments $a, b$ in $S$ such that $a$ attacks $b$.
-
-                    * *acceptable* wrt $S$ iff for each argument $b \in AR$: if $b$ attacks $a$, then $b$ is attacked by $S$.
-
-                    * *admissible* iff it is conflict-free and each argument in $S$ is acceptable wrt $S$.
-                    </fragment>
-
                     <fragment data-markdown class="tiny left">
                     Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."
                     </fragment>
                 </section>
 
                 <section>
+                        <fragment data-markdown>
+                        ### Argumentation Semantics - Examples
+                        </fragment>
+    
+                        <fragment>
+                                <div id="af-s" class="af"></div>
+                            </fragment>
+                            <script>
+                                // Ask sigma to draw it
+                                window.addEventListener('load', (
+                                    event) => {
+                                        s = new sigma(
+                                        {
+                                            renderer: {
+                                            container: document.getElementById('af-s'),
+                                            type: 'canvas'
+                                            },
+                                            settings: {
+                                                edgeLabelSize: 'fixed',
+                                                defaultLabelSize: 30,
+                                                minArrowSize: 10,
+                                                maxNodeSize: 25,
+                                                maxEdgeLabelSize: 20,
+                                                defaultLabelColor: '#fff',
+                                                defaultEdgeSize: 3,
+                                                maxEdgeSize: 3,
+                                                mouseWheelEnabled: true,
+                                                sideMargin: 0.1
+                                            }
+                                        }
+                                        )
+        
+                                        // Create a graph object
+                                        window.carGraphInitial = {
+                                        nodes: [
+                                            { id: "a", label: "A", x: 1, y: 1, size: 25, color: '#fff' },
+                                            { id: "b", label: "B", x: 0, y: 0, size: 25, color: '#fff' },
+                                            { id: "c", label: "C", x: -2, y: 1, size: 25, color: '#fff' },
+                                            { id: "d", label: "D", x: 0, y: 2, size: 25, color: '#fff' },
+                                            { id: "e", label: "E", x: 2, y: 2, size: 25, color: '#fff' }
+                                        ],
+                                        edges: [
+                                            { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e1", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e3", source: "d", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e4", source: "e", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                        ]
+                                        }
+                                        // Load the graph in sigma
+                                        s.graph.read(carGraphInitial)
+        
+                                        // Start the algorithm:
+                                       s.refresh()
+                                    }
+                                )
+                            </script>
+                    </section>
+
+                <section>
                     <fragment data-markdown>
                     ### Argumentation Semantics - Definitions III
 
-                    An argumentation framework is a pair $AF := (AR, attacks)$, where $AR$ is a finite set of arguments, and $attacks$ is a binary relation on $AR$, *i.e.* $attacks \subseteq AR \times AR$.
+                    * *Credulous* extension of $AF$: all extensions returned by $\sigma(AF)$
+
+                    * *Skeptical* extension of $AF$: $\bigcap \sigma(AF)$
+
+                    * *Lenient* extension of $AF$: $\bigcup \sigma(AF)$
                     </fragment>
 
                     <fragment data-markdown class="tiny left">
-                    Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."
+                            Doutre, Sylvie, Mengin, Jérôme. "On Sceptical Versus Credulous Acceptance for Abstract Argument Systems."
                     </fragment>
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                        ### Argumentation Expansions - Definitions
+                        </fragment>
+
+                        <fragment data-markdown style="font-size: 33.6px">
+                            * $AF\* = (AF\*, attacks)$ is expansion $AF = (AR, attacks)$ ($AF \preceq_E AF\*$) iff $AF\* = (AR \cup AR\*, attacks \cup attacks\*)$
+
+                            * Expansion $AF\*$ of $AF$ is *normal* ($AF \preceq_N AF\*$) iff $\forall a,b: ((a, b) \in attacks\* \rightarrow a \in AR\* \lor b \in AR\*)$.
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                                Baumann, Ringo & Brewka, Gerhard. "Expanding Argumentation Frameworks: Enforcing and Monotonicity Results."
+                        </fragment>
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                        ### Argumentation Expansions - Example
+                        </fragment>
+                        <fragment>
+                                <br>
+                                <br>
+                                <div id="af-exp-1" class="af-split" style="position: absolute; left: -250px"></div>
+                                <div id="af-exp-2" class="af-split" style="position: absolute; right: 250px"></div>
+                        </fragment>
+                        <script>
+                        window.addEventListener('load', (event => {
+                            s = new sigma(
+                            {
+                                renderer: {
+                                container: document.getElementById('af-exp-1'),
+                                type: 'canvas'
+                                },
+                                settings: {
+                                    edgeLabelSize: 'fixed',
+                                    defaultLabelSize: 30,
+                                    minArrowSize: 10,
+                                    maxNodeSize: 25,
+                                    maxEdgeLabelSize: 20,
+                                    defaultLabelColor: '#fff',
+                                    defaultEdgeSize: 3,
+                                    maxEdgeSize: 3,
+                                    mouseWheelEnabled: true,
+                                    sideMargin: 0.5 
+                                }
+                            }
+                            )
+
+                            // Create a graph object
+                            const expansionGraph1 = {
+                            nodes: [
+                                { id: "a", label: "A", x: 0, y: 0, size: 25, color: '#fff' },
+                                { id: "b", label: "B", x: 0, y: 1, size: 25, color: '#fff' },
+                            ],
+                            edges: [
+                                { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+                            ]
+                            }
+
+                            // Load the graph in sigma
+                            s.graph.read(expansionGraph1)
+
+                            // Start the algorithm:
+                            s.refresh()
+
+                            s2 = new sigma(
+                            {
+                                renderer: {
+                                container: document.getElementById('af-exp-2'),
+                                type: 'canvas'
+                                },
+                                settings: {
+                                    edgeLabelSize: 'fixed',
+                                    defaultLabelSize: 30,
+                                    minArrowSize: 10,
+                                    maxNodeSize: 25,
+                                    maxEdgeLabelSize: 20,
+                                    defaultLabelColor: '#fff',
+                                    defaultEdgeSize: 3,
+                                    maxEdgeSize: 3,
+                                    mouseWheelEnabled: true,
+                                    sideMargin: 0.2
+                                }
+                            }
+                            )
+                              // Create a graph object
+                              const expansionGraph2 = {
+                                nodes: [
+                                    { id: "a", label: "A", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "b", label: "B", x: 0, y: 1, size: 25, color: '#fff' },
+                                    { id: "c", label: "C", x: 1, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                            }
+                            // Load the graph in sigma
+                            s2.graph.read(expansionGraph2)
+
+                            // Start the algorithm:
+                            s2.refresh()
+                        }))
+                    </script>
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                        ### Argumentation Principles
+                        </fragment>
+
+                        <br><br>
+
+                        <fragment data-markdown style="font-size: 33.6px">
+                        * An *argumentation principle* defines properties that an argumentation semantics may or may not fulfill.
+
+                        * Example *uniqueness*: a semantics returns exactly one extension.
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                            van der Torre, Leon & Vesic, Srdjan. "The principle-based approach to abstract argumentation semantics."
+                        </fragment>
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                        ### Rational Economic Man
+                        </fragment>
+
+                        <br>
+                        <fragment data-markdown style="font-size: 33.6px">
+                        * Standard economic model for individual decision-making
+
+                        * Chooses from $A := \\{a, ..., n\\}$
+                        
+                        * Choice function: $A \rightarrow 2^A$
+
+                        * Clear preferences: total order of all sets in $2^A$
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                            Rubinstein, Ariel. *Modeling bounded rationality.* 
+                        </fragment>
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                        ### Independence of Irrelevant Alternatives
+                        </fragment>
+
+                        <fragment data-markdown style="font-size: 33.6px">
+                        * Set of choice options $A$
+                        
+                        * Any two possible subsets of choice options $A_1 \subset A$ and $A_2 \subset A$,  
+                          with $A_2 \subset A_1$
+                          
+                        * Rational man's choices $A\*_1 \subset A$ (based on the choice options $A_1$) and $A\*_2 \subset A_2$, if $A\*_1 \subset A_2$
+                        
+                        $\rightarrow A\*_1 = A\*_2$
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                            Rubinstein, Ariel. *Modeling bounded rationality.*
+                        </fragment>
+                </section>
+
+                <section>
+                        <fragment data-markdown>
+                        ### Rational Economic Man - Example
+                        </fragment>
+
+                        <fragment>
+                                <br>
+                                <br>
+                                <div id="af-rm-1" class="af-split" style="position: absolute; left: -250px"></div>
+                                <div id="af-rm-2" class="af-split" style="position: absolute; right: 250px"></div>
+                        </fragment>
+
+                        <script>
+                            window.addEventListener('load', (event => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-rm-1'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.5 
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                const drinksGraphSimple = {
+                                nodes: [
+                                    { id: "tee1", label: "Tea: 0.5€", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "coffee", label: "Coffee: 3€", x: 0, y: 1, size: 25, color: '#fff' },
+                                ],
+                                edges: [
+                                    { id: "e0", source: "tee1", target: "coffee", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+
+                                // Load the graph in sigma
+                                s.graph.read(drinksGraphSimple)
+
+                                // Start the algorithm:
+                                s.refresh()
+
+                                s2 = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-rm-2'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 1
+                                    }
+                                }
+                                )
+                                const drinksGraphRevised = {
+                                nodes: [
+                                    { id: "tee1", label: "Tea: 0.5€", x: 0, y: 10  , size: 25, color: '#fff' },
+                                    { id: "coffee", label: "Coffee: 3€", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "tee2", label: "Tea: 7€", x: 0, y: 5, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "tee2", target: "tee1", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "coffee", target: "tee2", color: '#fff', type:'arrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s2.graph.read(drinksGraphRevised)
+
+                                // Start the algorithm:
+                                s2.refresh()
+                            }))
+                        </script>
+
                 </section>
 
                 <section data-markdown>
@@ -334,7 +660,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.1
                                     }
                                 }
@@ -355,7 +681,7 @@
                                 s.graph.read(riGraph1)
 
                                 // Start the algorithm:
-                                s.refresh()
+                                s.refresh(), 1000
 
                                 s2 = new sigma(
                                 {
@@ -372,7 +698,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.05
                                     }
                                 }
@@ -463,7 +789,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.1
                                     }
                                 }
@@ -501,7 +827,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.05
                                     }
                                 }
@@ -543,7 +869,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.1
                                     }
                                 }
@@ -584,7 +910,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.05
                                     }
                                 }
@@ -627,7 +953,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.1
                                     }
                                 }
@@ -665,7 +991,7 @@
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
                                         maxEdgeSize: 3,
-                                        mouseWheelEnabled: false,
+                                        mouseWheelEnabled: true,
                                         sideMargin: 0.05
                                     }
                                 }
@@ -752,9 +1078,12 @@
 					{ src: './plugin/highlight/highlight.js', async: true },
                     { src: './plugin/math/math.js', async: true }
 				]
-			});
+			})
 
-
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
 
 		</script>
 

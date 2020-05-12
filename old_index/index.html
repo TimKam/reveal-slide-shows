@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Integrating Multi-agent Simulations into Enterprise Application Landscapes
+		</title>
+
+		<meta name="description" content="JS-son - a Minimal JavaScript BDI Agent Library">
+		<meta name="author" content="Timotheus Kampik">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+                <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">Kampik & Najjar. BCT4MAS 2019.</span>
+					<img class="signavio-logo" src="./signavio.png" alt="WASP logo"/>
+					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Integrating Multi-agent Simulations into Enterprise Application Landscapes
+					</h2>
+					<p>
+						<small><strong>Timotheus Kampik</strong><sub class="footnote">1,2</sub> and Amro Najjar<sub class="footnote">3</sub></small> <br>
+						<small>1: Umeå University; 2: Signavio GmbH; 3: University of Luxembourg</small>
+					</p>
+                                </section>
+                                
+                                
+
+					<section data-markdown>
+							### Agenda
+							
+							* Motivation
+							* Business process management, MAS & BCT
+							* ABS as (decentralized) business rules
+							* Architecture
+							* Proposed tech stack
+							* ABS on public block chains
+							* Future work
+					</section>
+
+					<section data-markdown>
+							### Motivation I
+
+							* Agent-based simulations are typically not fully integrated into enterprise application landscape
+
+							* However, increasing degree of autonomy of enterprise applications calls for seamless integration of ABS
+
+							* BCT as potential technology for cross-organizational integration
+		
+					</section>
+
+					<section>
+							<h3>Motivation II</h3>
+
+							<img class="fit-image white-bg" src="./bct4mas/high_level_concept_is.png"/>
+							
+					</section>
+
+					<section>
+							<div data-markdown>
+								### ABS & BCT
+
+								* BCT considered promising in facilitating MAS research adoption in practice
+
+								* ABS provides potential synergies
+								
+								* Industry buzzwords: *digital twin*, *autonomous enterprise*, *robotic process automation*
+
+							</div>
+							<small data-markdown class="tiny">
+									Calvaresi et al. "Multi-agent systems and blockchain: Results from a systematic literature review."  
+							</small>
+					</section>
+
+					<section>
+						<div data-markdown>
+								### BPM & BCT
+
+								* BCT considered promising for cross-organizational BPM/BPX
+
+								* Academic prototype for BPX on block chain exist
+
+								* Can BCT fulfill its promise?
+
+								* Is the problem really trust or interoperability plus coordination challenge?
+
+						</div>
+						<small data-markdown class="tiny">
+								Mendling et al. "Blockchains for business process management-challenges and opportunities."  
+								López-Pintado et al. "Caterpillar: A Blockchain-Based Business Process Management System."  
+						</small>
+					</section>
+
+					<section>
+							<div data-markdown>
+									### Business Process Management, ABS & BCT III
+	
+									&rarr; Some work at intersection BPM, ABS, and BCT exists
+		
+									
+									&rarr; "on-chain ABS" not explored in BPM context
+							</div>
+							<small data-markdown class="tiny">
+								Kampik et al. "MAS-Aided Approval for Bypassing Decentralized Processes: an Architecture."
+							</small>
+					</section>
+
+					<section>
+							<h3>ABS as Decentralized Business Rules I</h3>
+
+							<img class="fit-image white-bg" src="./bct4mas/high_level_concept_future_state.png"/>
+							
+					</section>
+
+					<section>
+							<h3>ABS as Decentralized Business Rules II</h3>
+
+							<img class="fit-image white-bg" src="./bct4mas/process.png"/>
+							
+					</section>
+
+					<section>
+							<h3>ABS as Decentralized Business Rules III</h3>
+
+							<img class="fit-image white-bg" src="./bct4mas/subprocess.png"/>
+							
+					</section>
+
+					<section>
+							<h3>Architecture</h3>
+
+							<img class="fit-image white-bg" src="./bct4mas/decentralized_business_rules_mas.png"/>
+							
+					</section>
+
+					<section data-markdown>
+							### Proposed Tech Stack I
+
+							* Application execution runtime: Node.js
+
+							* Decentralized execution environment: Hyperledger Fabric
+
+							* Multi-agent simulation library: JS-son
+							
+					</section>
+
+					<section style="margin-top: 100px;" data-background-iframe="http://localhost:8080/" data-background-interactive>
+					</section>
+
+					<section data-markdown>
+							### ABS on Public Block Chains
+
+							``+`` Ad-hoc participants, *open market*
+
+							``-`` Performance and security issues
+
+							``-`` Snake oil++?
+							
+					</section>
+
+					<section data-markdown>
+									### Future Work
+
+									* Implement proposed architecture as generic Node.js library for Hyperledger
+									* Provide an in-depth perspective of the alternative *centralized* architecture
+									* Evaluate the approach in a first pilot project
+					</section>
+
+					<section>
+							<h1>Questions?</h1>
+							<small data-markdown>
+								*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation and partially funded by the German Federal Ministry of Education and Research (BMBF) within the Framework Concept ”Industrie 4.0 – Kollaborationen in dynamischen Wertsch ̈opfungsnetzwerken (InKoWe)” / managed by the Project Management Agency Forschungszentrum Karlsruhe (PTKA).*
+							</small>
+					</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+                slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

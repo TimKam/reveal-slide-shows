@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Towards Learning Agents Teaching Fairness</title>
+
+		<meta name="description" content="Explaining Sympathetic Actions of Rational Agents">
+		<meta name="author" content="Timotheus Kampik">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">S. Stedtler et al. Umeå University. SweCog 2019.</span>
+					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Towards Learning Agents Teaching Fairness</h3>
+					<p>
+                        <small>Samantha Stedtler</strong></small> <br>
+                        <small><strong>Timotheus Kampik</strong></small> <br>
+                        <small>Helena Lindgren</small> <br>
+						<small>Umeå University</small>
+					</p>
+				</section>
+
+                <section data-markdown>
+                ### Agenda
+
+                * Motivation
+
+                * Research question
+
+                * Ultimatum Game
+
+                * Bandit-based Fairness Nudging
+                
+                * Prototype
+
+                * Simulation
+
+                * Future Work
+                </section>
+
+                <section data-markdown>
+                    ### Motivation
+
+                    * AI at scale: *Choice architecture* and *nudging* key concerns
+
+                    * Vision of *choice architecture*: improve welfare without sacrificing autonomy
+
+                    * Vision of *nudging*: align human (user) behavior with business objective 
+                    
+                    &rarr; Gap between Thaler's vision and today's reality
+                </section>
+                <section data-markdown>
+                    ### Research Question
+
+                    Can we use recommender system algorithms for social good, *i.e.* to facilitate **fair** behavior?
+
+                </section>
+
+                <section data-markdown>
+                        ### Ultimatum Game
+    
+                        * 2 players
+    
+                        * Player 1 (**proposer**) can share 100 coins, *e.g.*, ``20/80``
+    
+                        * Player 2 (**responder**) can reject or accept
+
+                        * If accept: share coins; else: nobody gets any coins
+    
+                        * Human-agent ultimatum game
+
+                        * Several rounds, switch of roles after each round
+    
+                </section>
+
+                <section data-markdown>
+                        ### Bandit-based Fairness Nudging I
+
+                        12 different modes over three variables:
+
+                        * Emotional (the agent ) vs. argumentative
+                        
+                        * Stingy (the agent highlights "unfair" behavior of the human) vs. fair (the agent highlights the "fair" target behavior)
+                        
+                        * Verbal (the agent adjusts only its text feedback) vs. non-verbal
+
+                </section>
+
+                <section data-markdown>
+                        ### Bandit-based Fairness Nudging II
+
+                        $\epsilon$-greedy multi-armed bandit:
+
+                        * Take random mode first;
+
+                        * Then: take "best" mode (based on previous experience)
+
+                        * But: "explore" with probability of $\epsilon$
+
+                        * $\epsilon$-decay: decrease $\epsilon$ every turn
+                </section>
+
+                <section>
+                        <h3>Prototype I</h3>
+            
+                        <img src="./extraamas/happy face.PNG" class="full-image" data-markdown />
+                </section>
+
+                <section>
+                        <h3>Prototype II</h3>
+                
+                        <img src="./extraamas/neutral gaze.PNG" class="full-image" data-markdown />
+                </section>
+
+                <section>
+                        <h3>Prototype III</h3>
+                    
+                        <img src="./extraamas/sad face.PNG" class="full-image" data-markdown />
+                </section>
+
+                <section>
+                        <h3>Prototype VI</h3>
+                            
+                        <img src="./extraamas/speak.PNG" class="full-image" data-markdown />
+                </section>
+
+
+        <section data-background-iframe="http://localhost:8888/notebooks/Multi-armed%20Bandit%20Simulation%20-%20Learning%20Agents%20Teaching%20Fairness.ipynb" data-background-interactive></section>
+
+        <section data-markdown>
+            ### Future Work
+
+            * Human-computer interaction study
+
+            * Pick "better" bandit!
+
+        </section>
+
+        <section>
+                <h1>Thank you!</h1>
+                <h1>Questions?</h1>
+                <small data-markdown>
+                    *This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+                </small>
+        </section>
+
+
+			</div>
+
+		</div>
+
+		<script src="./js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './plugin/highlight/highlight.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
