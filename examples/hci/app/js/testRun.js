@@ -29,8 +29,8 @@ const plans = [
         beliefs => beliefs.turn % 2 === 0 && beliefs.history.length === 0,
         () => ({ action: [
             [80, 20],
-            'Let\'s start. It is my turn to take the role of the proposer. I give you 20 coins and keep the remaining coins. As the responder, do you accept the offer?',
-            'Let\'s start. It is my turn to take the role of the proposer. Because I am nice, I give you 20 coins and keep the remaining coins. As the responder, do you accept the offer?'
+            /*'Let\'s start. It is my turn to take the role of the proposer.*/'I give you 20 coins and keep the remaining 80 coins.' /*As the responder,*/ + ' Do you accept the offer?',
+            /*'Let\'s start. It is my turn to take the role of the proposer.*/ 'Because I am nice, I give you 20 coins and keep the remaining 80 coins.' /*As the responder,*/ + ' Do you accept the offer?'
         ] })
     ),
     /* If the previous human offer was between 1 and 100 and
