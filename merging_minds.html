@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Merging Minds - Distributed Belief Revision in Polyglot Multi-Agent Systems
+        </title>
+
+        <meta name="description" content="Merging Minds - Distributed Belief Revision in Polyglot Multi-Agent Systems">
+        <meta name="author" content="Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text"> TBD. Merging Minds. 2020.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Merging Minds - Distributed Belief Revision in Polyglot Multi-Agent Systems
+                    </h3>
+                    <p>
+                        <small><strong>TBD</strong> </small><br>
+                        <small>TBD</small>
+                    </p>
+                </section>
+
+                    <section data-markdown>
+                        #### Agenda
+
+                        * Intuition
+
+                        * Formal Perspective
+
+                        * Engineering Perspective
+
+                        * ToDos: Engineering
+
+                        * ToDos: Formal Work
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Intuition I
+
+                        * Distributed multi-agent system <!--potentially different AOP technologies-->  
+
+                            * Example: central JaCaMo MAS, single-agent JS-son clients
+
+                        * Mind of some agents is distributed (*e.g.*, partly on server, partly on client)
+
+                            * Main belief base as part of the agent's mind
+
+                            * Belief proposal base as part of the central MAS
+
+                        * How to sync the belief bases?
+
+                            * Engineering and formal belief revision perspectives
+                        
+                    </section>
+
+                    <section>
+                        <h4>Intuition II</h4>
+
+                        <img src="./merging_minds.png" width="525px" style="background-color: #F0EEE3;"\>
+                        
+                    </section>
+                    
+
+                    <section data-markdown>
+                        #### Formal Perspectives I - Belief Proposal Base 
+
+                        * "Trivial", objective conflict resolution managed centrally
+
+                        * Given belief base as set $BB$, attacks relations are partial order on $BB \times BB$ (and excluding self-attacks)
+
+                        * Construct as argumentation framework, resolve with "any" argumentation semantics (*i.e.*, grounded)
+                        
+                    </section>
+
+                    <section>
+                        <h4>Formal Perspectives II - Belief Proposal Base</h4>
+
+                        <fragment>
+                            <div style="width:125%!important;margin-left:-100%;min-height: 250px !important;" id="af-1a" class="af"></div>
+                            <!--<table style="min-width:250px!important;min-height: 250px !important">
+                                <tr>
+                                    <td>
+                                        <div style="min-width:250px!important;min-height: 250px !important;" id="af-1a" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Attack relations are partial order $\rightarrow$ non-cyclic graph</li>
+                                            <li>Conflict resolution straightforward</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>-->
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-1a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 20,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 10,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: false,
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "~launch(product_a)[source(mngr_a),time(2020-10-20T20:03:01)]", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "     launch(product_a)[source(mngr_a),time(2020-10-20T19:54:27)]", x: 0, y: 1, size: 25, color: '#fff' },
+                                        { id: "c", label: "~launch  (product_a)[source(mngr_a),time(2020-10-20T19:23:54)]", x: 0, y: 2, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        { id: "e2", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "a", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e4", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Formal Perspectives III - Belief Base 
+
+                        * Subjective conflict resolution that is up to an individual agent
+
+                        * Less constraints on attack relations
+
+                        * Enforce "rationality" (relaxed monotony) properties
+                        
+                    </section>
+
+                    <section>
+                        <h4>Formal Perspectives IV - Belief Base</h4>
+
+                        <fragment>
+                            <div style="width:125%!important;margin-left:-100%;min-height: 250px !important;" id="af-2a" class="af"></div>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 20,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 10,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: false,
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "launch(product_b)[source(mngr_a)]", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "launch(product_c)[source(mngr_b)]", x: 0, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        { id: "e2", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        
+                    </section>
+
+                    <section>
+                        <h4>Formal Perspectives V - Belief Base</h4>
+
+                        <fragment>
+                            <div style="width:125%!important;margin-left:-100%;min-height: 250px !important;" id="af-3a" class="af"></div>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-3a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 20,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 10,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: false,
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "launch(product_b)[source(mngr_a)]", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "launch(product_c)[source(mngr_b)]", x: 0, y: 1, size: 25, color: '#fff' },
+                                        { id: "c", label: "launch(product_c)[source(mngr_c)]", x: 1, y: 0.5 , size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        { id: "e2", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e4", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e5", source: "c", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e6", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e7", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        
+                    </section>
+
+                    <section>
+                        <h4>Engineering Perspective</h4>
+
+                        <img src="./Belief_base_synchronization.png" width="750px" \>
+                        
+                    </section>
+
+                    <section data-markdown="">
+                        #### Engineering ToDos
+
+                        * Starting point provided [here](./https://github.com/jacamo-lang/jacamo-rest/tree/jacamo-rest-0.6/examples/js-son-integration)
+                        * Improve belief base interface of jacamo-rest
+                        * Allow subscribing to an agent minds in jacamo-rest
+                        * Implement JS-son belief revision support as explicit part of the reasoning-loop 
+                        * Implement/update running example
+                        * Implement argumentation-based belief revision capabilities (as part of example)
+                        
+                    </section>
+
+                    <section data-markdown="">
+                        #### Formal Work ToDos
+
+                        * Rough intuition exists
+
+                        * Establish "formal novelty" of work
+
+                        * Define exact formal models (adjustments of previous theoretical research results)
+                        
+                    </section>
+
+                <section>
+                        <h1>Questions?</h1>
+                        <h2>Contact me at tkampik@cs.umu.se</h2>
+                        <small data-markdown>
+                            *This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+                        </small>
+                </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

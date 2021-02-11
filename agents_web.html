@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>JS-son & Agents on Web Front-Ends
+        </title>
+
+        <meta name="description" content="JS-son & Agents on Web Front-Ends">
+        <meta name="author" content="Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Timotheus Kampik. JS-son & Agents on Web Front-Ends.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h2>JS-son & Agents on Web Front-Ends
+                    </h2>
+                    <p>
+                        <small><strong>Timotheus Kampik</strong> </small><br>
+                        <small>Umeå University</small>
+                    </p>
+                </section>
+                                
+                    <section data-markdown>
+                        ### That's Me
+                        * PhD Student in Umeå, Sweden
+                        * Industry background: software engineering, product management
+                        * Working on Reasoning and Multi-agent Systems
+                    </section>        
+
+                    <section data-markdown>
+                        ### Agents on Web Front-Ends
+
+                        Web front-ends (clients) take over increasingly complex tasks
+
+                        &rightarrow; Can/should agents "live" in web front-ends?
+                    </section>
+
+                    <section data-markdown>
+                        ### Agents & Dynamic, High-level Languages
+
+                        Dynamic, high-level programming languages with high usability for non-experts are on the rise
+
+                        &rightarrow; Can we move AOP to such languages?
+
+                    </section>
+
+                    <section data-markdown>
+                        ### JS-son
+                        We introduce the JS-son JavaScript library to work towards answering these questions.
+                    </section>
+                
+
+                <section>
+                    <h2>Reasoning loop</h2>
+                    <fragment data-markdown>
+                            ![](reasoning_loop.png)
+                            
+                    </fragment>
+                </section>
+
+                <section>
+                        <h4>Design Principles</h4>
+                            <fragment data-markdown>
+                                1. Usability over intellectual elegance
+                                2. Flexibility over rigor
+                                3. Extensibility over out-of-the-box power
+                            </fragment>
+                            <fragment data-markdown class="tiny left"><br>
+                                Inspired by the [Agile Manifesto](https://agilemanifesto.org/)
+                            </fragment>
+                </section>
+
+                <section>
+                        <h4>Analogy</h4>
+                        <table class="comparison">
+                            <tr>
+                                <td><strong>Functional Programming</strong></td>
+                                <td><strong>Agent-oriented Programming</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Lisp</td>
+                                <td>Jason</td>
+                            </tr>
+                            <tr>
+                                <td data-markdown>``MEMBER`` function (list)</td>
+                                <td data-markdown>``(event, context, body)`` plans </td>
+                            </tr>
+                            <tr>
+                                <td data-markdown>``includes`` functor (array)</td>
+                                <td data-markdown>``(intention-condition, body)`` plans</td>
+                            </tr>
+                            <tr>
+                                <td data-markdown> Lodash (``_``)</td>
+                                <td>JS-son</td>
+                            </tr>
+                            <tr>
+                                <td data-markdown> ES2016</td>
+                                <td>???</td>
+                            </tr>
+                        </table>
+                </section>
+
+                    <section style="margin-top: 100px;" id="iframe-nn" data-background-iframe="https://people.cs.umu.se/tkampik/demos/arena/" data-background-interactive>
+                    </section>
+                    <script>
+                        document.onkeydown = checkKey
+                        function checkKey(e) {
+
+                            e = e || window.event
+
+                            if (e.keyCode == '38') {
+                                // up arrow
+                                document.querySelectorAll('[src="https://people.cs.umu.se/tkampik/demos/arena/"]')[0].setAttribute('src', 'fair-nn')
+                                document.querySelectorAll('[src="https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true"]')[0].setAttribute('src', 'uav-sim')
+                            }
+                            else if (e.keyCode == '40') {
+                                // down arrow
+                                document.querySelectorAll('[src="fair-nn"]')[0].setAttribute('src', 'https://people.cs.umu.se/tkampik/demos/arena/')
+                                document.querySelectorAll('[src="uav-sim"]')[0].setAttribute('src', 'https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true')
+                            }
+
+                            }
+                    </script>
+
+                    <section style="margin-top: 100px;" data-background-iframe="https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true" data-background-interactive>
+                    </section>
+
+                <section data-background-iframe="https://nbviewer.jupyter.org/github/TimKam/JS-son/blob/master/examples/jupyter/JS-son_Data_Science_Demo.ipynb" data-background-interactive>
+                </section> 
+                <section data-background-iframe="https://people.cs.umu.se/~tkampik/demos/on-the-fly/" data-background-interactive>
+                </section>
+
+                <section data-markdown>
+                    ### Further Information
+                    
+                    * Main paper: Kampik, Timotheus, and Juan Carlos Nieves. "JS-son--A Lean, Extensible JavaScript Agent Programming Library." EMAS 2019.
+                    * GitHub: [https://github.com/TimKam/JS-son](https://github.com/TimKam/JS-son)
+                </section>
+
+                <section data-markdown>
+                        ### Open Questions 
+                        1. What roles does the front-end play in the vision of an agent-oriented (open) Web?
+                        2. What innovation potential can dynamic languages bring?
+                </section>
+
+                <section data-markdown>
+                    ## Role of Front-End?
+                    
+                    ![](web_fe.png)
+            </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

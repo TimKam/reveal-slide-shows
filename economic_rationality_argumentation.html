@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Economic Rationality as an Argumentation Principle
+        </title>
+
+        <meta name="description" content="Economic Rationality as an Argumentation Principle">
+        <meta name="author" content="Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Timotheus Kampik. Doctoral Students Session, SSA 2020.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Economic Rationality as an Argumentation Principle
+                    </h3>
+                    <p>
+                        <small><strong>Timotheus Kampik</strong> </small><br>
+                        <small>Supervisors: Helena Lindgren & Juan Carlos Nieves</small>
+                        <small>Work in collaboration with Dov Gabbay & Juan Carlos Nieves</small>
+                    </p>
+                </section>
+
+                    <section data-markdown>
+                        #### Motivation I
+
+                        * (Abstract) argumentation is a method of non-monotonic reasoning
+
+                        * Hence, it can be considered a decision-support and decision automation approach
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Motivation II
+
+                        * An influential formal principle of decision-making is economic rationality ("Rational Economic Man")
+
+                        * Bounded rationality: **systematically** relaxing economic rationality (Simon, and famously Tversky & Kahneman)
+
+                        &#8594; Let's use abstract argumentation as a model of bounded rationality!
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Economic Rationality
+
+                        * Assumptions of economic rationality, **ceteris paribus** (if everything else equal):
+
+                            * "Rational Economic Man" acts according to clear preferences
+
+                            * Has consistent preferences over time
+                            
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Clear Preferences
+                        </fragment>
+    
+                        <br>
+                        <fragment data-markdown style="font-size: 33.6px">
+                        * Standard economic model for individual decision-making
+    
+                        * Chooses from $A = \\{a, ..., n\\}$
+                        
+                        * Choice function: $A \rightarrow 2^A$
+    
+                        * Clear preferences: total order of all sets in $2^A$
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                            Rubinstein, Ariel. *Modeling bounded rationality.* 
+                        </fragment>
+                </section>
+    
+                <section>
+                    <fragment data-markdown>
+                    #### Consistent Preferences (Reference Independence)
+                    </fragment>
+    
+                    <fragment data-markdown style="font-size: 33.6px">
+                    * Set of choice options $A, A'$, such that $A \subseteq A'$
+                    
+                    * Rational man's choices $A^{\*} \subseteq A$ and $A'^{\*} \subseteq A'$
+                    
+                    * If $A'^{\*} \subseteq A$ then $A^{\*} = A'^{\*}$
+                    </fragment>
+    
+                    <fragment data-markdown class="tiny left">
+                        Rubinstein, Ariel. *Modeling bounded rationality.*
+                    </fragment>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Example I
+
+                    * We go to a café, on the menu: `tea and coffee`
+
+                        * We choose `coffee`
+
+                    * Next day, one the menu: `tea, coffee, and cookie`
+                </fragment>
+                <ul>
+                    <li>We choose `tea and cookie`. Are we rational?  <br><!--<button id="tea-cookie" value="" onclick="swal('Yes!', 'We establish that {tea, cookie} is preferred over all other options. Because {tea, cookie} was not an option in the previous scenario, our prefences are consistent.', 'success')">Check answer</button>-->
+
+                    <li>We choose `tea`. Are we rational? <br><!--<button id="tea" value="" onclick="swal('No!', 'We establish that {tea} is preferred over all other options. Because {tea} was an option in the previous scenario, but we chose {coffee} our prefences are inconsistent: we switched from {coffee} is preferred over {tea} to {tea} is preferred over {coffee}.', 'error')">Check answer</button>-->
+                </ul>
+  
+                </section>
+
+
+                <section data-markdown>
+                    #### Shortcomings
+
+                    * **Ceteris paribus** assumption
+
+                    * Ariel Rubinstein: _"The  model  has to  be  thought  of  as  a  reduced form derived from  a more complete model, one that captures the decision maker’s inference process."_
+                        
+                </section>
+
+
+                <section data-markdown>
+                    #### Example II
+
+                    * We want to determine the relevant citizenship (passports) of a client
+
+                    * Example: case handling of immigration or tax administration
+
+                    * We use decision management software (a real-world system)
+
+                    * The decision models can be deployed to high-scalability engines such as [jDMN](https://goldmansachs.github.io/jdmn/)
+                        
+                </section>
+
+                <section>
+                    <div class="signavio-interactive-content">
+                        <iframe
+                                class="signavio-simulation"
+                                width="1000"
+                                height="650"
+                                style="background-color:#fff"
+                                src="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation"
+                                frameborder="0"
+                                allowfullscreen="1"
+                        >
+                            &nbsp;
+                        </iframe>
+                    </div>
+                </section>
+
+
+                <!--<section style="margin-top: 100px;" data-background-iframe="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation" data-background-interactive>
+                </section>-->
+
+                <section data-markdown>
+                    #### Example II (continued)
+
+                    * First, insert ``NO`` (Norwegian citizenship)  
+                      &#8594; ``NO`` considered relevant
+
+                    * Then, insert ``UK`` (UK citizenship) as additional option  
+                      &#8594; neither ``NO`` nor ``UK`` relevant: not rational!
+
+                    * Automated checks of decision management software don't detect this problem
+                        
+                </section>
+                   
+
+                <section>
+                    <fragment data-markdown>
+                    #### Economic Rationality & Abstract Argumentation
+                    
+                    * $AF = (AR, AT)$; arguments $AR$, e.g.: $\\{a, b, c\\}$, attacks $AT$, e.g.: $\\{(a, b), (b, c)\\}$
+
+                    * Semantics $\sigma(AF)$ returns set of extensions $ES \subseteq 2^{AR}$
+
+                    * Conclusion $E \in ES, E \subseteq AR$ **implies** preferences: $\forall S \in AR, E \succeq S$
+
+                    * Consistent preferences when **normally expanding** $AF$ (Economics' *ceteris paribus* assumption)
+                    </fragment>
+
+                    
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Normal Expansion
+                    
+                    * Given $AF = (AR, AT), AF' = (AR', AT')$  AF' normally expands AF iff:
+
+                        * $AR \subseteq AR', AT \subseteq AT'$
+                        
+                        * $(AT' \setminus AT) \cap (AR \times AR) = \\{\\}$
+
+                    * Only add arguments and attacks, don't change attacks between existing arguments
+
+                    * Denoted by $AF \preceq_N AF'$ (Baumann, Brewka)
+
+                    </fragment>
+                    
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Reference Independence Principles
+                    * Given semantics $\sigma, AF = (AR, AT), AF' = (AR', AT')$
+                    * **Strong**, iff $\sigma$ must be universally defined and $\forall E \in \sigma(AF), \forall E' \in \sigma(AF')$ it holds true that:
+                        
+                        * $E' \not \subseteq AR$ or $E' = E$
+
+                    * **Weak**, iff $\forall E \in \sigma(AF), \exists E' \in \sigma(AF')$ such that:
+                    
+                        * $E' \not \subseteq AR$ or $E' = E$
+
+                    </fragment>
+
+                    
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Strong Reference Independence Is Unrealistic To Obtain
+                
+                        
+                    </fragment>
+
+                    <fragment>
+                        <table style="min-width:250px!important;min-height: 250px !important">
+                            <tr>
+                                <td>
+                                    <div style="min-width:250px!important;min-height: 250px !important;" id="af-1a" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="min-width:250px!important;min-height: 250px !important;" id="af-1b" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </fragment>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-1a'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e2", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-1b'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.2
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    
+                </section>
+
+                <section data-markdown>
+                    #### Example III - Weak Reference Independence
+                    
+                    * Decision: recommend launch of product $p_a$: yes or no?
+
+                    * *Launch* denoted by argument $a$
+    
+                    * At first, we find no reason not to launch
+    
+                    &rarr; recommend $a$
+    
+                </section>
+    
+                <section>
+                    <fragment>
+                        <h4>Example III</h4>
+                        <div id="af-2aa" class="af" style="width:50%!important;min-height: 250px !important;"></div>
+                    </fragment>
+    
+                    
+    
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2aa'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                    //{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                    // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    //{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    //{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    //{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+    
+    
+                </section>
+    
+                <section data-markdown>
+                    #### Example III
+                    
+                    Our boss asks us to collect more stakeholder opinions (arguments)
+    
+                </section>
+    
+                    <section>
+                        <fragment>
+                        <h4>Example III</h4> 
+                            <table style="min-width:900px!important;min-height: 900px !important;">
+                                <tr>
+                                    <td>
+                                        <div style="width:50%!important;min-height: 250px !important;" id="af-2b" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:50%!important;min-height: 250px !important;" id="af-2c" class="af"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2b'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 25,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                        //{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2c'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 25,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.3
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e4", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+        
+                    </section>
+    
+                    <section>
+                        <h4>Example III</h4>
+                        <ul>
+                            <li>If all newly added arguments are not valid conclusions, $a$ should remain a valid conclusion.</li>
+                            <li>
+                                Because we make <strong>clear decisions</strong> we consider arguments either valid conclusions or not (no undecided arguments)
+                            </li>
+                            <li>
+                                Which semantics allow us to be economically rational in this scenario?
+                                <br><!--<button id="example-3-btn" value="" onclick="swal('', 'Stage semantics does not return any extension for the second AF. Complete, preferred, eager, grounded, and ideal semantics return the empty set as the only extension. Consequently, these semantics do not allow for an economically rational conclusion. Stage, CF2, stage2, nsa(CF2), and SCF2 semantics allow us to \'pick\' the extension {d, a}, which is an economically rational conclusion in this scenario.', 'info')">Check answer</button>-->
+                            </li>
+                        </ul>
+                        
+        
+                    </section>
+                
+                <section>
+                    <h4>Semantics Families</h4>
+									<table class="comparison">
+										<tr>
+                                            <td><strong>Family</strong></td>
+											<td><strong>Admissibility-Based</strong></td>
+                                            <td><strong>Weak Admissibility-Based</strong></td>
+                                            <td><strong>Naive-Based</strong></td>
+										</tr>
+										<tr>
+                                            <td><strong>Satisfied by any established semantics$^*$</strong></td>
+											<td><strong>No</strong></td>
+                                            <td><strong>No</strong></td>
+                                            <td><strong>Yes</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Satisfied by</strong></td>
+											<td><strong>-</strong></td>
+                                            <td><strong>-</strong></td>
+                                            <td><strong>Naive, CF2, presumably SCF2 and nsa(CF2)</strong></td>
+										</tr>
+                                    </table>
+                                    <p style="font-size: small;">$^*$ Could potentially be satisfied by a semantics that always returns the empty set and hence is in all families.</p>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Further Results
+                    
+                    * Preference-based and value-based argumentation do not ensure economic rationality
+    
+                    * Monotony implies reference independence, but reference independence is not the same as cautious monotony or rational monotony
+
+                    * We present a dialogue reasoner that can enforce reference independence as well as cautious monotony$^*$ this afternoon at SAFA!
+    
+                    </fragment>
+                    <p style="font-size: small;">$^*$ Some tweaks are necessary to "port" this principle to abstract argumentation</p>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Open Questions
+                    
+                    * Undecided arguments: from a decision-making perspective we do not want to be undecided about actions; hence, relaxing (weak) reference independence to support undecided arguments requires more than abstract argumentation
+
+                    * Our principle can provide a new perspective on argumentation and game theory
+
+                    * From a practical perspective, we can investigate implications on business decision management
+    
+                    </fragment>
+                </section>
+
+                <section>
+                        <h1>Questions?</h1>
+                        <small data-markdown>
+                            *This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+                        </small>
+                </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

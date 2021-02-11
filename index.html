@@ -1,1162 +1,1168 @@
-<!doctype html>
-<html lang="en">
+			<!doctype html>
+			<html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+				<head>
+					<meta charset="utf-8">
 
-		<title>Formal Models of Bounded Rationality for Autonomous Agents
-		</title>
+					<title>Formal Models of Bounded Rationality for Autonomous Agents
+					</title>
 
-		<meta name="description" content="Formal Models of Bounded Rationality for Autonomous Agents">
-		<meta name="author" content="Timotheus Kampik">
+					<meta name="description" content="Formal Models of Bounded Rationality for Autonomous Agents">
+					<meta name="author" content="Timotheus Kampik">
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+					<meta name="apple-mobile-web-app-capable" content="yes">
+					<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+					<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
-		<script src="./js/sigma.min.js"></script>
-        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
-        <script src="./js/sigma.layout.noverlap.min.js"></script>
-        <script src="./js/sigma.plugins.animate.min.js"></script>
+					<link rel="stylesheet" href="css/reset.css">
+					<link rel="stylesheet" href="css/reveal.css">
+					<link rel="stylesheet" href="css/theme/black.css" id="theme">
+					<script src="./js/sigma.min.js"></script>
+					<script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+					<script src="./js/sigma.layout.noverlap.min.js"></script>
+					<script src="./js/sigma.plugins.animate.min.js"></script>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+					<!-- Theme used for syntax highlighting of code -->
+					<link rel="stylesheet" href="lib/css/monokai.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+					<!-- Printing and PDF exports -->
+					<script>
+						var link = document.createElement( 'link' );
+						link.rel = 'stylesheet';
+						link.type = 'text/css';
+						link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+						document.getElementsByTagName( 'head' )[0].appendChild( link );
+					</script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+					<!--[if lt IE 9]>
+					<script src="lib/js/html5shiv.js"></script>
+					<![endif]-->
+				</head>
 
-	<body>
+				<body>
 
-		<div class="reveal">
-				<div class='footer'>
-					<span class="footer-text">Timotheus Kampik. Licentiate Thesis.</span>
-					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
-					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
-				</div>
+					<div class="reveal">
+							<div class='footer'>
+								<span class="footer-text">Timotheus Kampik. Licentiate Thesis.</span>
+								<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+								<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+							</div>
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h2>Formal Models of Bounded Rationality for Autonomous Agents
-					</h2>
-					<p>
-						<small><strong>Timotheus Kampik</strong> </small><br>
-						<small>Supervisors: Helena Lindgren & Juan Carlos Nieves</small>
-					</p>
-				</section>
-                                
-					<section data-markdown>
-						### That's Me
-						* Background: software engineering, product management
-						* At the CS Department since 2018
-						* Member of the Interactive and Intelligent Systems Group
-						* Working on Reasoning and Multi-agent Systems
-					</section>        
+						<!-- Any section element inside of this container is displayed as a slide -->
+						<div class="slides">
+							<section>
+								<h2>Formal Models of Bounded Rationality for Autonomous Agents
+								</h2>
+								<p>
+									<small><strong>Timotheus Kampik</strong> </small><br>
+									<small>Supervisors: Helena Lindgren & Juan Carlos Nieves</small>
+								</p>
+							</section>
+											
+								<section data-markdown>
+									### That's Me
+									* Background: software engineering, product management
+									* At the CS Department since 2018
+									* Member of the Interactive and Intelligent Systems Group
+									* Working on Reasoning and Multi-agent Systems
+								</section>        
 
-					<section data-markdown>
-						### Agenda
-						* Motivation & Research Questions 
-						* Background
-						* Empathic Agents (I, II, IV)
-						* Reasoning-Loop Agents on the Web (III)
-						* Abstract Argumentation and Economic Rationality (V)
-						* Future work
-					</section>
+								<section data-markdown>
+									### Agenda
+									* Motivation & Research Questions 
+									* Background
+									* Empathic Agents (I, II, IV)
+									* Reasoning-Loop Agents on the Web (III)
+									* Abstract Argumentation and Economic Rationality (V)
+									* Future work
+								</section>
 
-					<section data-markdown>
-						### Motivation & Research Questions
-					</section>
+								<section data-markdown>
+									### Motivation & Research Questions
+								</section>
 
-					<section data-markdown>
-							How can intelligent systems make better decisions?
-					</section>
+								<section data-markdown>
+										How can intelligent systems make better decisions?
+								</section>
 
-					<section data-markdown>
-						### Problem	
+								<section data-markdown>
+									### Problem	
 
-						"When a measure becomes a target, it ceases to be a good measure."
+									"When a measure becomes a target, it ceases to be a good measure."
 
-						Marilyn Strathern
+									Marilyn Strathern
 
 
-						&rarr; It is more than optimization!
-						
-					</section>
+									&rarr; It is more than optimization!
+									
+								</section>
 
-					<section data-markdown>
-						### We have the same problem in economics!
+								<section data-markdown>
+									### We have the same problem in economics!
 
-						* Initial assumption of rationality:
+									* Initial assumption of rationality:
 
-							* "Economic man" acts according to clear preferences/utility function
+										* "Economic man" acts according to clear preferences/utility function
 
-							* Has consistent utility function over time
+										* Has consistent utility function over time
+										
+								</section>
 
-							* Shortcoming 1: "Single-mindedness", *ceteris paribus* assumption
 
-							* Shortcoming 2: egoistic instead of social behavior
+								<section data-markdown>
+									### Example I
 
-							&rarr; *bounded rationality*
+									* We go to a café, `tea and coffee` is on the menu
+
+										* We choose `coffee`
+
+									* Next day `tea, coffee, and cookie` is on the menu 
+
+										* We choose `tea and cookie`. Are we rational?
+
+										* We choose `tea`. Are we rational?
+
+
+										
+								</section>
+
+								<section data-markdown>
+									### Example II
+
+									* Ultimatum game: 2 players, 100 coins 
+
+									* Player 1 can split coins between players (e.g, "60 for me, 40 for you")
+
+									* Player 2 approves or rejects split
+
+									* If approved, coins are shared as proposed; otherwise nobody gets any coins
+										
+								</section>
+
+
+								<section data-markdown>
+								### Shortcomings
+								* Shortcoming 1: "Single-mindedness", *ceteris paribus* assumption
+
+								* Shortcoming 2: egoistic instead of social behavior
+
+								&rarr; *bounded rationality*
+
+							</section>
+
+								<!--<section data-background-iframe="./examples/hci/app/js/third_page.html" data-background-interactive>
+								</section>-->
+
+								<section data-markdown>
+									### Let us see if there is something useful at the intersection of economics and AI!
+								</section>
+
+								<section>
+									<h4>Game Theory</h4>
+									<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif" width="325px"\>
+									<img src="./rubinstein.jpg" width="325px"\>
+								</section>
+
+								<section>
+									<h4>Bounded Rationality</h4>
+									<img src="./simon.jpg" width="325px"\>
+									<img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Daniel_KAHNEMAN.jpg" width="325px"\>
+								</section>
+
+								<section data-markdown>
+									### Since the beginning, there has been a clear intersection between AI (and Computer Science) & Economics!
+								</section>
+
+								<section data-markdown>
+									### Let us further explore this intersection.
+								</section>
+
+								<section data-markdown>
+									### Specific Research Objectives
+								</section>
+
+								<section data-markdown>
+									1. Formal models of bounded rationality of agents that compromise with others (Papers I and II).
+								</section>
+
+								<section data-markdown>
+									2. Software engineering abstractions for boundedly rational agents (Paper III)
+								</section>
+
+								<section data-markdown>
+									3. Human decision-making and boundedly rational agents (Paper VI)
+								</section>
+
+								<section>
+									4. Formal reasoning methods and bounded rationality (Paper V)
+								</section>
+
+								<section data-markdown>
+									### Empathic Agents (Papers I, II, and IV)
+								</section>
+
+								<section>
+								<h4>Research Questions</h4>
+										<fragment data-markdown>
+											1. Formal models of bounded rationality of agents that compromise with others
+
+											3. Human decision-making and boundedly rational agents
+										</fragment>
+								</section>
+							<section>
+								<h4>Design Principles - Based on Notion of Empathy</h2>
+										<fragment data-markdown>
+												* Be aware of the utility function or beliefs of others
+												* Maintain "self-other differentiation" (Coplan)
+												* Be able to comply with rules/norms 
+												* Be limitedly receptive to *utility contagion*
+										</fragment>
+										<fragment data-markdown class="tiny left"><br>
+											Coplan. "Will the Real Empathy Please Stand Up? A Case for a Narrow Conceptualization."
+											Stueber. "Empathy (The Stanford Encyclopedia of Philosophy).""
+										</fragment>
+
+							</section>
+
+							<section>
+								<h4> Boundedly Altruistic Equilibria</h4>
+										<fragment data-markdown>
+												* ``n`` agents interact in environment
+												
+												* Each agent has set of actions it can potentially execute
+												
+												* All agents act simultaneously; only one specific point in time considered
+												
+												* Each agent has utility function: maps action combination to numerical value
+
+												* All agents are of the same *type* -> find equilibrium
+										</fragment>
+							</section>
+
+							<section>
+									<h4> Boundedly Altruistic Equilibria</h4>
+											<fragment data-markdown class="alg">
+													1. Employ acceptability rules: check if an action combination must not be executed
+
+													2. Update utility functions accordingly
+
+													3. Determine Pareto-optimal Nash equilibria ($NE_{po}$).
+
+													4. If $NE_{po}$ exist: Pick $first$ (deterministic) action set in $NE_{po}$.
+
+													5. Else: Pick actions that maximize shared utility.
+											</fragment>
+							</section>
+
+							<section>
+								<h4>Managing Inconsistent Beliefs</h4>
+										<br>
+										<fragment data-markdown>
+											* Agents may initially have inconsistent beliefs about acceptability rules.  
+											Example: recommender system scenario:
+												```
+												// System provider agent:
+												acceptable("Show vodka ad", "Show university ad").
+												// User agent:
+												attack("Show vodka ad", "Alcoholic"). 
+												```
+											* Apply formal argumentation (Dung-style), *maximal ideal extension*.
+										</fragment>
+							</section>
 							
-					</section>
+							<section>
+								<h2>Towards Empirical Assessment I</h2>
+								<section>
+										<br>
+										<fragment data-markdown>
+										* Human-robot ultimatum game
+										
+										* 6 rounds
 
+										* Roles switch every round
+										
+										* 100 coins to share per round
+										
+										* Two modes, randomly selected per participant:  
+										*explanations*, *no explanations*
 
-					<section data-markdown>
-						### Example: Single-Mindedness
+										* $n = 19$
+										</fragment>
+								</section>
+						</section>
 
-						* We go to a café, `tea and coffee` is on the menu
-
-							* We choose `coffee`
-
-						* Next day `tea, coffee, and cookie` is on the menu 
-
-							* We choose `tea and cookie`. Are we rational?
-
-							* We choose `tea`. Are we rational?
-
-
-							
-					</section>
-
-					<section data-markdown>
-						### Example: Egoism
-
-						* Ultimatum game: 2 players, 100 coins 
-
-						* Player 1 can split coins between players (e.g, "60 for me, 40 for you")
-
-						* Player 2 approves or rejects split
-
-						* If approved, coins are shared as proposed; otherwise nobody gets any coins
-							
-					</section>
-
-					<section data-background-iframe="./examples/hci/app/js/third_page.html" data-background-interactive>
-					</section>
-
-					<section data-markdown>
-						### Let us see if there is something useful at the intersection of economics and AI!
-					</section>
-
-					<section>
-						<h4>Game Theory</h4>
-						<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif" width="325px"\>
-						<img src="./rubinstein.jpg" width="325px"\>
-					</section>
-
-					<section>
-						<h4>Bounded Rationality</h4>
-						<img src="./simon.jpg" width="325px"\>
-						<img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Daniel_KAHNEMAN.jpg" width="325px"\>
-					</section>
-
-					<section data-markdown>
-						### Since the beginning, there has been a clear intersection between AI (and Computer Science) & Economics!
-					</section>
-
-					<section data-markdown>
-						### Let us further explore this intersection.
-					</section>
-
-					<section data-markdown>
-						### Specific Research Objectives
-					</section>
-
-					<section data-markdown>
-						1. Formal models of bounded rationality of agents that compromise with others (Papers I and II).
-					</section>
-
-					<section data-markdown>
-						2. Software engineering abstractions for boundedly rational agents (Paper III)
-					</section>
-
-					<section data-markdown>
-						3. Human decision-making and boundedly rational agents (Paper VI)
-					</section>
-
-					<section>
-						4. Formal reasoning methods and bounded rationality (Paper V)
-					</section>
-
-					<section data-markdown>
-						### Empathic Agents (Papers I, II, and IV)
-					</section>
-
-					<section>
-					<h4>Research Questions</h4>
-							<fragment data-markdown>
-								1. Formal models of bounded rationality of agents that compromise with others
-
-								3. Human decision-making and boundedly rational agents
-							</fragment>
-					</section>
-                <section>
-                    <h4>Design Principles - Based on Notion of Empathy</h2>
-                            <fragment data-markdown>
-                                    * Be aware of the utility function or beliefs of others
-                                    * Maintain "self-other differentiation" (Coplan)
-                                    * Be able to comply with rules/norms 
-                                    * Be limitedly receptive to *utility contagion*
-                            </fragment>
-                            <fragment data-markdown class="tiny left"><br>
-                                Coplan. "Will the Real Empathy Please Stand Up? A Case for a Narrow Conceptualization."
-                                Stueber. "Empathy (The Stanford Encyclopedia of Philosophy).""
-                            </fragment>
-
-                </section>
-
-                <section>
-                    <h4> Boundedly Altruistic Equilibria</h4>
-                            <fragment data-markdown>
-                                    * ``n`` agents interact in environment
-                                    
-                                    * Each agent has set of actions it can potentially execute
-                                    
-                                    * All agents act simultaneously; only one specific point in time considered
-                                    
-                                    * Each agent has utility function: maps action combination to numerical value
-
-                                    * All agents are of the same *type* -> find equilibrium
-                            </fragment>
-                </section>
-
-                <section>
-                        <h4> Boundedly Altruistic Equilibria</h4>
-                                <fragment data-markdown class="alg">
-                                        1. Employ acceptability rules: check if an action combination must not be executed
-
-                                        2. Update utility functions accordingly
-
-                                        3. Determine Pareto-optimal Nash equilibria ($NE_{po}$).
-
-                                        4. If $NE_{po}$ exist: Pick $first$ (deterministic) action set in $NE_{po}$.
-
-                                        5. Else: Pick actions that maximize shared utility.
-                                </fragment>
-                </section>
-
-                <section>
-                    <h4>Managing Inconsistent Beliefs</h4>
-                            <br>
-                            <fragment data-markdown>
-                                * Agents may initially have inconsistent beliefs about acceptability rules.  
-                                  Example: recommender system scenario:
-                                    ```
-                                    // System provider agent:
-                                    acceptable("Show vodka ad", "Show university ad").
-                                    // User agent:
-                                    attack("Show vodka ad", "Alcoholic"). 
-                                    ```
-                                * Apply formal argumentation (Dung-style), *maximal ideal extension*.
-                            </fragment>
-				</section>
-				
-				<section>
-					<h2>Towards Empirical Assessment I</h2>
-					<section>
-							<br>
-							<fragment data-markdown>
-							* Human-robot ultimatum game
-							
-							* 6 rounds
-
-							* Roles switch every round
-							
-							* 100 coins to share per round
-							
-							* Two modes, randomly selected per participant:  
-							  *explanations*, *no explanations*
-
-							* $n = 19$
-							</fragment>
-					</section>
-			</section>
-
-			<section>
-				<h2>Towards Empirical Assessment I</h2>
-				<section>
-						<br>
-						<fragment data-markdown>
-								* Sympathetic/empathic agents (hard-coded toy scenario)
-
-								* Ultimatum game
-
-								* Agents explain/do not explain their behavior
-						</fragment>
-				</section>
-		</section>
-
-				<section>
-						<h2>Towards Empirical Assessment II</h2>
 						<section>
-								<br>
+							<h2>Towards Empirical Assessment I</h2>
+							<section>
+									<br>
+									<fragment data-markdown>
+											* Sympathetic/empathic agents (hard-coded toy scenario)
+
+											* Ultimatum game
+
+											* Agents explain/do not explain their behavior
+									</fragment>
+							</section>
+					</section>
+
+							<section>
+									<h2>Towards Empirical Assessment II</h2>
+									<section>
+											<br>
+											<fragment data-markdown>
+													* Robot is rational acceptance, but *sympathetic* in proposals
+
+													* #Rejections per game
+
+													* #Coins optained by human and agent
+
+													* Reported *niceness* of robot (scale: 1-5)
+											</fragment>
+									</section>
+							</section>
+							
+							<section>
+								<h2>Towards Empirical Assessment III</h2>
+								<section> 
+									
+									<img src="./extraamas/furhat_demo.png" alt="Furhat" class="full-image"/>
+								</section>
+						</section>
+
+						<section>
+							<h2>Towards Empirical Assessment IV</h2>
+							<section>
+									<img src="./extraamas/mean.png" alt="Mean" class="full-image-landscape"/>
+							</section>
+					</section>
+
+					<section>
+						<h2>Towards Empirical Assessment V</h2>
+						<section>
+							<img src="./extraamas/median.png" alt="Mean" class="full-image-landscape"/>
+						</section>
+					</section>
+
+					<section>
+							<h2>Towards Empirical Assessment VI</h2>
+							<section>
+								<img src="./extraamas/fairness.png" alt="Mean" class="full-image-landscape"/>
+							</section>
+						</section>
+
+								<section data-markdown>
+									### Reasoning-Loop Agents on the Web (Paper III)
+								</section>
+								<section data-markdown="">
+									#### Research Question
+									2. Software engineering abstractions for boundedly rational agents
+
+							</section>
+
+							<section>
+								<h2>Reasoning loop</h2>
 								<fragment data-markdown>
-										* Robot is rational acceptance, but *sympathetic* in proposals
+										![](reasoning_loop.png)
+										
+								</fragment>
+							</section>
 
-										* #Rejections per game
+							<!--<section>
+									<h4>Design Principles I</h4>
+										<fragment data-markdown>
+											* Usability over intellectual elegance
+											* Flexibility over rigor
+											* Extensibility over out-of-the-box power
+										</fragment>
+										<fragment data-markdown class="tiny left"><br>
+											Inspired by the [Agile Manifesto](https://agilemanifesto.org/)
+										</fragment>
+							</section>-->
 
-										* #Coins optained by human and agent
+							<section>
+									<h4>Motivation</h4>
+									<table class="comparison">
+										<tr>
+											<td><strong>Functional Programming</strong></td>
+											<td><strong>Agent-oriented Programming</strong></td>
+										</tr>
+										<tr>
+											<td>Lisp</td>
+											<td>Jason</td>
+										</tr>
+										<tr>
+											<td data-markdown>``MEMBER`` function (list)</td>
+											<td data-markdown>``(event, context, body)`` plans </td>
+										</tr>
+										<tr>
+											<td data-markdown>``includes`` functor (array)</td>
+											<td data-markdown>``(intention-condition, body)`` plans</td>
+										</tr>
+										<tr>
+											<td data-markdown> Lodash (``_``)</td>
+											<td>JS-son</td>
+										</tr>
+										<tr>
+											<td data-markdown> ES2016</td>
+											<td>???</td>
+										</tr>
+									</table>
+							</section>
 
-										* Reported *niceness* of robot (scale: 1-5)
+								<section style="margin-top: 100px;" id="iframe-nn" data-background-iframe="https://people.cs.umu.se/tkampik/demos/arena/" data-background-interactive>
+								</section>
+								<script>
+									document.onkeydown = checkKey
+									function checkKey(e) {
+
+										e = e || window.event
+
+										if (e.keyCode == '38') {
+											// up arrow
+											document.querySelectorAll('[src="https://people.cs.umu.se/tkampik/demos/arena/"]')[0].setAttribute('src', 'fair-nn')
+											document.querySelectorAll('[src="https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true"]')[0].setAttribute('src', 'uav-sim')
+										}
+										else if (e.keyCode == '40') {
+											// down arrow
+											document.querySelectorAll('[src="fair-nn"]')[0].setAttribute('src', 'https://people.cs.umu.se/tkampik/demos/arena/')
+											document.querySelectorAll('[src="uav-sim"]')[0].setAttribute('src', 'https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true')
+										}
+
+										}
+								</script>
+
+								<section style="margin-top: 100px;" data-background-iframe="https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true" data-background-interactive>
+								</section>
+
+							<section data-background-iframe="https://nbviewer.jupyter.org/github/TimKam/JS-son/blob/master/examples/jupyter/JS-son_Data_Science_Demo.ipynb" data-background-interactive>
+							</section> 
+							<section data-background-iframe="https://people.cs.umu.se/~tkampik/demos/on-the-fly/" data-background-interactive>
+							</section>
+
+							<section data-markdown>
+								### Abstract Argumentation and Economic Rationality (Paper V)
+							</section>
+
+							<section>
+								<fragment data-markdown>
+									#### Introduction/Intuition I
+
+									* Idea of computational resolution of arguments precedes artificial intelligence:
+									
+									If "*controversies were to arise, there would be no more need of disputation;* *\[it would suffice to say:] let us calculate.*" - Leibniz
+					
+									* Dung's (formal) abstract argumentation considered important step towards Leibnitz's vision
+					
+								</fragment>
+								<fragment data-markdown class="tiny left">
+									Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."  
+									Russell, Bertrand. *The philosophy of Leibniz.*
+								</fragment>
+				
+							</section>
+
+							<section>
+								<fragment data-markdown>
+								#### Argumentation Frameworks
+								
+								* Set of arguments, e.g.: $\{a, b, c\}$
+
+								* Set of attack relations over arguments, e.g.: $\{(a, b), (b, c)\}$
+								</fragment>
+
+								
+							</section>
+
+							<section>
+								<fragment data-markdown>
+								#### Argumentation Semantics
+								
+								Which arguments in an AF are valid conclusions?
+								</fragment>
+								<fragment>
+									<table style="min-width:250px!important;min-height: 250px !important">
+										<tr>
+											<td>
+												<div style="min-width:250px!important;min-height: 250px !important;" id="af-1a" class="af"></div>
+											</td>
+											<td>
+												<div style="min-width:250px!important;min-height: 250px !important;" id="af-1b" class="af"></div>
+											</td>
+										</tr>
+									</table>
+								</fragment>
+								<script>
+									// Ask sigma to draw it
+									window.addEventListener('load', (
+										event) => {
+											s = new sigma(
+											{
+												renderer: {
+												container: document.getElementById('af-1a'),
+												type: 'canvas'
+												},
+												settings: {
+													edgeLabelSize: 'fixed',
+													defaultLabelSize: 30,
+													minArrowSize: 10,
+													maxNodeSize: 25,
+													maxEdgeLabelSize: 20,
+													defaultLabelColor: '#fff',
+													defaultEdgeSize: 3,
+													maxEdgeSize: 3,
+													mouseWheelEnabled: true,
+													sideMargin: 0.05
+												}
+											}
+											)
+
+											// Create a graph object
+											window.carGraphInitial = {
+											nodes: [
+												{ id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+												{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+												{ id: "c", label: "c", x: 1, y: 1, size: 25, color: '#73A790' }
+											],
+											edges: [
+												{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+												{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+												//{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+											]
+											}
+											// Load the graph in sigma
+											s.graph.read(carGraphInitial)
+
+											// Start the algorithm:
+										s.refresh()
+										}
+									)
+								</script>
+								<script>
+									// Ask sigma to draw it
+									window.addEventListener('load', (
+										event) => {
+											s = new sigma(
+											{
+												renderer: {
+												container: document.getElementById('af-1b'),
+												type: 'canvas'
+												},
+												settings: {
+													edgeLabelSize: 'fixed',
+													defaultLabelSize: 30,
+													minArrowSize: 10,
+													maxNodeSize: 25,
+													maxEdgeLabelSize: 20,
+													defaultLabelColor: '#fff',
+													defaultEdgeSize: 3,
+													maxEdgeSize: 3,
+													mouseWheelEnabled: true,
+													sideMargin: 0.05
+												}
+											}
+											)
+
+											// Create a graph object
+											window.carGraphInitial = {
+											nodes: [
+												{ id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+												{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+												{ id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+											],
+											edges: [
+												{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+												{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+												{ id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+											]
+											}
+											// Load the graph in sigma
+											s.graph.read(carGraphInitial)
+
+											// Start the algorithm:
+										s.refresh()
+										}
+									)
+								</script>
+								
+
+								
+							</section>
+				
+							<section>
+								<fragment data-markdown>
+								#### Argumentation Principles
+								
+								* How should argumentation semantics behave?
+								
+								* Example: directionality ("top-down")
+
+								&rarr; Principles based on economic rationality?
+
+								
+								</fragment>
+
+								<fragment data-markdown class="tiny left">
+								Vesic and Van der Torre. "The principle-based approach to abstract argumentation semantics."
+								</fragment>
+						
+							</section>
+							
+							<section>
+								<fragment data-markdown>
+								#### Rational Economic Man I
+								</fragment>
+
+								<br>
+								<fragment data-markdown style="font-size: 33.6px">
+								* Standard economic model for individual decision-making
+
+								* Chooses from $A = \\{a, ..., n\\}$
+								
+								* Choice function: $A \rightarrow 2^A$
+
+								* Clear preferences: total order of all sets in $2^A$
+								</fragment>
+
+								<fragment data-markdown class="tiny left">
+									Rubinstein, Ariel. *Modeling bounded rationality.* 
 								</fragment>
 						</section>
-				</section>
-				
-				<section>
-					<h2>Towards Empirical Assessment III</h2>
-					<section> 
-						
-						<img src="./extraamas/furhat_demo.png" alt="Furhat" class="full-image"/>
-					</section>
-			</section>
 
-			<section>
-				<h2>Towards Empirical Assessment IV</h2>
-				<section>
-						<img src="./extraamas/mean.png" alt="Mean" class="full-image-landscape"/>
-				</section>
-		</section>
-
-		<section>
-			<h2>Towards Empirical Assessment V</h2>
-			<section>
-				<img src="./extraamas/median.png" alt="Mean" class="full-image-landscape"/>
-			</section>
-		</section>
-
-		<section>
-				<h2>Towards Empirical Assessment VI</h2>
-				<section>
-					<img src="./extraamas/fairness.png" alt="Mean" class="full-image-landscape"/>
-				</section>
-			</section>
-
-					<section data-markdown>
-						### Reasoning-Loop Agents on the Web (Paper III)
-					</section>
-					<section data-markdown="">
-						#### Research Question
-						2. Software engineering abstractions for boundedly rational agents
-
-				</section>
-
-				<section>
-					<h2>Reasoning loop</h2>
-					<fragment data-markdown>
-							![](https://academic.signavio.com/p/model/19c65fb0f8c54b588c4f1a3aff427046/png?inline&authkey=9557ff1d839fbe5663a232c52cd648f1a67c4d7be8450d5f727eb78848949fc	)
-							
-					</fragment>
-				</section>
-
-				<section>
-						<h4>Design Principles I</h4>
+						<section>
 							<fragment data-markdown>
-								* Usability over intellectual elegance
-								* Flexibility over rigor
-								* Extensibility over out-of-the-box power
+							#### Rational Economic Man II
 							</fragment>
-							<fragment data-markdown class="tiny left"><br>
-								Inspired by the [Agile Manifesto](https://agilemanifesto.org/)
+
+							<fragment data-markdown style="font-size: 33.6px">
+							* Set of choice options $A, A'$, such that $A \subseteq A'$
+							
+							* Rational man's choices $A^{\*} \subseteq A$ and $A'^{\*} \subseteq A'$
+							
+							* If $A'^{\*} \subseteq A$ then $A' = A'^{\*}$
 							</fragment>
-				</section>
 
-				<section>
-						<h4>Design Principles II</h4>
-						<table class="comparison">
-							<tr>
-								<td><strong>Functional Programming</strong></td>
-								<td><strong>Agent-oriented Programming</strong></td>
-							</tr>
-							<tr>
-								<td>Lisp</td>
-								<td>Jason</td>
-							</tr>
-							<tr>
-								<td data-markdown>``MEMBER`` function (list)</td>
-								<td data-markdown>``(event, context, body)`` plans </td>
-							</tr>
-							<tr>
-								<td data-markdown>``includes`` functor (array)</td>
-								<td data-markdown>``(intention-condition, body)`` plans</td>
-							</tr>
-							<tr>
-								<td data-markdown> Lodash (``_``)</td>
-								<td>JS-son</td>
-							</tr>
-							<tr>
-								<td data-markdown> ES2016</td>
-								<td>???</td>
-							</tr>
-						</table>
-				</section>
+							<fragment data-markdown class="tiny left">
+								Rubinstein, Ariel. *Modeling bounded rationality.*
+							</fragment>
+						</section>
 
-					<section style="margin-top: 100px;" id="iframe-nn" data-background-iframe="https://people.cs.umu.se/tkampik/demos/arena/" data-background-interactive>
-					</section>
-					<script>
-						document.onkeydown = checkKey
-						function checkKey(e) {
+						<section>
+							<fragment data-markdown>
+							#### Example
+							</fragment>
 
-							e = e || window.event
+							<fragment data-markdown style="font-size: 33.6px">
+							* $\\{tea, coffee\\}$. Rational Man (RM) chooses $\\{coffee\\}$
+							
+							* Scenario 1: $\\{tea, coffee, cookie\\}$. RM chooses $\\{tea, cookie\\}$
+							
+							* Scenario 2: $\\{tea, coffee, cookie\\}$. RM chooses $\\{tea\\}$
+							</fragment>
 
-							if (e.keyCode == '38') {
-								// up arrow
-								document.querySelectorAll('[src="https://people.cs.umu.se/tkampik/demos/arena/"]')[0].setAttribute('src', 'fair-nn')
-								document.querySelectorAll('[src="https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true"]')[0].setAttribute('src', 'uav-sim')
-							}
-							else if (e.keyCode == '40') {
-								// down arrow
-								document.querySelectorAll('[src="fair-nn"]')[0].setAttribute('src', 'https://people.cs.umu.se/tkampik/demos/arena/')
-								document.querySelectorAll('[src="uav-sim"]')[0].setAttribute('src', 'https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true')
-							}
+						</section>
 
-							}
-					</script>
+						<section>
+							<fragment data-markdown>
+							#### Example
+							</fragment>
 
-					<section style="margin-top: 100px;" data-background-iframe="https://people.cs.umu.se/~tkampik/demos/uav/?scenario=s2&seed=5&mode=cont&speed=3&controls=true" data-background-interactive>
-					</section>
+							<fragment data-markdown style="font-size: 33.6px">
+							* $\\{coffee\\}$ from $\\{tea, coffee\\}$  
+							&rarr; $\forall A \in 2^{\\{tea, coffee\\}}, \\{coffee\\} \succeq A$  
+							&rarr; $\\{coffee\\} \succeq \\{tea\\}$
 
-				<section data-background-iframe="http://localhost:8888/notebooks/JS-son_Data_Science_Demo.ipynb" data-background-interactive>
-				</section> 
-				<section data-background-iframe="https://people.cs.umu.se/~tkampik/demos/on-the-fly/" data-background-interactive>
-				</section>
+							* $\\{tea, cookie\\}$  from $\\{tea, coffee, cookie\\}$  
+							&rarr; $\forall A \in 2^{\\{tea, coffee\\}}, \\{tea, cookie\\} \succeq A$  
+							&rarr; $\\{tea, cookie\\} \succeq \\{coffee\\}$
+							
+							* $\\{tea\\}$ from $\\{tea, coffee, cookie\\}$  
+							&rarr; $\forall A \in 2^{\\{tea, coffee\\}}, \\{tea\\} \succeq A$  
+							&rarr; $\\{tea\\} \succeq \\{coffee\\}$
 
-				<section data-markdown>
-					### Abstract Argumentation and Economic Rationality (Paper V)
-				</section>
+							</fragment>
 
-				<section>
-                    <fragment data-markdown>
-                        #### Introduction/Intuition I
+						</section>
 
-                        * Idea of computational resolution of arguments precedes artificial intelligence:
-                        
-                          If "*controversies were to arise, there would be no more need of disputation;* *\[it would suffice to say:] let us calculate.*" - Leibniz
-        
-                        * Dung's (formal) abstract argumentation considered important step towards Leibnitz's vision
-        
-                    </fragment>
-                    <fragment data-markdown class="tiny left">
-                        Dung, Phan Minh. "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games."  
-                        Russell, Bertrand. *The philosophy of Leibniz.*
-                    </fragment>
-    
-                </section>
+						<section>
+							<fragment data-markdown>
+							#### Problem
+							</fragment>
 
-                <section>
-                    <fragment data-markdown>
-					#### Argumentation Frameworks
-					
-					* Set of arguments, e.g.: $\{a, b, c\}$
+							<fragment data-markdown>
+							* *Ceteris paribus* assumption
 
-					* Set of attack relations over arguments, e.g.: $\{(a, b), (b, c)\}$
-					</fragment>
+							* What about knowledge/context?
 
-					
-				</section>
+							&rarr; Argumentation can manage this!
 
-				<section>
-                    <fragment data-markdown>
-					#### Argumentation Semantics
-					
-					Which arguments in an AF are valid conclusions?
-					</fragment>
-					<fragment>
-						<table>
-							<tr>
-								<td>
-									<div style="" id="af-1a" class="af"></div>
-								</td>
-								<td>
-									<div style="" id="af-1b" class="af"></div>
-								</td>
-							</tr>
-						</table>
-                    </fragment>
-					<script>
-                        // Ask sigma to draw it
-                        window.addEventListener('load', (
-                            event) => {
-                                s = new sigma(
-                                {
-                                    renderer: {
-                                    container: document.getElementById('af-1a'),
-                                    type: 'canvas'
-                                    },
-                                    settings: {
-                                        edgeLabelSize: 'fixed',
-                                        defaultLabelSize: 30,
-                                        minArrowSize: 10,
-                                        maxNodeSize: 25,
-                                        maxEdgeLabelSize: 20,
-                                        defaultLabelColor: '#fff',
-                                        defaultEdgeSize: 3,
-                                        maxEdgeSize: 3,
-                                        mouseWheelEnabled: true,
-                                        sideMargin: 0.05
-                                    }
-                                }
-                                )
+							</fragment>
 
-                                // Create a graph object
-                                window.carGraphInitial = {
-                                nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
-                                ],
-                                edges: [
-                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    //{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
-                                ]
-                                }
-                                // Load the graph in sigma
-                                s.graph.read(carGraphInitial)
+						</section>
 
-                                // Start the algorithm:
-                               s.refresh()
-                            }
-                        )
-					</script>
-					<script>
-                        // Ask sigma to draw it
-                        window.addEventListener('load', (
-                            event) => {
-                                s = new sigma(
-                                {
-                                    renderer: {
-                                    container: document.getElementById('af-1b'),
-                                    type: 'canvas'
-                                    },
-                                    settings: {
-                                        edgeLabelSize: 'fixed',
-                                        defaultLabelSize: 30,
-                                        minArrowSize: 10,
-                                        maxNodeSize: 25,
-                                        maxEdgeLabelSize: 20,
-                                        defaultLabelColor: '#fff',
-                                        defaultEdgeSize: 3,
-                                        maxEdgeSize: 3,
-                                        mouseWheelEnabled: true,
-                                        sideMargin: 0.05
-                                    }
-                                }
-                                )
+						<section>
+							<fragment data-markdown>
+							#### Rationality (Reference Independence) In Argumentation
+							</fragment>
 
-                                // Create a graph object
-                                window.carGraphInitial = {
-                                nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
-                                ],
-                                edges: [
-                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
-                                ]
-                                }
-                                // Load the graph in sigma
-                                s.graph.read(carGraphInitial)
+							<fragment data-markdown style="font-size: 33.6px">
+							* Each framework can have several extensions ("solutions")
 
-                                // Start the algorithm:
-                               s.refresh()
-                            }
-                        )
-                    </script>
-					
+							* "Picking" an extension $S^{*} \subseteq AR$ implies $\forall S \subseteq AR, S' \succeq S$
 
-					
-				</section>
-    
-                <section>
-                    <fragment data-markdown>
-					#### Argumentation Principles
-					
-					* How should argumentation semantics behave?
-					
-					* Example: directionality ("top-down")
+							* "Adding" new arguments to a framework must not change previously established preferences
 
-					&rarr; Principles based on economic rationality?
+							</fragment>
 
-					
-                    </fragment>
+						</section>
 
-                    <fragment data-markdown class="tiny left">
-                    Vesic and Van der Torre. "The principle-based approach to abstract argumentation semantics."
-                    </fragment>
-            
-				</section>
+						<section>
+							<fragment data-markdown>
+							#### Example
+							</fragment>
+
+							<fragment data-markdown style="font-size: 33.6px">
+							
+							* Decision: recommend launch of product: $a, b$.
+
+							* In A/B tests, consumers like $a$ better than $b$
+
+							&rarr; recommend $a$
+
+							</fragment>
+
+						</section>
+
+						<section>
+							<fragment>
+								<h4>Example</h4>
+								<div id="af-2aa" class="af" style="width:50%!important;min-height: 250px !important;"></div>
+							</fragment>
+
+							
+
+							<script>
+								// Ask sigma to draw it
+								window.addEventListener('load', (
+									event) => {
+										s = new sigma(
+										{
+											renderer: {
+											container: document.getElementById('af-2aa'),
+											type: 'canvas'
+											},
+											settings: {
+												edgeLabelSize: 'fixed',
+												defaultLabelSize: 30,
+												minArrowSize: 10,
+												maxNodeSize: 25,
+												maxEdgeLabelSize: 20,
+												defaultLabelColor: '#fff',
+												defaultEdgeSize: 3,
+												maxEdgeSize: 3,
+												mouseWheelEnabled: true,
+												sideMargin: 0.05
+											}
+										}
+										)
+
+										// Create a graph object
+										window.carGraphInitial = {
+										nodes: [
+											{ id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+											{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+											// { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+										],
+										edges: [
+											{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+											//{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+											//{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+										]
+										}
+										// Load the graph in sigma
+										s.graph.read(carGraphInitial)
+
+										// Start the algorithm:
+									s.refresh()
+									}
+								)
+							</script>
+
+
+						</section>
+
+						<section>
+							<fragment data-markdown>
+							#### Example
+							</fragment>
+
+							<fragment data-markdown style="font-size: 33.6px">
+							
+							* Decision delayed, in the meantime, $c$ is added as new option
+
+							* In A/B tests, consumers like $b$ better than $c$, but $c$ better than $c$
+
+							* Recommend what?
+
+							</fragment>
+						</section>
+
+							<section>
+								<fragment>
+								<h4>Example</h4> 
+									<table style="min-width:900px!important;min-height: 900px !important;">
+										<tr>
+											<td>
+												<div style="width:50%!important;min-height: 250px !important;" id="af-2b" class="af"></div>
+											</td>
+											<td>
+												<div style="width:50%!important;min-height: 250px !important;" id="af-2c" class="af"></div>
+											</td>
+										</tr>
+									</table>
+								</fragment>
+								<script>
+									// Ask sigma to draw it
+									window.addEventListener('load', (
+										event) => {
+											s = new sigma(
+											{
+												renderer: {
+												container: document.getElementById('af-2b'),
+												type: 'canvas'
+												},
+												settings: {
+													edgeLabelSize: 'fixed',
+													defaultLabelSize: 30,
+													minArrowSize: 10,
+													maxNodeSize: 25,
+													maxEdgeLabelSize: 20,
+													defaultLabelColor: '#fff',
+													defaultEdgeSize: 3,
+													maxEdgeSize: 3,
+													mouseWheelEnabled: true,
+													sideMargin: 0.05
+												}
+											}
+											)
+
+											// Create a graph object
+											window.carGraphInitial = {
+											nodes: [
+												{ id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+												{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+												// { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+											],
+											edges: [
+												{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3}
+												//{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+											]
+											}
+											// Load the graph in sigma
+											s.graph.read(carGraphInitial)
+
+											// Start the algorithm:
+										s.refresh()
+										}
+									)
+								</script>
+								<script>
+									// Ask sigma to draw it
+									window.addEventListener('load', (
+										event) => {
+											s = new sigma(
+											{
+												renderer: {
+												container: document.getElementById('af-2c'),
+												type: 'canvas'
+												},
+												settings: {
+													edgeLabelSize: 'fixed',
+													defaultLabelSize: 30,
+													minArrowSize: 10,
+													maxNodeSize: 25,
+													maxEdgeLabelSize: 20,
+													defaultLabelColor: '#fff',
+													defaultEdgeSize: 3,
+													maxEdgeSize: 3,
+													mouseWheelEnabled: true,
+													sideMargin: 0.2
+												}
+											}
+											)
+
+											// Create a graph object
+											window.carGraphInitial = {
+											nodes: [
+												{ id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+												{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+												{ id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+											],
+											edges: [
+												{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+												{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+												{ id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+											]
+											}
+											// Load the graph in sigma
+											s.graph.read(carGraphInitial)
+
+											// Start the algorithm:
+										s.refresh()
+										}
+									)
+								</script>
 				
-				<section>
-					<fragment data-markdown>
-					#### Rational Economic Man I
-					</fragment>
+							</section>
 
-					<br>
-					<fragment data-markdown style="font-size: 33.6px">
-					* Standard economic model for individual decision-making
+						</section>
 
-					* Chooses from $A = \\{a, ..., n\\}$
-					
-					* Choice function: $A \rightarrow 2^A$
+						<section>
+							<fragment data-markdown>
+							#### Insights
+							</fragment>
+							
+							<fragment data-markdown style="font-size: 33.6px">
+							* Most established argumentation semantics are not reference independent
 
-					* Clear preferences: total order of all sets in $2^A$
-					</fragment>
+							* One specific semantics is; we also define our own "rational" semantics (submitted work)
 
-					<fragment data-markdown class="tiny left">
-						Rubinstein, Ariel. *Modeling bounded rationality.* 
-					</fragment>
-			</section>
+							* We can enforce reference independence only by considering argumentation sequences
 
-			<section>
-				<fragment data-markdown>
-				#### Rational Economic Man II
-				</fragment>
+							</fragment>
 
-				<fragment data-markdown style="font-size: 33.6px">
-				* Set of choice options $A, A'$, such that $A \subseteq A'$
-				  
-				* Rational man's choices $A^{\*} \subseteq A$ and $A'^{\*} \subseteq A'$
+						</section>
+
+						<section>
+							<fragment data-markdown>
+							#### Application - Intelligent Systems
+						</fragment>
+							
+							<img src="./arg_rational_mining.png"/>
+
+						</section>
+
+						<section>
+							<fragment data-markdown>
+							#### Application - Economic Theory
+								
+							* Two brands of beans: `x`, `y`
+
+							* Cans of same size, `x` cheaper than `y`
+
+							&rarr; Consumers buy?
+
+
+						</fragment>
+						</section>
+
+						<section>
+							<fragment data-markdown>
+							#### Application - Economic Theory
+
+							* Two brands of beans: `x`, `y`
+
+							* Cans of same size, `x` cheaper than `y`
+
+							* Consumers buy `y` (assume better quality)
+
+							* Add smaller can of brand `x` (`x'`), same prize as `x`
+
+							&rarr; Consumers buy?
+
+						</fragment>
+						</section>
+
+						<section>
+							<fragment>
+							<h4>Application - Economic Theory</h4>
+
+
+
+										<div id="af-3a" class="af" style="min-width:500px!important;min-height:500px!important;position: relative;
+										float: left;"></div>
 				
-				* if $A'^{\*} \subseteq A$ then $A' = A'^{\*}$
-				</fragment>
+						</fragment>
+						<script>
+							// Ask sigma to draw it
+							window.addEventListener('load', (
+								event) => {
+									s = new sigma(
+									{
+										renderer: {
+										container: document.getElementById('af-3a'),
+										type: 'canvas'
+										},
+										settings: {
+											edgeLabelSize: 'fixed',
+											defaultLabelSize: 30,
+											minArrowSize: 10,
+											maxNodeSize: 25,
+											maxEdgeLabelSize: 20,
+											defaultLabelColor: '#fff',
+											defaultEdgeSize: 3,
+											maxEdgeSize: 3,
+											mouseWheelEnabled: true,
+											sideMargin: 0.5,
+										}
+									}
+									)
 
-				<fragment data-markdown class="tiny left">
-					Rubinstein, Ariel. *Modeling bounded rationality.*
-				</fragment>
-			</section>
+									// Create a graph object
+									window.carGraphInitial = {
+									nodes: [
+										{ id: "x", label: "x", x: 0, y: 0, size: 25, color: '#fff' },
+										{ id: "y", label: "y", x: 1, y: 0, size: 25, color: '#73A790' },
+										{ id: "p", label: "p", x: 1, y: 1, size: 25, color: '#fff' },
+										//{ id: "q", label: "q", x: 0, y: 1, size: 25, color: '#fff' },
+										{ id: "qp", label: "qp", x: 0, y: 1, size: 25, color: '#73A790' }
+									],
+									edges: [
+										{ id: "e0", source: "x", target: "y", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e1", source: "y", target: "x", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e2", source: "p", target: "y", color: '#fff', type:'arrow', count:0, size: 3},
+										{ id: "e3", source: "qp", target: "p", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e4", source: "qp", target: "x", color: '#fff', type:'arrow', count:0, size: 3}
+									]
+									}
+									// Load the graph in sigma
+									s.graph.read(carGraphInitial)
 
-			<section>
-				<fragment data-markdown>
-				#### Example
-				</fragment>
-
-				<fragment data-markdown style="font-size: 33.6px">
-				* $\\{tea, coffee\\}$. Rational Man (RM) chooses $\\{coffee\\}$
-				
-				* Scenario 1: $\\{tea, coffee, cookie\\}$. RM chooses $\\{tea, cookie\\}$
-				
-				* Scenario 2: $\\{tea, coffee, cookie\\}$. RM chooses $\\{tea\\}$
-				</fragment>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Example
-				</fragment>
-
-				<fragment data-markdown style="font-size: 33.6px">
-				* $\\{coffee\\}$ from $\\{tea, coffee\\}$  
-				&rarr; $\forall A \in 2^{\\{tea, coffee\\}}, \\{coffee\\} \succeq A$  
-				&rarr; $\\{coffee\\} \succeq \\{tea\\}$
-
-				* $\\{tea, cookie\\}$  from $\\{tea, coffee, cookie\\}$  
-				&rarr; $\forall A \in 2^{\\{tea, coffee\\}}, \\{tea, cookie\\} \succeq A$  
-				&rarr; $\\{tea, cookie\\} \succeq \\{coffee\\}$
-				
-				* $\\{tea\\}$ from $\\{tea, coffee, cookie\\}$  
-				&rarr; $\forall A \in 2^{\\{tea, coffee\\}}, \\{tea\\} \succeq A$  
-				&rarr; $\\{tea\\} \succeq \\{coffee\\}$
-
-				</fragment>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Problem
-				</fragment>
-
-				<fragment data-markdown>
-				* *Ceteris paribus* assumption
-
-				* What about knowledge/context?
-
-				&rarr; Argumentation can manage this!
-
-				</fragment>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Rationality (Reference Independence) In Argumentation
-				</fragment>
-
-				<fragment data-markdown style="font-size: 33.6px">
-				* Each framework can have several extensions ("solutions")
-
-				* "Picking" an extension $S^{*} \subseteq AR$ implies $\forall S \subseteq AR, S' \succeq S$
-
-				* "Adding" new arguments to a framework must not change previously established preferences
-
-				</fragment>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Example
-				</fragment>
-
-				<fragment data-markdown style="font-size: 33.6px">
-				
-				* Decision: recommend launch of product: $a, b$.
-
-				* In A/B tests, consumers like $a$ better than $b$
-
-				&rarr; recommend $a$
-
-				</fragment>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Example
-				</fragment>
-
-				<div style="" id="af-2a" class="af"></div>
-
-				<script>
-					// Ask sigma to draw it
-					window.addEventListener('load', (
-						event) => {
-							s = new sigma(
-							{
-								renderer: {
-								container: document.getElementById('af-2a'),
-								type: 'canvas'
-								},
-								settings: {
-									edgeLabelSize: 'fixed',
-									defaultLabelSize: 30,
-									minArrowSize: 10,
-									maxNodeSize: 25,
-									maxEdgeLabelSize: 20,
-									defaultLabelColor: '#fff',
-									defaultEdgeSize: 3,
-									maxEdgeSize: 3,
-									mouseWheelEnabled: true,
-									sideMargin: 0.05
+									// Start the algorithm:
+								s.refresh()
 								}
-							}
 							)
+						</script>
+						</section>
+						<section>
 
-							// Create a graph object
-							window.carGraphInitial = {
-							nodes: [
-								{ id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-								{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-								// { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
-							],
-							edges: [
-								{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
-								//{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
-								//{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+						<fragment>
+							<h4>Application - Economic Theory</h4>
+										<div id="af-3b" class="af" style="min-width:500px!important;min-height:500px!important;position: relative;
+										float: left;"></div>
+				
+						</fragment>
+						<script>
+									// Ask sigma to draw it
+									window.addEventListener('load', (
+								event) => {
+									s = new sigma(
+									{
+										renderer: {
+										container: document.getElementById('af-3b'),
+										type: 'canvas'
+										},
+										settings: {
+											edgeLabelSize: 'fixed',
+											defaultLabelSize: 30,
+											minArrowSize: 10,
+											maxNodeSize: 25,
+											maxEdgeLabelSize: 20,
+											defaultLabelColor: '#fff',
+											defaultEdgeSize: 3,
+											maxEdgeSize: 3,
+											mouseWheelEnabled: true,
+											sideMargin: 0.01,
+										}
+									}
+									)
+
+									// Create a graph object
+									window.carGraphInitial = {
+									nodes: [
+										{ id: "_", label: "x", x: 3, y: 0, size: 0, color: '#fff' },
+										{ id: "x", label: "x", x: 0, y: 0, size: 25, color: '#73A790' },
+										{ id: "y", label: "y", x: 1, y: 0, size: 25, color: '#fff' },
+										{ id: "p", label: "p", x: 1, y: 1, size: 25, color: '#73A790' },
+										{ id: "qp", label: "qp", x: 0, y: 1, size: 25, color: '#fff' },
+										{ id: "x'", label: "x'", x: 2, y: 0, size: 25, color: '#fff' },
+										{ id: "p'", label: "p'", x: 2, y: 1, size: 25, color: '#73A790' },
+										{ id: "an", label: "!qp", x: -1, y: 1, size: 25, color: '#73A790' }
+									],
+									edges: [
+										{ id: "e0", source: "x", target: "y", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e1", source: "y", target: "x", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e2", source: "p", target: "y", color: '#fff', type:'arrow', count:0, size: 3},
+										{ id: "e3", source: "qp", target: "p", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e4", source: "qp", target: "x", color: '#fff', type:'arrow', count:0, size: 3},
+										{ id: "e5", source: "x", target: "x'", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e6", source: "x'", target: "x", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e7", source: "y", target: "x'", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e8", source: "x'", target: "y", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e9", source: "an", target: "qp", color: '#fff', type:'curvedArrow', count:0, size: 3},
+										{ id: "e10", source: "p'", target: "x'", color: '#fff', type:'arrow', count:0, size: 3}
+									]
+									}
+									// Load the graph in sigma
+									s.graph.read(carGraphInitial)
+
+									// Start the algorithm:
+								s.refresh()
+								}
+							)
+						</script>
+							
+						
+						</section>
+
+						<section data-markdown>
+							### Future Work
+						</section>
+
+							<section data-markdown>
+								* Clearer focus on RQ 3: (bounded) rationality and non-monotonic reasoning
+
+								* Strong theoretical results exist and more are emerging
+
+								* Develop engineering abstraction on theoretical contributions (reasoning engine)
+
+								* Study real-world impact of theoretical results and engineering artificats, i.e., in HCI studies
+							</section>
+
+							<section>
+									<h1>Questions?</h1>
+									<small data-markdown>
+										*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+									</small>
+							</section>
+
+
+						</div>
+
+					</div>
+
+					<script src="js/reveal.js"></script>
+
+					<script>
+
+						// More info https://github.com/hakimel/reveal.js#configuration
+						Reveal.initialize({
+							controls: true,
+							progress: true,
+							center: true,
+							hash: true,
+							slideNumber: true,
+
+							transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+							// More info https://github.com/hakimel/reveal.js#dependencies
+							dependencies: [
+								{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+								{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+								{ src: 'plugin/highlight/highlight.js', async: true },
+								{ src: 'plugin/search/search.js', async: true },
+								{ src: 'plugin/zoom-js/zoom.js', async: true },
+								{ src: 'plugin/notes/notes.js', async: true },
+								{ src: './plugin/math/math.js', async: true }
 							]
-							}
-							// Load the graph in sigma
-							s.graph.read(carGraphInitial)
+						});
 
-							// Start the algorithm:
-						   s.refresh()
-						}
-					)
-				</script>
+						Reveal.addEventListener( 'slidechanged', function( event ) {
+							window.dispatchEvent(new Event('resize'))
+							window.dispatchEvent(new Event('resize'))
+						} )
 
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Example
-				</fragment>
-
-				<fragment data-markdown style="font-size: 33.6px">
-				
-				* Decision delayed, in the meantime, $c$ is added as new option
-
-				* In A/B tests, consumers like $b$ better than $c$, but $c$ better than $c$
-
-				* Recommend what?
-
-				</fragment>
-			</section>
-
-				<section>
-					<fragment data-markdown>
-					#### Example
-					</fragment>
-	
-					<fragment>
-						<table>
-							<tr>
-								<td>
-									<div style="" id="af-2b" class="af"></div>
-								</td>
-								<td>
-									<div style="" id="af-2c" class="af"></div>
-								</td>
-							</tr>
-						</table>
-                    </fragment>
-					<script>
-                        // Ask sigma to draw it
-                        window.addEventListener('load', (
-                            event) => {
-                                s = new sigma(
-                                {
-                                    renderer: {
-                                    container: document.getElementById('af-2b'),
-                                    type: 'canvas'
-                                    },
-                                    settings: {
-                                        edgeLabelSize: 'fixed',
-                                        defaultLabelSize: 30,
-                                        minArrowSize: 10,
-                                        maxNodeSize: 25,
-                                        maxEdgeLabelSize: 20,
-                                        defaultLabelColor: '#fff',
-                                        defaultEdgeSize: 3,
-                                        maxEdgeSize: 3,
-                                        mouseWheelEnabled: true,
-                                        sideMargin: 0.05
-                                    }
-                                }
-                                )
-
-                                // Create a graph object
-                                window.carGraphInitial = {
-                                nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
-                                ],
-                                edges: [
-                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3}
-                                    //{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
-                                ]
-                                }
-                                // Load the graph in sigma
-                                s.graph.read(carGraphInitial)
-
-                                // Start the algorithm:
-                               s.refresh()
-                            }
-                        )
 					</script>
-					<script>
-                        // Ask sigma to draw it
-                        window.addEventListener('load', (
-                            event) => {
-                                s = new sigma(
-                                {
-                                    renderer: {
-                                    container: document.getElementById('af-2c'),
-                                    type: 'canvas'
-                                    },
-                                    settings: {
-                                        edgeLabelSize: 'fixed',
-                                        defaultLabelSize: 30,
-                                        minArrowSize: 10,
-                                        maxNodeSize: 25,
-                                        maxEdgeLabelSize: 20,
-                                        defaultLabelColor: '#fff',
-                                        defaultEdgeSize: 3,
-                                        maxEdgeSize: 3,
-                                        mouseWheelEnabled: true,
-                                        sideMargin: 0.05
-                                    }
-                                }
-                                )
 
-                                // Create a graph object
-                                window.carGraphInitial = {
-                                nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
-                                ],
-                                edges: [
-                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
-                                ]
-                                }
-                                // Load the graph in sigma
-                                s.graph.read(carGraphInitial)
-
-                                // Start the algorithm:
-                               s.refresh()
-                            }
-                        )
-                    </script>
-	
-				</section>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Insights
-				</fragment>
-				
-				<fragment data-markdown style="font-size: 33.6px">
-				* Most established argumentation semantics are not reference independent
-
-				* One specific semantics is; we also define our own "rational" semantics (submitted work)
-
-				* We can enforce reference independence only by considering argumentation sequences
-
-				</fragment>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Application - Intelligent Systems
-			</fragment>
-				
-				<img src="./arg_rational_mining.png"/>
-
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Application - Economic Theory
-					
-				* Two brands of beans: `x`, `y`
-
-				* Cans of same size, `x` cheaper than `y`
-
-				&rarr; Consumers buy?
-
-
-			</fragment>
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Application - Economic Theory
-
-				* Two brands of beans: `x`, `y`
-
-				* Cans of same size, `x` cheaper than `y`
-
-				* Consumers buy `y` (assume better quality)
-
-				* Add smaller can of brand `x` (`x'`), same prize as `x`
-
-				&rarr; Consumers buy?
-
-			</fragment>
-			</section>
-
-			<section>
-				<fragment data-markdown>
-				#### Application - Economic Theory
-			</fragment>
-
-			<fragment>
-
-							<div style="" id="af-3a" class="af" height="250px"></div>
-	
-			</fragment>
-			<script>
-				// Ask sigma to draw it
-				window.addEventListener('load', (
-					event) => {
-						s = new sigma(
-						{
-							renderer: {
-							container: document.getElementById('af-3a'),
-							type: 'canvas'
-							},
-							settings: {
-								edgeLabelSize: 'fixed',
-								defaultLabelSize: 30,
-								minArrowSize: 10,
-								maxNodeSize: 25,
-								maxEdgeLabelSize: 20,
-								defaultLabelColor: '#fff',
-								defaultEdgeSize: 3,
-								maxEdgeSize: 3,
-								mouseWheelEnabled: true,
-								sideMargin: 0.05,
-								defaultLabelAlignment: 'left'
-							}
-						}
-						)
-
-						// Create a graph object
-						window.carGraphInitial = {
-						nodes: [
-							{ id: "x", label: "x", x: 0, y: 0, size: 25, color: '#fff' },
-							{ id: "y", label: "y", x: 1, y: 0, size: 25, color: '#fff' },
-							{ id: "p", label: "p", x: 1, y: 1, size: 25, color: '#fff' },
-							//{ id: "q", label: "q", x: 0, y: 1, size: 25, color: '#fff' },
-							{ id: "qp", label: "qp", x: 0, y: 1, size: 25, color: '#fff' }
-						],
-						edges: [
-							{ id: "e0", source: "x", target: "y", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e1", source: "y", target: "x", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e2", source: "p", target: "y", color: '#fff', type:'arrow', count:0, size: 3},
-							{ id: "e3", source: "qp", target: "p", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e4", source: "qp", target: "x", color: '#fff', type:'arrow', count:0, size: 3}
-						]
-						}
-						// Load the graph in sigma
-						s.graph.read(carGraphInitial)
-
-						// Start the algorithm:
-					   s.refresh()
-					}
-				)
-			</script>
-			</section>
-			<section>
-
-			<fragment>
-				<h4>Application - Economic Theory</h4>
-							<div id="af-3b" class="af" height="500px"></div>
-	
-			</fragment>
-			<script>
-						// Ask sigma to draw it
-						window.addEventListener('load', (
-					event) => {
-						s = new sigma(
-						{
-							renderer: {
-							container: document.getElementById('af-3b'),
-							type: 'canvas'
-							},
-							settings: {
-								edgeLabelSize: 'fixed',
-								defaultLabelSize: 30,
-								minArrowSize: 10,
-								maxNodeSize: 25,
-								maxEdgeLabelSize: 20,
-								defaultLabelColor: '#fff',
-								defaultEdgeSize: 3,
-								maxEdgeSize: 3,
-								mouseWheelEnabled: true,
-								sideMargin: 0.05
-							}
-						}
-						)
-
-						// Create a graph object
-						window.carGraphInitial = {
-						nodes: [
-							{ id: "x", label: "x", x: 0, y: 0, size: 25, color: '#fff' },
-							{ id: "y", label: "y", x: 1, y: 0, size: 25, color: '#fff' },
-							{ id: "p", label: "p", x: 1, y: 1, size: 25, color: '#fff' },
-							{ id: "qp", label: "qp", x: 0, y: 1, size: 25, color: '#fff' },
-							{ id: "x'", label: "x'", x: 2, y: 0, size: 25, color: '#fff' },
-							{ id: "an", label: "an'", x: -1, y: 1, size: 25, color: '#fff' }
-						],
-						edges: [
-							{ id: "e0", source: "x", target: "y", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e1", source: "y", target: "x", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e2", source: "p", target: "y", color: '#fff', type:'arrow', count:0, size: 3},
-							{ id: "e3", source: "qp", target: "p", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e4", source: "qp", target: "x", color: '#fff', type:'arrow', count:0, size: 3},
-							{ id: "e5", source: "x", target: "x'", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e6", source: "x'", target: "x", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e7", source: "y", target: "x'", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e8", source: "x'", target: "y", color: '#fff', type:'curvedArrow', count:0, size: 3},
-							{ id: "e9", source: "an", target: "qp", color: '#fff', type:'curvedArrow', count:0, size: 3}
-						]
-						}
-						// Load the graph in sigma
-						s.graph.read(carGraphInitial)
-
-						// Start the algorithm:
-					   s.refresh()
-					}
-				)
-			</script>
-				
-			
-			</section>
-
-			<section data-markdown>
-				### Future Work
-			</section>
-
-				<section data-markdown>
-					* Clearer focus on RQ 3: (bounded) rationality and non-monotonic reasoning
-
-					* Strong theoretical results exist and more are emerging
-
-					* Develop engineering abstraction on theoretical contributions (reasoning engine)
-
-					* Study real-world impact of theoretical results and engineering artificats, i.e., in HCI studies
-				</section>
-
-				<section>
-						<h1>Questions?</h1>
-						<small data-markdown>
-							*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
-						</small>
-				</section>
-
-
-			</div>
-
-		</div>
-
-		<script src="js/reveal.js"></script>
-
-		<script>
-
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				center: true,
-				hash: true,
-                slideNumber: true,
-
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true },
-					{ src: 'plugin/search/search.js', async: true },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: './plugin/math/math.js', async: true }
-				]
-			});
-
-			Reveal.addEventListener( 'slidechanged', function( event ) {
-                window.dispatchEvent(new Event('resize'))
-                window.dispatchEvent(new Event('resize'))
-            } )
-
-		</script>
-
-	</body>
-</html>
+				</body>
+			</html>

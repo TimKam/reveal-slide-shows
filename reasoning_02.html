@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Reasoning: From Humans to Machines
+        </title>
+
+        <meta name="description" content="Reasoning: From Humans to Machines">
+        <meta name="author" content="Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">T. Kampik. Feburary 2021. tkampik@cs.umu.se.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Reasoning: From Humans to Machines
+                    </h3>
+                    <p>
+                        <small><strong>Timotheus Kampik</strong> </small><br>
+                        <!--<small>Work in collaboration with Timotheus Kampik</small>-->
+                    </p>
+                </section>
+
+                    <section data-markdown>
+                        ### About Me
+                        * 4th year PhD Student
+                        * Research interests:
+                            * Automated reasoning
+                            * Engineering intelligent systems
+                        * Also *Scientist in Residence, Product*, Signavio GmbH  
+                        (Business Process & Business Decision Management Software)
+                    </section>
+
+                    <section data-markdown>
+                        #### Outline
+
+                        * In many real-world application scenarios we need machines that
+
+                            **learn** and **reason**
+
+                        * *Human* reasoning has been studied from descriptive and prescriptive perspectives since (at least) centuries
+
+                        * Can the principles according to which humans (should) reason inform the way machines reason?
+                        
+                    </section>
+
+                    <section>
+                        <h4>What is (Artificial) Intelligence?</h4>
+
+                        <img class="scenario-img" src="./Deep_Blue.jpg">    
+                        <img class="scenario-img" src="./Go.JPG">
+                        <img class="scenario-img" src="./starcraft.jpg">
+                        
+                    </section>
+
+                    <section>
+                        <h4>What is (Artificial) Intelligence?</h4> 
+
+                        <img src="./belief_revision.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+                        
+                    </section>
+
+                    <section>
+                        <h4>What is AI in the reald world?</h4> 
+
+                        <img src="./what_is_ai.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        
+                    </section>
+
+                    <section>
+                        <h4>How do humans reason?</h4> 
+                    </section>
+
+
+
+                    <section data-markdown>
+                        #### Economic Rationality
+
+                        * Assumptions of economic rationality, **ceteris paribus** (if everything else equal):
+
+                            * "Rational Economic Man" acts according to clear preferences
+
+                            * Has consistent preferences over time
+                            
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Clear Preferences
+                        </fragment>
+    
+                        <br>
+                        <fragment data-markdown style="font-size: 33.6px">
+                        * Standard economic model for individual decision-making
+    
+                        * Chooses from $A = \\{a_0, ..., a_n\\}$
+                        
+                        * Choice function: $A \rightarrow 2^A$
+    
+                        * Clear preferences: total order of all sets in $2^A$
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                            Rubinstein, Ariel. *Modeling bounded rationality.* 
+                        </fragment>
+                </section>
+    
+                <section>
+                    <fragment data-markdown>
+                    #### Consistent Preferences (Reference Independence)
+                    </fragment>
+    
+                    <fragment data-markdown style="font-size: 33.6px">
+                    * Set of choice options $A, A'$, such that $A \subseteq A'$
+                    
+                    * Rational man's choices $A^{\*} \subseteq A$ and $A'^{\*} \subseteq A'$
+                    
+                    * If $A'^{\*} \subseteq A$ then $A^{\*} = A'^{\*}$
+                    </fragment>
+    
+                    <fragment data-markdown class="tiny left">
+                        Rubinstein, Ariel. *Modeling bounded rationality.*
+                    </fragment>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Example
+
+                    * We go to a café, on the menu: `tea and coffee`
+
+                        * We choose `coffee`
+
+                    * Next day, one the menu: `tea, coffee, and cookie`
+                </fragment>
+                <ul>
+                    <li>We choose `tea and cookie`. Are we rational?  <br><button id="tea-cookie" value="" onclick="swal('Yes!', 'We establish that {tea, cookie} is preferred over all other options. Because {tea, cookie} was not an option in the previous scenario, our prefences are consistent.', 'success')">Check answer</button>
+
+                    <li>We choose `tea`. Are we rational? <br><button id="tea" value="" onclick="swal('No!', 'We establish that {tea} is preferred over all other options. Because {tea} was an option in the previous scenario, but we chose {coffee} our prefences are inconsistent: we switched from {coffee} is preferred over {tea} to {tea} is preferred over {coffee}.', 'error')">Check answer</button>
+                </ul>
+  
+                </section>
+                
+                <section>
+                <h4>Bounded Rationality</h4>
+                <img src="./kahneman_2.png" width="325px"\>
+                        <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                            <ul>
+                                <li> By now, we know that economic rationality is not a good model of human (intelligent) decision-making. 
+                                </li>
+                                <li>Economists try to adjusts their models accordingly.</li>
+                                <li>Key improvement: modeling knowledge in decision scenarios.</li>
+                            </ul>
+                        </div>
+                        <fragment data-markdown class="tiny left">
+                            Kahneman, Daniel. *Maps of bounded rationality.* 
+                            Rubinstein, Ariel. *Modeling bounded rationality.*
+                        </fragment>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Consistent Preferences in Knowledge-based Systems
+
+                    * We want to determine the relevant citizenship (passports) of a client
+
+                    * Example: case handling of immigration or tax administration
+
+                    * We use decision management software (a real-world system)
+
+                    * The decision models can be deployed to high-scalability engines such as [jDMN](https://goldmansachs.github.io/jdmn/)
+                </fragment>    
+                <fragment data-markdown class="tiny left">
+                    TK. Nieves, Juan Carlos. *Abstract Argumentation and the Rational Man*.
+                </fragment>
+                </section>
+
+                <section>
+                    <h4>Modern Knowledge-Based Systems</h4>
+
+                    <iframe data-src="https://goldmansachs.github.io/jdmn/" style="width: 100%; background-color: #fff;"></iframe>
+
+                    <a  style="font-size: 12px;" src="https://goldmansachs.github.io/jdmn/">https://goldmansachs.github.io/jdmn/</a>
+
+                    <iframe data-src="https://www.redhat.com/en/technologies/jboss-middleware/decision-manager" style="width: 100%; height: 200px"></iframe>
+
+                    <a style="font-size: 12px;" src="https://www.redhat.com/en/technologies/jboss-middleware/decision-manager">https://www.redhat.com/en/technologies/jboss-middleware/decision-manager</a>
+                        
+                </section>
+
+                <section data-markdown>
+                    #### Example: Decision Model and Notation (DMN)
+
+                    * Decision:
+                    
+                        * Set of ``if ... then ...`` rules
+
+                        * Aggregation function or order on all rules
+
+                    * Graphical/XML model of data sources and hierarchical decisions
+
+                    * Open standard (OMG)
+                        
+                </section>
+
+                <section>
+                    <h4>DMN Example Decision</h4>
+
+                    <img src="./DMN_internal.png" style="background-color: #F0EEE3;">
+
+
+                </section>
+
+                <section>
+                    <div class="signavio-interactive-content">
+                        <iframe
+                                class="signavio-simulation"
+                                width="1000"
+                                height="625"
+                                style="background-color:#fff"
+                                src="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation"
+                                frameborder="0"
+                                allowfullscreen="1"
+                        >
+                            &nbsp;
+                        </iframe>
+                    </div>
+                </section>
+
+
+                <!--<section style="margin-top: 100px;" data-background-iframe="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation" data-background-interactive>
+                </section>-->
+
+                <section data-markdown>
+                    #### Consistent Preferences in Knowledge-based Systems
+
+                    * First, insert ``NO`` (Norwegian citizenship)  
+                      &#8594; ``NO`` considered relevant
+
+                    * Then, insert ``UK`` (UK citizenship) as additional option  
+                      &#8594; neither ``NO`` nor ``UK`` relevant: not rational!
+
+                    * Automated checks of decision management software don't detect this problem
+                        
+                </section>
+
+                <section data-markdown>
+                    #### There are more principles
+
+                    * Example: legal reasoning, *burden of persuasion*
+
+                    * If several conclusions/decisions are possible
+
+                    * If in doubt, remain consistent with previous decision
+                
+                </section>
+                <!--
+                <section>
+                    <div class="signavio-interactive-content">
+                        <iframe
+                                class="signavio-simulation"
+                                width="1000"
+                                height="650"
+                                style="background-color:#fff"
+                                src="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation"
+                                frameborder="0"
+                                allowfullscreen="1"
+                        >
+                            &nbsp;
+                        </iframe>
+                    </div>
+                </section>-->
+
+                <section>
+                <h4>"Reasoning Backwards"</h4>
+                <img src="./haidt.jpg" width="325px"\>
+                        <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                            <ul>
+                                <li> We also know that humans "reason backwards". 
+                                </li>
+                                <li>We commit to a decision intuitively.</li>
+                                <li>We make up a line of reasoning if necessary.</li>
+                            </ul>
+                        </div>
+                        <fragment data-markdown class="tiny left">
+                            Haidt, Jonathan. *The emotional dog and its rational tail: a social intuitionist approach to moral judgment.*
+                        </fragment>
+                </section>
+
+                <section>
+                    <h4>"Reasoning backwards": Find an explanation that happens to be satisfied</h4>
+                    <img src="./mourinho.jpg" style="border: none; background: none; box-shadow: none; height: 350px">  
+                </section>
+
+                <section data-markdown>
+                    #### "Reasoning backwards": Find an explanation that happens to be satisfied
+                     * **Journalist**: *When you were at Chelsea, you were asked whether you would ever come to the Spurs and you said: 'Never, I love the Chelsea fans too much.' What has changed?*
+
+                    * **Mourinho**: [*That was*] *before I was sacked* [*at Chelsea*].
+                </section>
+
+                <section data-markdown>
+                    #### Alternative to Reasoning Backwards
+                    
+                    * Principle-based and evidence-based reasoning
+
+                    * Explaining change
+                </section>
+
+                <section data-markdown>
+                    #### *Mourinho* Example
+                    
+                    * Rule: maximize expected utility/payoff
+
+                    * ``Payoff_Tottenham`` << ``Payoff_Chelsea``
+
+                      changed to
+                      
+                      ``Payoff_Tottenham`` >> ``Payoff_Chelsea``
+
+                </section>
+
+                <section>
+                    <div class="signavio-interactive-content">
+                        <iframe
+                                class="signavio-simulation"
+                                width="1000"
+                                height="625"
+                                style="background-color:#fff"
+                                src="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation"
+                                frameborder="0"
+                                allowfullscreen="1"
+                        >
+                            &nbsp;
+                        </iframe>
+                    </div>
+                </section>
+
+                <section data-markdown>
+                    #### Example II
+                    
+                    * Change: new passport reported: ``UK``
+
+                    * Principle violated: *reference independence*
+
+                    * Explanation, "new" rules that fire
+
+                       * If any passport is EU passport, remove non-EU passports
+
+                       * If ``r1`` then ``r2``
+
+                       * ``UK`` is ``EU`` in r1 but is not ``EU`` in ``r2``
+
+                </section>
+
+
+
+                <section data-markdown>
+                    #### Learning Principles
+                </section>
+
+                <section data-markdown>
+                    #### Learning Principles
+
+                    * We know that we can mine knowledge and reason about it
+
+                    * Principles are not generally applicable (at least most principles)
+
+                    * Can we learn which principles should be satisfied?
+
+                    * How can we learn (and reason about) new principles?
+
+                </section>
+
+                <section>
+                    <h4>Learning Knowledge and Reasoning About It I</h4>
+
+                    <img src="./process_mining.png" width="175px"\>
+                    <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                        <ul>
+                            <li> Example: process mining
+                            </li>
+                            <li>Mine Petri Nets from event log data</li>
+                            <li>Formally analyze properties like liveness, deadlock-freeness.</li>
+                        </ul>
+                    </div>
+                    <fragment data-markdown class="tiny left">
+                        Van der Aalst, Wil. *Process mining.*
+                    </fragment>
+                </section>
+
+                <section>
+                    <h4>Learning Knowledge and Reasoning About It II</h4>
+
+                    <img src="./movies.png" width="325px"\>
+                    <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                        <ul>
+                            <li> Example: explainable recommender systems
+                            </li>
+                            <li>Mine argumentation graphs from (movie) review data</li>
+                            <li>Enforce relaxed monotony principles and facilitate explainability.</li>
+                        </ul>
+                    </div>
+                    <fragment data-markdown class="tiny left">
+                        Rago *et al.* *Argumentation as a Framework for Interactive Explanations for Recommendations*
+                    </fragment>
+                </section>
+
+                <section>
+                    <h4>Learning Knowledge and Reasoning About It III</h4>
+
+                    Gap between technology ecosystems
+
+                    <img src="./reasoning_tools.png" style="background-color: #F0EEE3;">
+
+
+                </section>
+
+                <section data-markdown>
+                    #### Learning to Select Principles
+
+                    * Connect historic data to KPIs
+
+                    * Enforce different principles and select a set of non-mutually exclusive principles that maximizes KPI achievement
+
+                </section>
+
+                <section data-markdown>
+                    #### Learning New/Refined Principles
+                    
+                    * Humans do this (legal system of any advanced society)
+
+                    * Requires automated reasoning about reasoning
+
+                    * Is in its infancy but a hot topic  
+
+                        [Popular science overview of SOTA](https://www.quantamagazine.org/building-the-mathematical-library-of-the-future-20201001/)
+             
+                </section>
+
+
+                <section>
+                    <h1>Questions?</h1>
+                    <small data-markdown>
+                    *Explainable AI workshop*:  
+                    [https://extraamas.ehealth.hevs.ch/](https://extraamas.ehealth.hevs.ch/)
+
+                    Special Issue in the Journal of Applied Logics - IfCoLog Journal:  
+                    *Explainable Reasoning in Face of Contradictions: Cross-disciplinary Perspectives*
+                    </small>
+            </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Art Evolves Life - A Sound-Driven Game of Life
+        </title>
+
+        <meta name="description" content="Art Evolves Life - A Sound-Driven Game of Life">
+        <meta name="author" content="Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text"> T. Kampik. AI&ART Kick-Off. 2020.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Art Evolves Life - A Sound-Driven Game of Life
+                    </h3>
+                    <p>
+                        <small><strong>Timotheus Kampik</strong> </small><br>
+                        <small>Umeå University</small>
+                    </p>
+                </section>
+
+                    <section>
+                        <img src="./tk_drums.jpg" width="325px"\>
+
+                        <div  style="font-size: 26px; float: right; width: 400px; text-align: center; margin-top: 20px;">
+                            <ul>
+                                <li>Pursuing PhD at Umeå University, Sweden</li>
+                                <li>Scientist in Residence (Product), Signavio (software start-up, latest valuation 400m€)</li>
+                                <li>Focus: automated reasoning, engineering intelligent systems</li>
+                                <li>Amateur musician</li>
+                            </ul>
+                        </div>
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### AI & Artificial Societies
+
+                        * Some AI research deals with the modeling and creation of artificial societies
+
+                        * The behavior of individuals ("agents") in a society may be simplistic
+
+                        * The observation of the evolution of a society at large is interesting
+
+                        * A simple example/starting point is John Conway's Game of Life
+                        
+                    </section>
+
+                    <section>
+                        <h4>Conway's Game of Life</h4>
+
+                        <img src="./conway.jpg" width="325px"\>
+                        <div  style="font-size: 26px; float: right; width: 400px; text-align: center; margin-top: 20px;">
+                            <ul>
+                                <li>Grid of tiles</li>
+                                <li>Each tile represents "agent"</li>
+                                <li>Simple rules and neighbor activity decide: is agent off or on?</li>
+                                <li>Initially: random state</li>
+                                <li>Fascinating patterns can emerge, based on initial state</li>
+                            </ul>
+                        </div>
+                        
+                    </section>
+
+                    <section>Game of Life</section>
+
+                    <section style="margin-top: 100px;" data-background-iframe="https://people.cs.umu.se/~tkampik/demos/js-son/" data-background-interactive></section>
+
+                    <section>Playing God in Game of Life - Example</section>
+
+                    <section style="margin-top: 100px;" data-background-iframe="https://people.cs.umu.se/~tkampik/demos/on-the-fly/" data-background-interactive></section>
+
+                    <section>
+                        <h4>Societal "Rules" Evolve</h4>
+
+                            
+
+                            <img src="./nietzsche.jpg" width="325px"\>
+									<div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 50px;">
+                                        <it>"[H]ere are exposed those deeper formations in the mountain of humanity which usually remain concealed."</it><br>
+                                        <br>
+                                        - Friedrich Nietzsche. Menschliches, Allzu Menschliches.
+                                    </div>
+                               
+       
+                        
+                    </section>
+
+                    <section>Playing God with Sound in Game of Life</section>
+
+                    <section style="margin-top: 100px;" data-background-iframe="https://people.cs.umu.se/~tkampik/demos/sound-on-the-fly/" data-background-interactive></section>
+
+                    <section>
+                        <h4>The Interactive Game of Life as a Metaphor (Art)</h4>
+                        <img src="./ART_AI-Art_art.png" width="325px" style="background-color: #F0EEE3;">
+
+                    </section>
+
+
+                    <section>
+                        <h4>The Interactive Game of Life as a Metaphor (AI)</h4>
+                        <img src="./ART_AI-AI_AI.png" width="325px" style="background-color: #F0EEE3;">
+
+                    </section>
+
+                    <section>
+                        <h4>Formal Models as Cultural Artifacts</h4>
+
+                        <img src="./rubinstein.jpg" width="325px"\>
+                        <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                            <it>"Research universities [...] are part of a cultural fabric. Culture is gauged by how interesting and challenging it is, and not by the benefit it brings."</it><br>
+                            <br>
+                            - Ariel Rubinstein. Opinion Piece, FAZ, 2013.
+                        </div>
+                         
+
+                    </section>
+
+
+                    <section>
+                       <h4>
+                           Evaluation of Art and Science
+                       </h4>
+
+                       <img src="./spotify.png" width="325px"\>
+
+                       <img src="./g_scholar.png" width="325px"\>
+
+                    </section>
+
+                    <section data-markdown>
+                        #### Looking Ahead
+
+                        * Heterogenous artificial societies
+
+                        * Artificial societies that interact with the subtleties of music/arts
+
+                        * Musicians/artists who _jam_ with artificial societies
+
+                    </section>
+                    
+
+                <section>
+                        <h1>Questions?</h1>
+                        <h2>Contact me at tkampik@cs.umu.se</h2>
+                        <small data-markdown>
+                            *This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+                        </small>
+                </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

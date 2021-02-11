@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Perspectives on ACKTUS
+        </title>
+
+        <meta name="description" content="Perspectives on ACKTUS">
+        <meta name="author" content="Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Timotheus Kampik.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Perspectives on ACKTUS
+                    </h3>
+                    <p>
+                        <small><strong>Timotheus Kampik</strong> </small><br>
+                        <small>Interactive and Intelligent Systems</small>
+                    </p>
+                </section>
+
+                    <section data-markdown>
+                        #### Motivation
+
+                        * I study fundamental principles of automated reasoning  
+                          (using abstract argumentation as my "preferred" formal approach)
+
+                        * These principles have been introduced to analyze the behavior of decision-support and automation systems, *e.g.*:  
+                        Gabbay's 1985 paper: "Theoretical foundations for non-monotonic reasoning in expert systems"
+                        
+                    </section>
+
+                <section data-markdown>
+                    #### Example - Reference Independence in Decision Automation Systems
+
+                    * We want to determine the relevant citizenship (passports) of a client
+
+                    * Example: case handling of immigration or tax administration
+
+                    * We use decision management software (a real-world system)
+
+                    * The decision models can be deployed to high-scalability engines such as [jDMN](https://goldmansachs.github.io/jdmn/)
+                        
+                </section>
+
+                <section>
+                    <div class="signavio-interactive-content">
+                        <iframe
+                                class="signavio-simulation"
+                                width="1000"
+                                height="650"
+                                style="background-color:#fff"
+                                src="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation"
+                                frameborder="0"
+                                allowfullscreen="1"
+                        >
+                            &nbsp;
+                        </iframe>
+                    </div>
+                </section>
+
+
+                <!--<section style="margin-top: 100px;" data-background-iframe="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation" data-background-interactive>
+                </section>-->
+
+               <section data-markdown>
+                   ### Application Perspectives
+
+                   * Use my principle(s) to analyze real-world systems
+
+                   * Implement features that automate the analysis
+
+                   * Add new capabilities for dialogue reasoning, see:
+
+                   Kampik, Gabbay: "Towards DiArg: An Argumentation-based Dialogue Reasoning Engine"
+
+               </section>
+
+               <section data-markdown>
+                ### Example of Where to Go
+
+                * Calvanese, Dumas et al.: Semantic and Analysis of DMN Decision Tables
+
+                * [Linked in jDMN Issue Tracker](https://github.com/goldmansachs/jdmn/issues/271)
+
+            </section>
+
+               <section data-markdown>
+                ### What I need to know
+
+                * Where is the code base? SVN or GitHub, how do I contribute?
+
+                * What is the system's architecture?
+
+                * How do I run the system (admin documentation)
+
+                * How do I extend ACKTUS' reasoning capabilities (API/code documentation)
+
+                * What is the current research delta of ACKTUS? (What can ACKTUS do that other systems can't?)
+
+            </section>
+
+                <section>
+                        <h1>Questions?</h1>
+                        <small data-markdown>
+                            *This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+                        </small>
+                </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

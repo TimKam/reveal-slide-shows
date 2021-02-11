@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>DiArg
+        </title>
+
+        <meta name="description" content="DiArg">
+        <meta name="author" content="Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .sigma-mouse {
+                position: relative !important;
+            }
+        </style>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Timotheus Kampik & Dov Gabbay. SAFA@COMMA 2020.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Towards DiArg: An Argumentation-based Dialogue Reasoning Engine
+                    </h3>
+                    <p>
+                        <small><strong>Timotheus Kampik</strong> and <strong>Dov Gabbay</strong></small><br>
+                    </p>
+                </section>
+
+                    <section data-markdown>
+                        #### Motivation I
+
+                        * (Formal) dialogues and formal argumentation are intertwined, see Walton’s”Argumentation Schemes for Presumptive Reasoning”
+                        * Little work on generic software components for automating argumentation-based dialogues
+
+                        * Notable exception: some components of the Tweety Project focus on very specific aspects of **strategic** argumentation
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Motivation II
+
+                        &#8594; Let us design and implement generic abstractions for (abstract) argumentation-based dialogues
+
+                        &#8594; We start by focussing on our own theoretical work
+
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Focus
+
+                        * We consider an argument dialogue as a sequence of (typically expanding) AFs
+
+                        * We can enforce consistency properties (relaxed forms of monotony)
+
+                        * We can manage context to further relax consistency and expansion properties
+
+                        * We provide serialization support (JSON import/export)
+
+                        
+                    </section>
+
+                    <section>
+                       <h4>High-level Architecture</h4>
+
+                       <img src="./DiArg_arch.png" style="background-color: #F0EEE3;"/>
+                    </section>
+
+                    <section data-markdown>
+                        #### Intuition
+
+                        * Iteratively resolve & expand argumentation frameworks (*resolve*: "pick" an extension)
+
+                        * Ensure Reference Independence (RI) and/or Cautious Monotony (CM), given normal expansion:
+                        
+                            * RI: An AF’s resolution needs to imply consistent preferences over the powerset of arguments w.r.t. to the resolution of its predecessor
+                            
+                            * CM: An AF’s resolution is a superset of its predecessor’s resolution, if no attack relations between this resolution and the new arguments exist
+                           
+                    </section>
+
+                <section>
+                    <h4>Example - Activity Recommender System</h4>
+
+                    <img src="./diarg_mock1.png" style="height:400px;"/>
+                 </section>
+
+
+
+                 <section>
+                    <fragment>
+                        <h4>Example - Activity Recommender System</h4>
+                        <div id="af-2aa" class="af" style="width:100%!important;min-height: 400px !important;"></div>
+                    </fragment>
+    
+                    
+    
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2aa'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.2
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "r", x: 0, y: 0, size: 25, color: '#F0EEE3' },
+                                    { id: "b", label: "p & c", x: 0, y: 1, size: 25, color: '#F0EEE3' },
+                                    { id: "c", label: "wo", x: 1, y: 1, size: 25, color: '#F0EEE3' }
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e5", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+    
+    
+                </section>
+
+                <section>
+                    <fragment>
+                        <h4>Example - Activity Recommender System</h4>
+                        <div id="af-2ab" class="af" style="width:100%!important;min-height: 400px !important;"></div>
+                    </fragment>
+    
+                    
+    
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2ab'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.2
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "r", x: 0, y: 0, size: 25, color: '#EABAB9' },
+                                    { id: "b", label: "p & c", x: 0, y: 1, size: 25, color: '#73A790' },
+                                    { id: "c", label: "wo", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                    { id: "d", label: "an", x: 1, y: 0, size: 25, color: '#73A790' },
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e5", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e6", source: "d", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e7", source: "d", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+    
+    
+                </section>
+
+                <section>
+                    <h4>Example - Activity Recommender System</h4>
+
+                    <img src="./diarg_mock2.png" style="height:400px;"/>
+                 </section>
+
+                 <section>
+                    <fragment>
+                        <h4>Example - Activity Recommender System</h4>
+                        <div id="af-2ac" class="af" style="width:100%!important;min-height: 400px !important;"></div>
+                    </fragment>
+    
+                    
+    
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2ac'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.2
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "r", x: 0, y: 0, size: 25, color: '#F0EEE3' },
+                                    { id: "b", label: "p & c", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                    { id: "c", label: "wo", x: 1, y: 1, size: 25, color: '#F0EEE3' },
+                                    { id: "d", label: "an", x: 1, y: 0, size: 25, color: '#FFF'},
+                                    { id: "f", label: "aa", x: 2, y: 1, size: 25, color: '#73A790' },
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e5", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e6", source: "d", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e7", source: "d", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e8", source: "f", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e9", source: "f", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+    
+    
+                </section>
+
+                <section>
+                    <h4>Example - Activity Recommender System</h4>
+
+                    <img src="./diarg_mock3.png" style="height:400px;"/>
+                 </section>
+
+                 <section>
+                    <fragment>
+                        <h4>Example - Activity Recommender System</h4>
+                        <div id="af-2ad" class="af" style="width:100%!important;min-height: 400px !important;"></div>
+                    </fragment>
+    
+                    
+    
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2ad'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.35
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "r", x: 0, y: 0, size: 25, color: '#EABAB9' },
+                                    { id: "b", label: "p & c", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                    { id: "c", label: "wo", x: 1, y: 1, size: 25, color: '#73A790' },
+                                    { id: "d", label: "an", x: 1, y: 0, size: 25, color: '#FFF'},
+                                    { id: "f", label: "aa", x: 2, y: 1, size: 25, color: '#73A790' },
+                                    { id: "g", label: "an'", x: -1, y: 1, size: 25, color: '#73A790' },
+                                ],
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e5", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e6", source: "d", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e7", source: "d", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e8", source: "f", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e9", source: "f", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e10", source: "g", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+    
+    
+                </section>
+
+                <section data-markdown>
+                    #### Code
+
+                    ```java
+                    AFSequence sequence = new AFSequence(
+                        SequenceType.NORMALLY_EXPANDING,
+                        ResolutionType.EXPANSIONIST_REFERENCE_INDEPENDENT,
+                        cf2Semantics,
+                        true);
+                    sequence.addFramework(framework1);
+                    sequence.addFramework(framework2);
+                    sequence.resolveFrameworks();
+                    ```
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Future Work I
+                    
+                    * Improved context support
+
+                    * Integration with recommender system approaches
+
+                    * Interoperability enhancements
+    
+                    </fragment>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Future Work II
+
+                    * Integration with Tweety capabilities beyond abstract argumentation
+
+                    * Evaluation: what does it cost to ensure consistency?
+    
+                    </fragment>
+                </section>
+
+                <section>
+                        <h1>Questions?</h1>
+
+                        <fragment data-markdown>
+                            You find the project at [https://github.com/Interactive-Intelligent-Systems/diarg](https://github.com/Interactive-Intelligent-Systems/diarg).
+                        </fragment>
+                        <small data-markdown>
+                            *This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+                        </small>
+                </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JS-son - Agent-Oriented Programming in JavaScript</title>
+
+		<meta name="description" content="JS-son - Agent-Oriented Programming in JavaScript">
+		<meta name="author" content="Timotheus Kampik">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">Kampik et al. Dagstuhl Seminar: Autonomous Agents on the Web</span>
+					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+					<img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <h3>Minimally Viable Agent-Oriented Programming Abstractions</h3>
+                    <h6>A Perspective from the JS-son JavaScript Library</h6>
+					<p>
+						<small><strong>Timotheus Kampik et al.</strong></small> <br>
+						<small>Umeå University</small>
+					</p>
+				</section>
+
+				<section>
+
+                    <fragment data-markdown>
+                    #### Motivation
+
+                    * Gap: academic Agent-Oriented Programming (AOP) frameworks & engineering reality
+                    * Lack of intuitive, practical entry point for non-experts
+                    * Reference point: *Machine Learning* community
+                    </fragment>
+                    <fragment data-markdown class="tiny left"><br>
+                            Mascardi et al. "Engineering Multi-Agent Systems: State of Affairs and the Road Ahead."  
+                            Logan. "An agent programming manifesto." 
+                    </fragment>
+
+                </section>
+                
+                <section>
+                    <h2>Question</h2>
+                            <fragment data-markdown>
+                                   Can we provide "mainstream-ready" abstractions for AOP?
+
+                                   * Agent internals
+
+                                   * Agent interfaces (to environments, artifacts, and other agents)
+
+                                   * Example: JavaScript
+                            </fragment>
+
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                        For sure, we can create a simple JS library for AOP: **JS-son**
+                    </fragment>
+                    <fragment class="tiny left"><br>
+                        TK, JC Nieves. "JS-son -- A Lean, Extensible JavaScript Agent Programming Library". <br>
+                        <a href="https://github.com/TimKam/JS-son">https://github.com/TimKam/JS-son</a>
+                    </fragment>
+                </section>
+
+                <section>
+                    And we can deploy JS-son agents just about everywhere!
+                </section>
+
+                <section data-background-iframe="https://people.cs.umu.se/~tkampik/demos/uav/?seed=5&scenario=s2&mode=cont&speed=3&controls=true" data-background-interactive>
+				</section>
+
+				<section data-background-iframe="https://people.cs.umu.se/tkampik/demos/arena/" data-background-interactive>
+				</section>
+
+                <section data-markdown>
+                    Local example, see [here on Google Colab](https://colab.research.google.com/drive/1_viwoWyOIl8SH61WEAnEpndbR18WHPf3" data-background-interactive)
+                </section>
+                <!--<section data-background-iframe="https://colab.research.google.com/drive/1_viwoWyOIl8SH61WEAnEpndbR18WHPf3" data-background-interactive></section>-->
+                    
+                <section data-background-iframe="https://people.cs.umu.se/~tkampik/demos/sound-on-the-fly/" data-background-interactive>
+                </section>
+				
+
+                <section data-markdown>
+                    But which *abstractions* are actually useful?
+
+                    JS-son supports a ton of different reasoning loops.
+                </section>
+
+                <section data-markdown>
+                    #### Reasoning loops
+
+                    ![](https://academic.signavio.com/p/model/9e299b68352447af8a74934c1ecebd18/png?inline&authkey=6d854f9fd2fc48e154bac993e92b5a485f46badec9f818cbba9b1f7d54bbd)
+                </section>
+
+				<section>
+                    <h4>Design Principles I</h4>
+                        <fragment data-markdown>
+                            * Usability over intellectual elegance
+                            * Flexibility over rigor
+                            * Extensibility over out-of-the-box power
+                        </fragment>
+                        <fragment data-markdown class="tiny left"><br>
+                            Inspired by the [Agile Manifesto](https://agilemanifesto.org/)
+                        </fragment>
+				</section>
+
+				<section>
+						<h4>Design Principles II</h4>
+						<table class="comparison">
+							<tr>
+								<td><strong>Functional Programming</strong></td>
+								<td><strong>Agent-oriented Programming</strong></td>
+							</tr>
+							<tr>
+								<td>Lisp</td>
+								<td>Jason</td>
+							</tr>
+							<tr>
+								<td data-markdown>``MEMBER`` function (list)</td>
+								<td data-markdown>``(event, context, body)`` plans </td>
+							</tr>
+							<tr>
+								<td data-markdown>``includes`` functor (array)</td>
+								<td data-markdown>``(intention-condition, body)`` plans</td>
+							</tr>
+							<tr>
+								<td data-markdown> Lodash (``_``)</td>
+								<td>JS-son</td>
+							</tr>
+							<tr>
+								<td data-markdown> ES2016</td>
+								<td>???</td>
+							</tr>
+						</table>
+                </section>
+                
+                <section data-markdown>
+                    #### Agent Internals I: Beliefs
+
+                    ```JavaScript
+                        const beliefs = {
+                            ...Belief('door', { locked: true }),
+                            ...Belief('requests', [])
+                        }
+                    ```
+
+                    * Elevates the notion that "knowledge"/state needs to be systematically revised
+                    * Can be received from environment
+                    * Belief revision function:
+                    ```JavaScript
+                    (oldBeliefs, newBeliefs) => 
+                        doSomething.then(beliefs => beliefs)
+                    ```
+                </section>
+
+                <section data-markdown>
+                    #### Agent Internals II: Goals
+
+                    ```JavaScript
+                        const goals = {
+                            openDoor: Goal('openDoor', false, { forWhom: undefined })
+                            closeDoor: Goal('closeDoor', false, { forWhom: undefined })
+                        }
+                    ```
+
+                    * Elevates the notion that the program works towards a desirable outcome
+                    * Relates to user stories, test specs, jobs-to-be-done, ...
+                    * Agent can manage its goals with goal revision function:
+                    ```JavaScript
+                    (beliefs, goals) => 
+                        doSomething.then(goals => goals)
+                </section>
+
+                <section data-markdown>
+                    #### Agent Internals III: Plans
+
+                    ```JavaScript
+                        const odPlan = Plan(goals.openDoor,
+                            (beliefs, goalValue) => ({ action: {
+                                type: 'openDoor',
+                                forWhom: goalValue.forWhom
+                        } })) ]
+                    ```
+
+                    * Defines procedures that are attached to a goal
+                    * Plan results are fed back to environment/artifacts/other agents
+                    ```
+                </section>
+
+                <section data-markdown>
+                    #### JS-son and React
+
+                    * React is extremely popular and a key facilitator of "functional" thinking
+
+                    * State management is a pain, and the cause of many problems
+
+                    * Can we use AOP to decouple state from UI?
+                </section>
+
+                <section>
+                    TODO React integration
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                        #### Agent Interface 
+                
+                        * W3C WoT Scripting API
+                        * Beliefs are superset of properties
+                        * Goals are superset of affordances
+                        * Agent has goal autonomy
+                    </fragment>
+                    <fragment data-markdown class="tiny left"><br>
+                        TK, A Gomez, A Ciortea, S Mayer. "Autonomous Agents on the Edge of Things"
+                    </fragment>
+                </section>
+
+                <section>
+                    TODO WoT Scripting API integration
+                </section>
+			
+
+				<section data-markdown>
+                    #### To Conclude
+                    
+                    * Assumption: AOP is useful beyond academic exploration
+
+                    * Search or minimally viable abstractions
+
+                    * Present them in a highly practical context
+				</section>
+
+				<section>
+						<h1>Thanks!</h1>
+						<small data-markdown>
+							*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation.*
+						</small>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
