@@ -66,21 +66,37 @@
                         * Research interests:
                             * Automated reasoning
                             * Engineering intelligent systems
-                        * Also *Scientist in Residence, Product*, Signavio  
-                        (Business Process & Business Decision Management Software)
-                        * No time for hobbies
+                        * I also work in product management & innovation research
+                    </section>
+
+                    <section>
+                        <h4>What is AI?<h4>
+
+                            <img class="scenario-img" src="./Deep_Blue.jpg">    
+                            <img class="scenario-img" src="./Go.JPG">
+                            <img class="scenario-img" src="./starcraft.jpg">
+                        
+                    </section>
+
+                    <section>
+                        <h4>Symbolic AI & Automated Reasoning</h4>
+
+                        <img src="./belief_revision.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+                        
                     </section>
 
                     <section data-markdown>
                         #### Motivation I
 
-                        * (Abstract) argumentation is a method of non-monotonic reasoning
+                        * (Abstract) argumentation is a method of symbolic reasoning
 
                         * Hence, it can be considered a decision-support and decision automation approach
                         
                     </section>
 
-                    <section data-markdown>
+                    <section>
+
+                        <fragment data-markdown>
                         #### Motivation II
 
                         * An influential formal principle of decision-making is economic rationality ("Rational Economic Man")
@@ -88,7 +104,24 @@
                         * Bounded rationality: **systematically** relaxing economic rationality (Simon, and famously Tversky & Kahneman)
 
                         &#8594; Let's create a formal model of bounded rationality by integrating economic rationality principles and methods for automated reasoning!
+                    </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                        Kampik & Nieves. *Abstract Argumentation and the Rational Man.*
+                        </fragment>
                         
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Motivation III
+
+                            More broadly, we apply principles of machine reasoning to principles of human reasoning
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Kampik & Gabbay. *Explainable Reasoning in Face of Contradictions: From Humans to Machines.*
+                        </fragment>
                     </section>
 
                     <section data-markdown>
@@ -113,9 +146,9 @@
     
                         * Chooses from $A = \\{a, ..., n\\}$
                         
-                        * Choice function: $A \rightarrow 2^A$
+                        * Choice function: takes $A$, returns $S^* \in 2^A$
     
-                        * Clear preferences: total order of all sets in $2^A$
+                        * Clear preferences: choice $S^\*$ implies $S^*$ is strictly preferred over all other elements in $2^A$
                         </fragment>
     
                         <fragment data-markdown class="tiny left">
@@ -159,9 +192,26 @@
   
                 </section>
 
+                <section>
+                <h4>Bounded Rationality</h4>
+                <img src="./kahneman_2.png" width="325px"\>
+                        <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                            <ul>
+                                <li> By now, we know that economic rationality is not a good model of human (intelligent) decision-making. 
+                                </li>
+                                <li>Economists try to adjusts their models accordingly.</li>
+                                <li>Key improvement: modeling knowledge in decision scenarios.</li>
+                            </ul>
+                        </div>
+                        <fragment data-markdown class="tiny left">
+                            Kahneman, Daniel. *Maps of bounded rationality.* 
+                            Rubinstein, Ariel. *Modeling bounded rationality.*
+                        </fragment>
+                </section>
+
 
                 <section data-markdown>
-                    #### Shortcomings
+                    #### Shortcomings of Economic Rationality
 
                     * **Ceteris paribus** assumption
 
@@ -218,7 +268,7 @@
 
                 <section>
                     <fragment data-markdown>
-                    #### Abstract Argumentation
+                    #### Abstract Argumentation I
                     
 
                     
@@ -335,6 +385,67 @@
 
                     
                 </section>
+
+                <section>
+                    <fragment>
+                    <h4>Abstract Argumentation II</h4> 
+                        <div style="width:50%!important;min-height: 250px !important;" id="af-2bb" class="af"></div>
+                    </fragment>
+    
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2bb'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 25,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' },
+                                    { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#fff' }
+                                ],
+                                edges: [
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+
+<fragment data-markdown class="tiny left">
+    Dung, Phan Minh. *On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games.*
+</fragment>
+    
+                </section>
                    
 
                 <section>
@@ -345,7 +456,7 @@
 
                     * Semantics $\sigma(AF)$ returns set of extensions $ES \subseteq 2^{AR}$
 
-                    * Conclusion $E \in ES, E \subseteq AR$ **implies** preferences: $\forall S \in AR, E \succeq S$
+                    * Extension $E \in ES, E \subseteq AR$ **implies** preferences: $\forall S \in AR, E \succeq S$
 
                     * Consistent preferences when **normally expanding** $AF$ (Economics' *ceteris paribus* assumption)
                     </fragment>
@@ -379,7 +490,7 @@
                     
                 </section>
 
-                <section>
+                <!--<section>
                     <fragment data-markdown>
                     #### Reference Independence Principles
                     * Given semantics $\sigma, AF = (AR, AT), AF' = (AR', AT')$
@@ -396,7 +507,24 @@
                     <fragment data-markdown class="tiny left">
                         Kampik & Nieves. *Abstract Argumentation and the Rational Man.*
                     </fragment>
+                </section>-->
+                <section>
+                    <fragment data-markdown>
+                    #### Reference Independence Principles
+                    * Given semantics $\sigma$, $AF = (AR, AT), AF' = (AR', AT'), AF \preceq_N AF'$
+
+                    * **Strong**: no matter what conclusion/extension we select from $AF$ and $AF'$,  
+                      the implied preferences are consistent
+
+                    * **Weak**: no matter what conclusion/extension we select from $AF$,  
+                      we can infer a conclusion from $AF'$ that implies consistent preferences
+                    </fragment>
+
+                    <fragment data-markdown class="tiny left">
+                        Kampik & Nieves. *Abstract Argumentation and the Rational Man.*
+                    </fragment>
                 </section>
+
 
                 <section>
                     <fragment data-markdown>
@@ -761,11 +889,9 @@
                     <fragment data-markdown>
                     #### Open Questions
                     
-                    * Undecided arguments: from a decision-making perspective we do not want to be undecided about actions; hence, relaxing (weak) reference independence to support undecided arguments requires more than abstract argumentation
-
-                    * Our principle can provide a new perspective on argumentation and game theory
-
-                    * From a practical perspective, we can investigate implications on business decision management
+                    * Undecided arguments, gradual argumentation approaches
+                    * New perspective on argumentation and game theory
+                    * Implications on business decision management?
     
                     </fragment>
                 </section>

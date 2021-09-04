@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Principle-based Explanations of Change in QBAFs
+        </title>
+
+        <meta name="description" content="Principle-based Explanations of Change in QBAFs">
+        <meta name="author" content="Timotheus Kampik, Kristijonas Cyras">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Kampik, Cyras. June 2021. tkampik@cs.umu.se.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Principle-based Explanations of Change in QBAFs
+                    </h3>
+                    <p>
+                         <!--<small><strong>Timotheus Kampik</strong> </small><br>
+                       <small>Work in collaboration with Timotheus Kampik</small>-->
+                    </p>
+                </section>
+
+
+                    <section data-markdown>
+                        #### Idea
+
+                        * We want to explain change of inference in QBAFs
+
+                        * What is *change*?  
+                        $\rightarrow$ Arguments $a, b$ change rank in the order established by the total strength function:  
+                        First: $a \succeq b$ then $b \succ a$ or vice versa
+
+                        * What are explanations?  
+                        $\rightarrow$ All arguments that change (or are added), so that they are more
+                        'favorable' for $b$ than for $a$ in the updated QBAF, in comparison to the initial QBAF
+                        
+                    </section>
+
+
+                    <section>   
+                        <h4>Preference Consistency</h4>
+
+                        
+
+                        <fragment data-markdown style="font-size: 25px;">
+                            Let $Q = (X, R^-, R^+, \tau)$ and $Q' = (X', R^{'-}, R^{'+}, \tau')$ be QABFs and let $\sigma$ be a strength function.  
+                            $Q$ and $Q'$ are preference consistent w.r.t. $\sigma$, denoted by $C^{\sigma}_{\succeq}(Q, Q')$ iff the following statements hold true $\forall a, b \in X$, such that $a, b \in X'$:
+
+                            1. If $\sigma_Q(a) > \sigma_Q(b)$ then $\sigma_{Q'}(a) > \sigma_{Q'}(b)$
+
+                            2. If $\sigma_Q(a) < \sigma_Q(b)$ then $\sigma_{Q'}(a) < \sigma_{Q'}(b)$
+
+                            3. If $\sigma_Q(a) = \sigma_Q(b)$ then $\sigma_{Q'}(a) = \sigma_{Q'}(b)$
+
+                            Similarly, we can say that $a, b$ are preference consistent in $Q$ and $Q'$ w.r.t. $\sigma$: $C^{\sigma}_{\succeq, Q, Q'}(a, b)$
+
+                            (Somewhat similar to notions in micro-economic theory)
+                        </fragment>
+                        
+                    </section>
+
+                    <section data-markdown>
+                        Preference Consistency is:
+
+                        * Transitive
+
+                        * Symmetric
+
+                        * Reflexive
+                    </section>
+
+                    <section>
+                        <h4>Explaining Inconsistent Preferences I</h4>
+
+                        
+
+                        <fragment data-markdown style="font-size: 25px;">
+                            * Let $Q = (X, R^-, R^+, \tau)$ and $Q' = (X', R^{'-}, R^{'+}, \tau')$ be QABFs and let $\sigma$ be a strength function.  
+                            
+                            * We need explanations for all $a, b \in Q$, such that $C^{\sigma}_{\succeq, Q, Q'}(a, b)$
+
+                            * For all $c \in X \cup X'$, we say:
+
+                                * $c^{a+}$/$c_{b+}$ iff $c$'s support for $a$/$b$ is stronger in $Q'$ than in $Q$
+
+                                * $c^{a-}$/$c_{b-}$ iff $c$'s support for $a$/$b$  is weaker in $Q'$ than in $Q$
+
+                                * $c^{a=}$/$c_{b=}$ iff $c$'s support for $a$/$b$ is the same in $Q'$ as in $Q$
+
+                        </fragment>
+
+                    </section>
+
+
+                    <section>
+                        <h4>Explaining Inconsistent Preferences II</h4>
+
+                        
+
+                        <fragment style="font-size: 25px;">
+                        If $a \succeq b$ in $Q$ but $b \succ a$ in $Q'$: explanations <u><strong style="color: red">in red</strong></u>
+
+                        <table style="width:100%">
+                            <tr>
+                                <td>$c^{a+}_{b+}$</td>
+                                <td>$c^{a+}_{b=}$</td>
+                                <td>$c^{a+}_{b-}$</td>
+                                <td><u><strong style="color: red">$c^{a+}_{b++}$</strong></u></td>
+                            </tr>
+                            <tr>
+                                <td><u><strong style="color: red">$c^{a=}_{b+}$</strong></u></td>
+                                <td>$c^{a=}_{b=}$</td>
+                                <td>$c^{a=}_{b-}$</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><u><strong style="color: red">$c^{a-}_{b+}$</strong></u></td>
+                                <td><u><strong style="color: red">$c^{a-}_{b=}$</strong></u></td>
+                                <td>$c^{a-}_{b-}$</td>
+                                <td><u><strong style="color: red">$c^{a--}_{b-}$</strong></u></td>
+                              </tr> 
+                          </table>
+                        </fragment>
+                        <fragment style="font-size: small;">
+                            $b++$ indicates that the argument increases support for $b$ more than it increases support for $a$ <br>     
+                            $a--$ indicates that the argument decreases support for $a$ more than it decreases support for $b$
+                        </fragment>
+
+                    </section>
+
+
+                    <section data-markdown>
+                        #### Explaining Inconsistent Preferences III
+
+                        * We can do this for different change scenarios
+
+                        * We can determine $\subseteq$-minimal explanations, given the delta that is needed for the change in rank
+                    </section>
+
+
+
+                    <section data-markdown>
+                        #### Path Forward?
+
+                        1. Work out theory during the next ~3-6 months
+
+                        2. a. Theory-only, then it can be combined with abstract arg. paper
+
+                        2. b. Experimental evaluation, then we need dataset, perhaps collaborators
+                        
+                    </section>
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

@@ -8,7 +8,7 @@
         </title>
 
         <meta name="description" content="Explainable Reasoning in Face of Contradictions: From Humans to Machines">
-        <meta name="author" content="Timotheus Kampik">
+        <meta name="author" content="Dov Gabbay, Timotheus Kampik">
 
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -45,9 +45,10 @@
 
         <div class="reveal">
                 <div class='footer'>
-                    <span class="footer-text">Kampik & Gabbay. EXTRAAMAS 2021.</span>
-                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
-                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                    <span class="footer-text">Gabbay (& Kampik). EXTRAAMAS 2021.</span>
+                    <img class="lu-logo" src="./uni_lu.png" alt="LU logo"/>
+                    <img class="kcl-logo" src="./kcl_logo.png" alt="KCL logo"/>
+                    <img class="bar-ilan-logo" src="./bar_ilan.svg" alt="Bar Ilan logo"/>
                 </div>
 
             <!-- Any section element inside of this container is displayed as a slide -->
@@ -68,8 +69,6 @@
 
                         * We motivate this claim by looking at research in micro-economic theory and behavioral economics.
 
-                        * We identify relevant existing and ongoing research on non-monotonic reasoning and highlight limitations.
-
                         * We outline a set of future research directions.
                         
                     </section>
@@ -88,13 +87,73 @@
 
                         <img src="./belief_revision.png" style="border: none; background: none; box-shadow: none;">
                         
-                    </section> 
-
-                    <section>
-                        <h4>How do humans reason?</h4> 
                     </section>
 
 
+                    <section data-markdown>
+                        #### Example: British Nationality Program
+
+                        * 1980: $\Delta$
+
+                        * Query from $\Delta$: can ${\cal A}$ get British passport?
+
+                        * Program: **Prolog**
+                    </section>
+
+                    <section data-markdown>
+                        #### $\Delta$: can ${\cal A}$ get British passport?
+
+                        * Answer: no  
+                          Explanation: trace of attempted proof with output of what is missing
+
+                        * (1) $a \rightarrow b$
+                        * (2) $a
+                        * $?_{(1), (2)} b = $ yes, from (1), (2)
+                        * $?_{(1)} b = $ no, (2) is needed
+                    </section>
+
+                    <section >
+
+                        <fragment data-markdown>
+                            #### Choice (Gabbay example)
+                        
+                            * Test for cancer inconclusive
+    
+                            * ${\cal H}$ is consistent to assume ${\cal A}$ has cancer
+
+                            * ${\cal H}$ is consistent to assume ${\cal A}$ does not have cancer
+    
+                            * Program: **Logica**
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Tretyakov and Skvortsov (Google). *Logica Open Source Project*. 2021. 
+                        </fragment>
+                    </section>
+
+                    <section data-markdown>
+                        #### What happens if data is inconsistent?
+                        
+                        * All queries can be answered with `yes`.
+
+                        * We need priorities.
+
+                    </section>
+
+                    <section>
+                        <h4>Human reason according to prioritiess</h4>
+                        <img src="./Talmud_set.JPG" width="325px"\>
+                                <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                                    <ul>
+                                        <li>Human Reasoning has been studied for centuries</li>
+                                        <li>How should we make decisions?
+                                        </li>
+                                        <li>How should we treat doubt?</li>
+                                        <li>Example: the Talmud and Shev Shema'tata.</li>
+                                        <li>Line from religious to legal reasoning</li>
+                                        <li>Line from religious reasoning to economic theory?</li>
+                                    </ul>
+                                </div>
+                    </section>
 
                     <section data-markdown>
                         #### Economic Rationality
@@ -115,17 +174,24 @@
                         <br>
                         <fragment data-markdown style="font-size: 33.6px">
                         * Standard economic model for individual decision-making
-    
-                        * Chooses from $A = \\{a_0, ..., a_n\\}$
+
+                        * Chooses from $A = \\{a, ..., n\\}$
                         
-                        * Choice function: $A \rightarrow 2^A$
+                        * Choice function: takes $A$, returns $S^* \in 2^A$
     
-                        * Clear preferences: total order of all sets in $2^A$
+                        * Clear preferences: choice $S^\*$ implies $S^*$ is strictly preferred over all other elements in $2^A$
                         </fragment>
     
                         <fragment data-markdown class="tiny left">
                             Rubinstein, Ariel. *Modeling bounded rationality.* 
                         </fragment>
+                </section>
+
+
+                <section>
+                    <h4>Clear Preferences</h4>
+                    $a$: ${\cal A}$ has cancer, $b$: ${\cal A}$ does not have cancer
+
                 </section>
     
                 <section>
@@ -171,7 +237,10 @@
                             <ul>
                                 <li> By now, we know that economic rationality is not a good model of human (intelligent) decision-making. 
                                 </li>
+                                <li> Lacks a model of knowledge.
+                                </li>
                                 <li>Economists try to adjusts their models accordingly.</li>
+                                <li>With formal argumentation, we can draw inferences in face of contradictions that are economically rational.</li>
                             </ul>
                         </div>
                         <fragment data-markdown class="tiny left">
@@ -180,7 +249,7 @@
                         </fragment>
                 </section>
 
-                <section data-markdown>
+               <!-- <section data-markdown>
                     #### Consistent Preferences in Knowledge-based Systems
 
                     * We want to determine the relevant citizenship (passports) of a client
@@ -210,9 +279,6 @@
                 </section>
 
 
-                <!--<section style="margin-top: 100px;" data-background-iframe="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation" data-background-interactive>
-                </section>-->
-
                 <section data-markdown>
                     #### Consistent Preferences in Knowledge-based Systems
 
@@ -224,10 +290,10 @@
 
                     * Automated checks of decision management software don't detect this problem
                         
-                </section>
+                </section>-->
 
                 <section data-markdown>
-                    #### What does this have to do with XAgents?
+                    #### What does this have to do with Explainable Agents?
                 </section>
 
                 <section>
@@ -274,10 +340,15 @@
                 </section>
 
                 <section data-markdown>
-                    #### "Reasoning backwards": Find an explanation that happens to be satisfied
+                    #### "Reasoning backwards"
+
+                     * Find an explanation that happens to be satisfied
+
                      * **Journalist**: *When you were at Chelsea, you were asked whether you would ever come to the Spurs and you said: 'Never, I love the Chelsea fans too much.' What has changed?*
 
-                    * **Mourinho**: [*That was*] *before I was sacked* [*at Chelsea*].
+                     * **Mourinho**: [*That was*] *before I was sacked* [*at Chelsea*].
+
+                     * After recent events, Mourinho may say want to revert to the original statement
                 </section>
 
                 <section>
@@ -950,6 +1021,9 @@
                         Special Issue in the Journal of Applied Logics - IfCoLog Journal:  
                         *Explainable Reasoning in Face of Contradictions: Cross-disciplinary Perspectives*
                     </small>
+                    <fragment data-markdown>
+                        [Link to the paper](https://people.cs.umu.se/tkampik/reports/Kampik_Gabbay_reasoning_contradictions.pdf)
+                    </fragment>
             </section>
 
 

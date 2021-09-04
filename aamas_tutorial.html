@@ -1,0 +1,2589 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Argumentation-based Dialogues and their Application to Interactive Intelligent Systems
+        </title>
+
+        <meta name="description" content="Argumentation-based Dialogues and their Application to Interactive Intelligent Systems">
+        <meta name="author" content="Juan Carlos Nieves, Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Nieves and Kampik. May 2021. Formal Dialogue Systems - Tutorial.</span>
+                    <img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+                    <img class="umu-logo" src="./umu.png" alt="UmU logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Argumentation-based Dialogues and their Application to Interactive Intelligent Systems
+                    </h3>
+                    <p>
+                        <small><strong>Juan Carlos Nieves and Timotheus Kampik</strong></small><br>
+                    </p>
+                </section>
+
+                    <!--<section data-markdown>
+                        ### Preliminary Version - To Be Updated!
+                    </section>-->
+
+                    <section data-markdown>
+                        #### Agenda
+
+                        * Introduction to Dialogues and Argumentation
+
+                            * Activity-centered Perspective 
+
+                            * Software Systems-oriented Perspective
+
+                        * Formal Foundations of Argumentation Dialogues
+
+                        * Applications
+
+                            * Applications and Limitations
+
+                            * Engineering Tutorial
+
+                            * A look ahead
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Introduction
+
+                        * Juan Carlos
+
+                            * Associate Professor, Umeå University
+
+                            * PhD from Universitat Politècnica de Catalunya
+
+                            * Research interests: automated reasoning, logic programming, responsible AI, ...
+
+                        * Timotheus
+
+                            * 4th year PhD Student, Umeå University
+
+                            * *Scientist in Residence/Product Lead* at Signavio/SAP BPI
+
+                            * Research interests: automated reasoning, engineering intelligent systems...
+
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/4b56af5fd419' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section data-markdown>
+                        #### What this tutorial is not about
+
+                        This tutorial is not (primarily) about
+
+                        * Natural language dialogues
+
+                        * Natural language argumentation
+
+                        * This tutorial attempts to bridge theoretical and applied perspectives;
+                          a more 'classical' (and very good) tutorial by Simon Parsons is [available online](https://ssa2020.dmi.unipg.it/program.html)
+                    </section>
+
+                    <section data-markdown>
+                        Some perspectives we provide are **novel** and **opinionated/subjective**.  
+                        We attempt to identify challenges and opportunities to motivate new research.
+                    </section>
+
+                    <section data-markdown>
+                        #### Related AAMAS events
+
+                        * Explainable AI [Industry Panel](https://extraamas.ehealth.hevs.ch/panel.html)  
+                          3rd of May, 16:45 - 17:45 (Berlin/Paris CEST)
+
+                        * EXTRAAMAS [Logic and Argumentation Keynote](https://extraamas.ehealth.hevs.ch/program.html) by Dov Gabbay  
+                          4th of May, 09:30 - 10:15 (CEST)
+
+                        * Ericsson Research [Explainable Machine Reasoning Tutorial](https://www.ericsson.com/en/reports-and-papers/research-papers/aamas-2021-tutorial)    
+                          4th of May, 09:30 - 13:30 (CEST)
+
+                        * EXTRAAMAS [Logic and Argumentation Session](https://extraamas.ehealth.hevs.ch/program.html)  
+                          4th of May, 15:30 - 16:45 (CEST)
+                    </section>
+
+                    <section data-markdown>
+                        Introduction to Dialogues and Argumentation
+                        -
+                        Activity-centered Perspective
+                    </section>
+
+                    <section data-markdown>
+                        #### A Dialogue as an Activity
+
+                        * Any activity is motivated by a **need** (*activity theory*)
+
+                        * A dialogue emerges from a need
+
+                            * To get a drink
+
+                            * To get to know someone
+
+                            * To agree on the terms of a contract
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### A Dialogue as an Activity
+
+                        * The need of a dialogue defines the **goals** of the dialogue
+
+                        * The goals usually define the **topic** of a dialogue
+
+                        * Agents try to achieve goals by issuing *utterances* (aka *speech acts*)
+                        
+                    </section>
+
+                    <section>
+                        <fragment>
+                           <h4>A Dialogue as an Activity</h4>
+
+                            <img src="./activity_theory.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+                        </fragment data-markdown>
+                        <fragment data-markdown class="tiny left">
+                            Adapted from Kaptelini and Nardi. *Acting with technology: Activity theory and interaction design*. 2006.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>Utterances: Does a Dialogue Require Words?</h4> 
+
+                        <img src="./whales.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+                        
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/4218f9aa9767' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Typology of Dialogues
+
+                            * Information-seeking dialogues
+
+                            * Inquiry dialogues
+
+                            * Persuasion dialogues
+
+                            * Negotiation dialogues
+
+                            * Deliberation dialogues
+
+                            * Eristic dialogues
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Walton and Krabbe. *Commitment in Dialogue: Basic Concepts of Interpersonal Reasoning*. 1995.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/ed013fdf5a7b' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section data-markdown>
+                        #### Settings of a Dialogue
+
+                        * Initial situation
+
+                        * Private aims of the participating agents
+
+                        * Joint aims and overarching motivation to conduct the dialogue
+                    </section>
+
+                    <section data-markdown>
+                        #### Arguments
+
+                        * An **argument**: A reason or reasons why you support or oppose an idea or suggestion, or the process of explaining these reasons.  
+                          -- *Cambridge Dictionary*
+
+                        * A dialogue is based on arguments
+
+                        * These arguments can be of different forms
+
+                        * The strategy of construction arguments depends on the specification language (of the knowledge base)
+                    </section>
+
+                    <section>
+                        <h4>Constructing Arguments</h4> 
+
+                        <img src="./knowledge_base.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Protocols of a Dialogue
+                        
+                        * **Turn-making function**: determines which agent should make an utterance at any point in a dialogue
+                        
+                        * **Legal-move function**: determines which utterances agents can make during dialogues
+
+                        * **Outcome function**: determines whether dialogues have desirable properties
+                        
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Fan & Toni. A general framework for sound assumption-based argumentation dialogue. 2014.
+                        </fragment>
+                    </section>
+
+                    <section>  
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/7498a9af3dda'     style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section>
+                        <h4>Legal Move Function</h4> 
+
+                        <img src="./legal_move.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+                        
+                    </section>
+
+                    <section data-markdown>
+                        Introduction to Dialogues and Argumentation
+                        -
+                        Engineering-oriented Perspective
+                    </section>
+
+                    <section>
+                        <h4>Real-world Intelligent Systems</h4> 
+
+                        <img src="./what_is_ai.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Intelligent System Landscapes
+
+                        * We do not have merely one intelligent system,  
+                          we have **intelligent system landscapes**
+
+                        * (IT) systems interact with other internal systems, external systems, and humans
+                        
+                    </section>
+
+                    <section>
+                        <h4>Real-world Oriented Abstractions and Dialogues</h4>
+
+                         Is it only this? <br>
+                         <fragment>
+                            <img src="./chatbot.png" style="border: none; background: none; box-shadow: none; width: 30%; background-color: #F0EEE3; padding: 15px;">
+                         </fragment>
+                     </section>
+
+                    <section>
+                       <h4>Real-world Oriented Abstractions and Dialogues</h4>
+                       <fragment>
+                            <img src="./customer_journey.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                           Customer journeys
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>Real-world Oriented Abstractions and Dialogues</h4>
+                        <fragment>
+                            <img src="./business_process.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                           Business processes
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Real-world Oriented Abstractions and Dialogues
+                    
+                        More abstractions:
+
+                        * User stories
+
+                        * Jobs-to-be-done (Clayton Christensen. *Competing Against Luck*)
+
+                        * Clinical pathways
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Lindgren, Kampik, Guerrero, Blusi, Nieves. *Argumentation-based Health Information Systems: A Design Methodology.* 2021.
+                         </fragment>
+                    </section>
+
+
+                    <section data-markdown>
+                        #### Typology of Dialogues in Software Systems
+
+                        * Reminder: *deliberation*, *persuasion*, *negotiation*, *eristic*, etc.
+
+                        * We cannot always design a system to fit a specific dialogue type
+
+                        * But we typically want to avoid some types of dialogues  
+                          In particular: eristic dialogue
+                    </section>
+
+                    <section data-markdown>
+                        #### Settings of a Dialogue in a Software System
+
+                        * Reminder: initial state, private objectives, joint aims, ...
+                        
+                        * We can only model a subset of these settings
+                    </section>
+
+                    <section data-markdown>
+                        #### Topics and Utterances
+                        
+                        Consider a customer journey, *e.g.*, the customer onboarding journey, retail banking, mortgage
+
+                        What could be a **topic** and what could be an **utterance**? 
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/df012cb6b84f' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/e9fc814a1c2b' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section data-markdown>
+                        #### Real-world Oriented Abstractions and Dialogues
+                        
+                        **Claim**: By considering parts of customer journeys, business processes et cetera 
+                        **formal dialogues**,
+                        we can create intelligent systems that are
+                        * more **reliable**,  
+                        * more **transparent**, and  
+                        * economically better **scalable**.
+                    </section>
+
+                    <section data-markdown>
+                        #### Real-World State of the Art
+
+                        I am a software systems manager.  
+                        Why would I want deploy a defeasible reasoning system?
+                    </section>
+
+                    <section>
+
+                        <fragment data-markdown>
+                        #### Real-World State of the Art
+
+                        Why would I want deploy a defeasible reasoning system?
+
+                        * Conciseness
+
+                        * Conflicts as first-class abstractions
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                           Lindgren, Kampik, Guerrero, Blusi, Nieves. *Argumentation-based Health Information Systems: A Design Methodology.* 2021.
+                        </fragment>
+                    </section>
+
+                    <section data-markdown>
+                        #### Real-World State of the Art
+
+                        I am a software engineer.  
+                        How can I deploy a defeasible reasoning system?
+                    </section>
+
+                    <!--<section>
+                        <div class="signavio-interactive-content">
+                            <iframe
+                                    class="signavio-simulation"
+                                    width="1000"
+                                    height="625"
+                                    style="background-color:#fff"
+                                    src="https://editor.signavio.com/p/bdmsimulation/9616b74b03bb47a8becd1cc945d1b7e9?authkey=f1b186db213e8ff377b3a19ad4c67266f7e953c3bbd382e9d28f6214bdc357ac#/model/9616b74b03bb47a8becd1cc945d1b7e9/decision/sid-D65E0F49-022C-4333-A4A2-F12F0650A7E0/simulation"
+                                    frameborder="0"
+                                    allowfullscreen="1"
+                            >
+                                &nbsp;
+                            </iframe>
+                        </div>
+                    </section>-->
+
+                    <section>
+                        <h4>Real-World State of the Art</h4>
+
+                        <fragment>
+                            <img src="./drools_page.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>Real-World State of the Art</h4>
+
+                        <fragment>
+                            <img src="./drools_defeasible.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        </fragment>
+                    </section>
+
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Real-World State of the Art
+
+                        What are the limitations of these systems?
+
+                        Example: limited completeness checks.
+                        </fragment>
+                        <fragment>
+                            <img src="./jdmn_issue.png" style="border: none; background: none; box-shadow: none; width: 35%; background-color: #F0EEE3; padding: 15px;">
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Calvanese *et al*. *Semantics and Analysis of DMN Decision Tables*. 2016.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        Break  
+                        Questions/Discussion
+                    </section>
+
+                    <section data-markdown>
+                        Formal Foundations
+                    </section>
+
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Argumentation using Classical Logic
+
+                        </fragment>
+                        <fragment data-markdown class="semi-larger">
+                        Possibly inconsistent knowledge base $\Sigma$, propositional language ${\cal L}$.  
+                        An argument is a pair $A = (H, h)$, where $h$ is a formula of ${\cal L}$ and $H \subseteq \Sigma$, s.t.:
+
+                        * $H$ is consistent;
+
+                        * $H \vdash  h$;
+
+                        * $H$ is minimal.
+
+                        $H$ is called the support of $A$, denoted by $S(A)$ and $h$ is the conclusion of $A$, denoted by $C(A)$.
+                        
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Gorogiannis and Hunter. *Instantiating abstract argumentation with classical logic arguments: Postulates and properties.* 2011.
+                        </fragment>
+
+
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Example
+                        </fragment>
+                        <fragment data-markdown class="semi-larger">
+                        Let $\Sigma = \\{\neg c, a, a \land c \rightarrow b, c\\}$.
+
+                        * $A_1 = \langle \\{\neg c\\}, \neg c \rangle$
+
+                        * $A_2 = \langle \\{c\\}, c \rangle$
+
+                        * $A_3 = \langle \\{a\\}, a \rangle$
+
+                        * $A_4 = \langle \\{c\\}, \neg b \rangle$
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Conflicts between Arguments
+
+                        Let ${\cal A}$ be the space of all arguments. We have an **attack function** $D: {\cal A} \times {\cal A} \rightarrow \\{ \top, \bot \\}$
+
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Gorogiannis and Hunter. *Instantiating abstract argumentation with classical logic arguments: Postulates and properties.*
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Conflicts between Arguments
+
+                        </fragment>
+                        <fragment data-markdown style="font-size: large;">
+                        Let $A, B$ be arguments.  
+                        The following attack functions list the conditions under which $D(A, B) = \top$.
+
+                        * $D_D$: $A$ is a **defeater** of $B$ iff $C(A) \vdash \neg \bigwedge S(B)$.
+
+                        * $D_{DD}$: $A$ is a **direct defeater** of $B$ iff there exists $a \in S(B)$, s.t. $C(A) \vdash \neg a$.
+
+                        * $D_{U}$: $A$ is an **undercut** of $B$ iff there exists $b \in S(B)$, s.t. $C(A) \equiv \neg \bigwedge b$.
+
+                        * $D_{DU}$: $A$ is a **direct undercut** of $B$ iff there exists $c \in S(B)$, s.t. $C(A) \equiv \neg c$
+
+                        * $D_{CU}$: $A$ is a **canonical undercut** of $B$ iff $C(A) \equiv \neg \bigwedge S(B)$.
+
+                        * $D_{R}$: $A$ is a **rebuttal** of $B$ iff $C(A) \equiv \neg C(B)$.
+
+                        * $D_{DR}$: $A$ is a **defeating rebuttal** of $B$ iff $C(A) \vdash \neg C(B)$.
+                        
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### From Knowledge Base to Argumentation Framework
+
+                        </fragment>
+                        <fragment data-markdown class="semi-larger">
+                        Let $\Sigma$ be a (possible inconsistent) knowledge base containing formulas of a propositional language ${\cal L}$.
+                        Let $A_{\Sigma}$ be the set of arguments constructed from $\Sigma$.
+
+                        We define $AT_{\Sigma} = \\{(A, B)|A, B \in A_{\Sigma} \text{ and } D(A, B) = \top \\}$.
+
+                        $(A_{\Sigma}, AT_{\Sigma})$ is the argumentation framework $AF_{\Sigma}$ that has been constructed from $\Sigma$.
+                        
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Example
+                        </fragment>
+                        <fragment data-markdown class="semi-larger">
+                        Let $\Sigma = \\{\neg c, a, a \land c \rightarrow b, c\\}$.
+
+                        * $A_1 = \langle \\{\neg c\\}, \neg c \rangle$
+
+                        * $A_2 = \langle \\{c\\}, c \rangle$
+
+                        * $A_3 = \langle \\{a\\}, a \rangle$
+
+                        * $A_4 = \langle \\{c\\}, \neg b \rangle$
+
+                        $AF_{\Sigma} = (\\{A_1, A_2, A_3, A_4\\}, \\{(A_1, A_2), (A_1, A_4), (A_2, A_1)\\})$
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment>
+                        <h4> Example</h4>
+                        <div style="width:50%!important;min-height: 250px !important;" id="af-1bb" class="af"></div>
+                        </fragment>
+                        <fragment data-markdown style="font-size: large;">
+                        $AF_{\Sigma} = (\\{A_1, A_2, A_3, A_4\\}, \\{(A_1, A_2), (A_1, A_4), (A_2, A_1)\\})$
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-1bb'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.3
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "A1", x: 0, y: 0, size: 20, color: '#fff' },
+                                        { id: "b", label: "A2", x: 0, y: 1, size: 20, color: '#fff' },
+                                        { id: "c", label: "A3", x: 1, y: 1, size: 20, color: '#fff' },
+                                        { id: "d", label: "A4", x: 1, y: 0, size: 20, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        { id: "e1", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "a", target: "d", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e3", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        
+                    </section>
+
+                    <section>
+                        Note that this was just an example.
+                        Argumentation frameworks can be constructed in many other ways.
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/9eb37ef3fe93' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Who defines what an argument and an attack is?
+                    
+                        * Somebody needs to do it (similar to labeling in supervised learning)
+
+                        * Do we have a KB of propositional statements?
+
+                        * The problem is *domain*-specific
+
+                            * Application developers
+
+                            * Knowledge engineers
+
+                            * End-users
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Lindgren, Kampik, Guerrero, Blusi, Nieves. *Argumentation-based Health Information Systems: A Design Methodology.* 2021.
+                         </fragment>
+                    </section>
+
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Abstract Argumentation
+                        </fragment>
+                        <fragment data-markdown class="semi-larger">
+                            Argumentation framework $AF = (AR, AT)$, s.t. $AT \subseteq AR \times AR$. Let $a, b \in AR, S \subseteq AR$. 
+
+                            * $a$ **attacks** $b$ iff $(a, b) \in AT$
+    
+                            * $S$ **attacks** $a$ iff $c \in S$ s.t. $(c, a) \in AT$
+
+                            * $a$ **attacks** $S$ iff $d \in S$ s.t. $(a, d) \in AT$
+
+                            * $S$ **defends** $a$ iff $S$ attacks all arguments in $AR$ that attack $a$
+
+                            * $S$ is **conflict-free** iff $\not \exists e, f \in S$ s.t. $e$ attacks $f$
+                        
+                        </fragment>
+
+                        
+                    </section>
+
+                    <section>
+                        <fragment>
+                        <h4>Abstract Argumentation</h4>
+                        
+                        <fragment data-markdown class="semi-larger">
+                        Given an argumentation framework $AF = (AR, AT)$ and $S \subseteq AR$:
+
+                        * $S$ is **naive** iff $S$ is a $\subseteq$-maximal conflict-free set
+
+                        * $S$ is **admissible** iff $S$ is conflict-free and every argument that attacks $S$ is attacked by $S$
+
+                        An argumentation **semantics** takes an argumentation framework and returns a set of *extensions*, where each extension is a set of arguments.
+                        </fragment>
+                    
+                        <fragment data-markdown class="tiny left">
+                        Dung. *On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games.* 1995.
+                        </fragment>
+    
+                        
+                    </section>
+    
+                    <section>
+                        <fragment>
+                        <h4>Abstract Argumentation</h4>
+    
+                        <fragment>
+                            <table style="min-width:250px!important;min-height: 250px !important">
+                                <tr>
+                                    <td>
+                                        <div style="min-width:250px!important;min-height: 250px !important;" id="af-1a1" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="min-width:250px!important;min-height: 250px !important;" id="af-1b1" class="af"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-1a1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        //{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-1b1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+    
+                        <fragment data-markdown class="tiny left">
+                            Dung. *On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games.* 1995.
+                        </fragment>
+    
+                        
+                    </section>
+    
+                    <section>
+                        <fragment>
+                        <h4>Abstract Argumentation</h4>
+                            Admissible set-based semantics
+                            <div style="width:50%!important;min-height: 250px !important;" id="af-2bb" class="af"></div>
+                        </fragment>
+        
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2bb'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.3
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#EABAB9' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#EABAB9    ' }
+                                    ],
+                                    edges: [
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e4", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+    
+                        <fragment data-markdown class="tiny left">
+                            Dung. *On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games.* 1995.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <fragment>
+                        <h4>Abstract Argumentation</h4>
+                            Weak admissible set-based semantics
+                            <div style="width:50%!important;min-height: 250px !important;" id="af-2bc" class="af"></div>
+                        </fragment>
+        
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2bc'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.3
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#EABAB9' }
+                                    ],
+                                    edges: [
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e4", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+    
+                        <fragment data-markdown class="tiny left">
+                            Baumann, Brewka, Ulbricht. *Revisiting the Foundations of Abstract Argumentation-Semantics Based on Weak Admissibility and Weak Defense.* 2020.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <fragment>
+                        <h4>Abstract Argumentation</h4>
+                            Naive set-based semantics
+                            <div style="width:50%!important;min-height: 250px !important;" id="af-2bd" class="af"></div>
+                        </fragment>
+        
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2bd'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.3
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#D7B17C' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#D7B17C' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "b", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e4", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+    
+                        <fragment data-markdown class="tiny left">
+                            Verhej. *Two approaches to dialectical argumentation: admissible sets and argumentation stages.* 1996. 
+                            Baroni, Giacomin, Guida. *SCC-recursiveness: a general schema for argumentation semantics.* 2005.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        Again, abstract argumentation is just an example approach.  
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Abstract Argumentation Dialogues
+
+                        * We start with an argumentation framework $AF = (AR, AT)$.
+
+                        * Our topic is $T \subseteq AR$.
+
+                        * We have *agents* that change the argumentation framework
+                        
+                        * Broadly speaking, we are in the realm of *argumentation dynamics*
+
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Doutre & Mailly. *Constraints and changes: A survey of abstract argumentation dynamics.* 2018.
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Multi-Agent Argumentation Dialogues
+
+                        * We have a set of agents that may have:
+
+                            * Subjective preferences on arguments
+
+                            * Subjective inference functions
+
+                            * ...
+
+                        * Things get complex (game theory); we focus on *dynamics*
+
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Bodanza, Tohmé, Auday. *Collective argumentation: A survey of aggregation issues around argumentation frameworks.*  2017.  
+                            Kampik & Nieves. *Toward Consistent Agreement Approximation in Abstract Argumentation and Beyond.* 2021.
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Abstract Argumentation Dialogues
+
+                        * We start with an argumentation framework $AF = (AR, AT)$.
+
+                        * Our topic is $T \subseteq AR$.
+
+                        * We have *agents* that change the argumentation framework
+                        
+                        * Broadly speaking, we are in the realm of *argumentation dynamics*
+
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <h4>Dialogue Construction</h4>
+
+                        <img src="./dialogue_contruction.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                        
+                    </section>
+
+                    <section>
+                        <h4>Drawing Inferences from Dialogues</h4>
+                        <img src="./outcome_evaluation.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                    </section>
+
+                    <!--<section>
+                        <h4>Drawing Inferences from Dialogues</h4>
+                        <img src="./dialogue_landscape_example.png" style="border: none; background: none; box-shadow: none; width: 40%; background-color: #F0EEE3; padding: 15px;">
+                        <br>
+                        <p style="font-size: large;">Example: Determine the 'cause' of loss for an up-sell opportunity</p>
+                    </section>-->
+
+                    <section data-markdown>
+                        #### Drawing Inferences from Dialogues: Example
+
+                        * We have a reasoner that draws inferences from a KB/BB
+
+                        * Other systems may add to the KB
+
+                        * Other systems may need to react when previous inferences are defeated
+                          This comes at a cost
+                          
+                    </section>
+
+                    <section>
+                        <h4>Drawing Inferences from Dialogues: Example</h4>
+                        <img src="./architecture_example.png" style="border: none; background: none; box-shadow: none; width: 40%; background-color: #F0EEE3; padding: 15px;">
+                        <br>
+                    </section>
+
+                    <section data-markdown>
+                        #### Drawing Inferences from Dialogues
+                        
+                        We want to be able to draw inferences at any point!
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Argumentation Expansions
+
+                        Given $AF = (AR, AT), AF' = (AR', AT')$
+
+                        * AF' expands AF ($AF \preceq AF'$) iff:
+
+                            * $AR \subseteq AR', AT \subseteq AT'$
+                        
+                        * AF' normally expands AF ($AF \preceq_N AF'$) iff:
+
+                             * $AF \preceq AF'$ and $(AT' \setminus AT) \cap (AR \times AR) = \\{\\}$
+                        
+                        * $AF$ is a (normal) **deletion** of $AF'$ iff $AF'$ is a (normal) expansion of $AF$
+
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Baumann & Brewka. *Expanding Argumentation Frameworks: Enforcing and Monotonicity Results.* 2010.
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <h4>Example: Expansions</h4>
+        
+                            <fragment>
+                                <table style="min-width:900px!important;min-height: 900px !important;">
+                                    <tr>
+                                        <td>
+                                            <div style="width:50%!important;min-height: 350px !important;" id="af-exp-1" class="af"></div>
+                                            $AF$
+                                        </td>
+                                        <td>
+                                            <div style="width:50%!important;min-height: 350px !important;" id="af-exp-2" class="af"></div>
+                                            $AF'$   
+                                        </td>
+                                        <td>
+                                            <div style="width:100%!important;min-height: 350px !important;" id="af-exp-3" class="af"></div>
+                                            $AF''$
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fragment>
+                            <script>
+                                // Ask sigma to draw it
+                                window.addEventListener('load', (
+                                    event) => {
+                                        s = new sigma(
+                                        {
+                                            renderer: {
+                                            container: document.getElementById('af-exp-1'),
+                                            type: 'canvas'
+                                            },
+                                            settings: {
+                                                edgeLabelSize: 'fixed',
+                                                defaultLabelSize: 30,
+                                                minArrowSize: 10,
+                                                maxNodeSize: 15,
+                                                maxEdgeLabelSize: 20,
+                                                defaultLabelColor: '#fff',
+                                                defaultEdgeSize: 3,
+                                                maxEdgeSize: 3,
+                                                mouseWheelEnabled: true,
+                                                sideMargin: 0.05
+                                            }
+                                        }
+                                        )
+        
+                                        // Create a graph object
+                                        window.carGraphInitial = {
+                                        nodes: [
+                                            { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+                                            { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' }
+                                        ],
+                                        edges: [
+                                            { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                        ]
+                                        }
+                                        // Load the graph in sigma
+                                        s.graph.read(carGraphInitial)
+        
+                                        // Start the algorithm:
+                                    s.refresh()
+                                    }
+                                )
+                            </script>
+                            <script>
+                                // Ask sigma to draw it
+                                window.addEventListener('load', (
+                                    event) => {
+                                        s = new sigma(
+                                        {
+                                            renderer: {
+                                            container: document.getElementById('af-exp-2'),
+                                            type: 'canvas'
+                                            },
+                                            settings: {
+                                                edgeLabelSize: 'fixed',
+                                                defaultLabelSize: 30,
+                                                minArrowSize: 10,
+                                                maxNodeSize: 15,
+                                                maxEdgeLabelSize: 20,
+                                                defaultLabelColor: '#fff',
+                                                defaultEdgeSize: 3,
+                                                maxEdgeSize: 3,
+                                                mouseWheelEnabled: true,
+                                                sideMargin: 0.05
+                                            }
+                                        }
+                                        )
+        
+                                        // Create a graph object
+                                        window.carGraphInitial = {
+                                        nodes: [
+                                            { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+                                            { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                            { id: "c", label: "c", x: 0, y: 2, size: 25, color: '#fff' }
+                                        ],
+                                        edges: [
+                                            { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e1", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e2", source: "c", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                        ]
+                                        }
+                                        // Load the graph in sigma
+                                        s.graph.read(carGraphInitial)
+        
+                                        // Start the algorithm:
+                                    s.refresh()
+                                    }
+                                )
+                            </script>
+                            <script>
+                                // Ask sigma to draw it
+                                window.addEventListener('load', (
+                                    event) => {
+                                        s = new sigma(
+                                        {
+                                            renderer: {
+                                            container: document.getElementById('af-exp-3'),
+                                            type: 'canvas'
+                                            },
+                                            settings: {
+                                                edgeLabelSize: 'fixed',
+                                                defaultLabelSize: 30,
+                                                minArrowSize: 10,
+                                                maxNodeSize: 15,
+                                                maxEdgeLabelSize: 20,
+                                                defaultLabelColor: '#fff',
+                                                defaultEdgeSize: 3,
+                                                maxEdgeSize: 3,
+                                                mouseWheelEnabled: true,
+                                                sideMargin: 0.05
+                                            }
+                                        }
+                                        )
+        
+                                        // Create a graph object
+                                        window.carGraphInitial = {
+                                        nodes: [
+                                            { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
+                                            { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                            { id: "c", label: "c", x: 0, y: 2, size: 25, color: '#fff' }
+                                        ],
+                                        edges: [
+                                            { id: "e0", source: "a", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e1", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                            { id: "e2", source: "c", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                            { id: "e3", source: "a", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                        ]
+                                        }
+                                        // Load the graph in sigma
+                                        s.graph.read(carGraphInitial)
+        
+                                        // Start the algorithm:
+                                    s.refresh()
+                                    }
+                                )
+                            </script>
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/c315a61fe4e6' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Why Normal Expansions?
+
+                            * Intuitive alignment with dialogues
+    
+                            * Allow us to *keep track of history* within the AF
+    
+                            * Reflects real-world: data is rarely 'just deleted', but typically marked as deleted/overwritten
+    
+                              For this, we can use annihilator arguments (Gabbay)
+    
+                            * Allows for theoretical guarantees in some contexts (next)
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Gabbay. *The handling of loops in argumentation networks.* 2014.
+                        </fragment>
+                    </section>
+
+                    <section data-markdown>
+                        #### Why Normal Expansions? Example
+
+                        * Customer journey, mortgage
+
+                        * Utterance $A_n$: customer indicates interest rate is $X$ elsewhere
+
+                        * Utterance $A_m, n < m$: customer requests interest rate of $Y$, $Y > X$
+
+                        * $A_n$ attacks $A_m$
+                    </section>
+
+                    <section data-markdown>
+                        #### Why Normal Expansions?
+
+                        * Approaches that extend abstract argumentation can also extend the notion of a normal expansion
+
+                        * Alternative dynamics constraints may be feasible for fundamentally different argumentation approaches
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Consistency/Focus in Argumentation Dialogues
+
+                        * How do we expand the topic? Do we expand it at all?
+
+                        * If we model subjective preferences or similar, how do we expand these?
+
+                        * Do different argumentation semantics satisfy related *principles*?
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Kampik & Nieves. *Abstract Argumentation and the Rational Man.* 2021.  
+                            Kampik & Nieves. *Toward Consistent Agreement Approximation in Abstract Argumentation and Beyond.* 2021. 
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Principle: Monotony
+                        
+                        * Argumentation semantics $\sigma$, $AF = (AR, AT)$ and $AF' = (AR', AT')$, $AF \preceq_N AF'$
+                        
+                        * $\forall E \in \sigma(AF), \exists E' \in \sigma(AF)$, s.t. $E \subseteq E'$.
+
+                        * Too strict!
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Principle: Weak Cautious Monotony (CM)
+                        
+                        * Argumentation semantics $\sigma$, $AF = (AR, AT)$ and $AF' = (AR', AT')$, $AF \preceq_N AF'$
+                        
+                        * $\forall E \in \sigma(AF)$, if $AR' \setminus AR$ does not attack $E$ then $\exists E' \in \sigma(AF)$, s.t. $E \subseteq E'$.
+
+                        * Works for many admissible set-based semantics
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Principle: Weak Reference Independence (RI)
+                        
+                        * Argumentation semantics $\sigma$, $AF = (AR, AT)$ and $AF' = (AR', AT')$, $AF \preceq_N AF'$
+                        
+                        * $\forall E \in \sigma(AF), \exists E' \in \sigma(AF')$, s.t.  $E' \not \subseteq AR$ or $E' = E$.
+
+                        * Works for some naive set-based semantics
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>Example: RI but not CM</h4>
+                        <fragment>
+                            <table style="min-width:100%!important;min-height: 250px !important">
+                                <tr>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-ri-1" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-ri-2" class="af"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-ri-1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#D7B17C' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#D7B17C' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-ri-2'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#EABAB9' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#73A790' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "d", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3}
+
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+    
+                        <fragment data-markdown class="tiny left">
+                            Kampik & Nieves. *Abstract Argumentation and the Rational Man.* 2021.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>Example: CM but not RI</h4>
+                        <fragment>
+                            <table style="min-width:100%!important;min-height: 250px !important">
+                                <tr>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-cm-1" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-cm-2" class="af"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-cm-1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 1, y: 1, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-cm-2'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#EABAB9' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+    
+                        <fragment data-markdown class="tiny left">
+                            Kampik & Nieves. *Abstract Argumentation and the Rational Man.* 2021.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>RM / CI are not enough</h4>
+                        <fragment>
+                            <table style="min-width:100%!important;min-height: 250px !important">
+                                <tr>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-deg-1-1" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-deg-1-2" class="af"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-deg-1-1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                        nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#73A790' },
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-deg-1-2'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#EABAB9' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#73A790' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "d", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Monotony Maximization
+                        
+                        * Given the constraints of semantics $\sigma$ and $S \in \sigma(AF), ES = \sigma(AF')$
+
+                        * W.r.t. cardinality (assume $S \neq \\{\\}$):  
+                          $argmax_{E \in ES} \frac{S \cap E}{S}$ (not transitive!)
+
+                        * W.r.t. set inclusion: $\\{E | E \in ES, \nexists E' \in ES$ s.t. $E \cap S \subset E' \cap S \\}$
+
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>Example: Monotony Maximization</h4>
+                        <fragment>
+                            <table style="min-width:100%!important;min-height: 250px!important">
+                                <tr>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-deg-2-1" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-deg-2-2" class="af"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-deg-2-1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                        nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#73A790' },
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-deg-2-2'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+                                    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "d", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/e04fd27735fa' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+
+                    <section>
+                        Break  
+                        Questions/Discussion
+                    </section>
+
+                    <section data-markdown>
+                        Applications
+                    </section>
+
+
+                    <section data-markdown>
+                        #### Our Initial Questions
+
+                        I am a software systems manager.  
+                        Why would I want deploy a argumentation-based dialogue system?
+
+                        I am a software engineer.  
+                        How can I deploy a defeasible argumentation-based dialogue system?
+                    </section>
+
+                    <section>
+                        <h4>Knowledge-based Systems - 'Business' Perspective</h4>
+
+
+                        <img src="./business_process_example_tutorial.png" style="background-color: #F0EEE3;">
+                        
+                    </section>
+
+                    <section>
+                        <h4>Knowledge-based Systems - 'Business' Perspective</h4>
+
+                        <img src="./business_decision_example.png" style="background-color: #F0EEE3;">
+
+                    </section>
+
+                    <section data-markdown>
+                        #### Example: Decision Model and Notation (DMN)
+    
+                        * Decision:
+                        
+                            * Set of ``if ... then ...`` rules
+    
+                            * Aggregation function or order on all rules
+    
+                        * Graphical/XML model of data sources and hierarchical decisions
+    
+                        * Open standard (OMG)
+                            
+                    </section>
+    
+                    <section>
+                        <h4>DMN Example Decision</h4>
+    
+                        <img src="./DMN_internal.png" style="background-color: #F0EEE3;">
+    
+    
+                    </section>
+    
+                    <section>
+                        <fragment data-markdown style="font-size: 24px;">
+                        #### Rough Formalization Attempt, Decision Table
+                        
+                        Tuple $\langle T, I, O, type, facet, R, P, C, H \rangle$
+    
+                        * $T$: table name 
+    
+                        * $I, O$ finite disjoint sets of input and output attributes
+    
+                        * $type$: function that maps each I, O to a data type
+    
+                        * $facet$: function that maps each I, O to an *acceptable list of objects*
+    
+                        * $R$: finite set of 'if ... then ...' rules
+    
+                        * $P$: total order on rules
+    
+                        * $C$: boolean completeness indicator
+    
+                        * $H$: hit policy indicator 
+    
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Calvanese *et al*. Semantics and Analysis of DMN Decision Tables.
+                        </fragment> 
+                    </section>
+
+                    <section>
+                        <h4>Defeasible Rules (Open Rules)</h4>
+
+                        <img src="./open_rules_2.jpg" style="background-color: #F0EEE3;">
+                        <fragment data-markdown class="tiny left">
+                            Feldman. [*Open Rules - Solving Rule Conflicts*](https://openrules.wordpress.com/2013/08/14/solving-rule-conflicts-part-2/). 2013.
+                        </fragment> 
+                    </section>
+
+                    <section>
+                        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/embed/62d7cdd580bc30718fa3181c67940cdd/4b56af5fd419' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+                    </section>
+
+                    <section>
+
+                        <fragment data-markdown>
+                            #### What is missing here?
+                        
+                            * Model of conflicts is limited (preorder or total order)
+    
+                            * No first-class abstraction for uncertainty
+    
+                            * One-shot decisions, chained via process flow
+    
+                            * Little flexibility (CMMN standard tried to address this and failed)
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Freund & Rücker. *Real-Life BPMN (4th Edition).* 2019.
+                        </fragment>
+                    </section>
+
+                    <section data-markdown>
+                        #### Argumentation Dialogues Provide
+
+                        * Comprehensive models of conflict
+
+                        * First-class abstractions for uncertainty 
+
+                        * Capabilities for iteratively drawing consistent inference
+                          (from an expanding KB with conflicting statements)
+
+                        * Case-based flexibility
+
+                    </section>
+
+                    <section data-markdown>
+                        Engineering Micro-Tutorial
+
+                        [Link to Written Tutorial/Code](https://github.com/Interactive-Intelligent-Systems/diarg/blob/master/examples/DialoguesAndDmn.md)
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Setup
+
+                        * Java (~recent SDK version)
+
+                        * [Camunda](https://docs.camunda.org/manual/7.4/user-guide/dmn-engine/embed/) DMN decision automation engine
+
+                        * [DiArg](https://github.com/Interactive-Intelligent-Systems/diarg), Tweety-based dialogue reasoner
+                        </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Kampik & Gabbay. *Towards DiArg - An Argumentation-based Dialogue Reasoner*. 2021.  
+                            Thimm. *Tweety: A Comprehensive Collection of Java Libraries for Logical Aspects of Artificial Intelligence and Knowledge Representation*. 2014.
+                        </fragment>
+                    </section>
+
+                    <section data-markdown>
+                        #### Hands-on Example 1 (Decision Management)
+
+                        * Our engine gives us several 'conflicting' results
+
+                        * Different human roles make the final decision
+
+                    </section>
+
+                    <section>
+                        <h4>Hands-on Example 1 (Decision Management)</h4>
+
+                        <img src="./dmn_hiring_eligibility.png" style="background-color: #F0EEE3;">
+                        <fragment data-markdown class="tiny left">
+                            DMN Decision Table
+                        </fragment> 
+
+
+                    </section>
+
+                    <section>  
+                        Go to IDE. <a href="https://github.com/Interactive-Intelligent-Systems/diarg/blob/master/examples/DialoguesAndDmn.md">Link to programming tutorial</a>.
+
+
+                    </section>
+
+
+                    <section data-markdown>
+                        #### Simple Advantages of Argumentation Model
+
+                        I want to know:
+
+                        * How often is a machine 'decision' indecisive?
+
+                        * How often is machine decision 'overruled' by a human / another machine?
+
+                        * How often is a human decision 'overruled' by another human?
+                    </section>
+
+                    <section data-markdown>
+                        #### Can we make use of some neat theoretical results?
+
+                        * We should not overestimate the importance of theoretical analysis in practice
+
+                        * Consider Calvanese's et al. DMN completeness analysis
+
+                            * Well-presented, with clear improvement recommendations for industry SOTA
+
+                            * Raised interest, but not yet adopted
+
+                        * But some theory is somewhat useful  
+                          Consider, *e.g.* successes in Business Process Management and Process Mining
+                    </section>
+
+                    <section data-markdown>
+                        #### Limitations
+
+                        * Even 'traditional' knowledge-based systems like DMN engines require great organizational maturity
+
+                        * Little vendor-driven innovation in this space
+
+                        * Lack of integration with software ecosystem
+
+                        * Lack of integration with data science approaches
+                    </section>
+
+                    <section>
+
+                        <fragment data-markdown>
+                        #### Hands-on Example (Legal Reasoning)
+
+                        * Traditional example, but allows for a lot of theory fun
+
+                        * Arguments: pieces of evidence
+
+                        * Arguments may carry different levels of 'burdens of persuasion'
+
+                        * Tutorial: *Argument-based Normative and Legal Reasoning* by Governatori & Sartor: [available online](https://ssa2020.dmi.unipg.it/program.html)
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Calegari & Sartor. *Burden of persuasion in argumentation*. 2020.
+                        </fragment>
+
+                    </section>
+
+                    <section>
+                        <h4> Automated Legal Reasoning has Left the Ivory Tower</h4>
+
+                        <img src="./legal_tech.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
+                    </section>
+
+                    <section>
+
+                        <fragment data-markdown>
+                        #### Burden of Persuasion - Intuition
+
+                        * Civil law, claim medical practitioner may have acted negligently: $a$
+
+                        * Different contradicting statements that support or attack the claim (or related statements): $b, c, d$
+
+                        * $AF = (\\{a, b, c, d\\}, \\{(b, a), (b, c), (c, d), (d, b)\\})$
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Calegari & Sartor. *Burden of persuasion in argumentation*. 2020.
+                        </fragment>
+
+                    </section>
+
+                    <section>
+                        <h4>Burden of Persuasion - Intuition</h4>
+                        <fragment>
+                            <table style="min-width:100%!important;min-height: 250px !important">
+                                <tr>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-bp-1" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 250px !important;" id="af-bp-2" class="af"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-bp-1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 1, y: 1, size: 25, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-bp-2'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#EABAB9' },
+                                    ],
+                                    edges: [
+                                        { id: "e0", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e3", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3}
+
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+
+                        <fragment data-markdown>
+                        #### Burden of Persuasion - Observations
+
+                        * The order of arguments is determined by levels of burden -  
+                          It is not a *temporal* order
+
+                        * We need a *credulous* argumentation semantics
+                        
+                        * We start with unburdened arguments, infer, expand, and maximize monotony
+
+                        </fragment>
+
+                    </section>
+
+                    <section>
+                        <h4>3-level Burden of Persuasion Example</h4>
+
+                        <table style="min-width:900px!important;min-height: 900px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2a_6" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:90%!important;min-height: 350px !important;" id="af-2b_6" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c_6" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a_6'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 0.5, size: 15, color: '#73A790' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b_6'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "b", label: "b", x: 1, y: 2, size: 15, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 0, size: 15, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 1, size: 15, color: '#73A790' },
+                                        { id: "e", label: "e", x: 0, y: 1, size: 15, color: '#D7B17C' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "a", target: "e", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "e", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e5", source: "e", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c_6'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "b", label: "b", x: 1, y: 2, size: 15, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 1, y: 0, size: 15, color: '#EABAB9' },
+                                        { id: "d", label: "d", x: 1, y: 1, size: 15, color: '#73A790' },
+                                        { id: "e", label: "e", x: 0, y: 1, size: 15, color: '#D7B17C' },
+                                        { id: "f", label: "f", x: 0, y: 2, size: 15, color: '#D7B17C' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "a", target: "e", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "d", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "e", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e5", source: "e", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e6", source: "f", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e7", source: "d", target: "f", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e8", source: "f", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+
+
+
+                    <section>
+                        Go to IDE. <a href="https://github.com/Interactive-Intelligent-Systems/diarg/blob/master/BurdenOfPersuasion.md">Link to programming tutorial</a>.
+                    </section>
+
+
+                    <section>
+                        <h4>From Legal Reasoning to the WoT</h4>
+                        
+                        <img src="./wot_arg.png" width="750px"\>
+
+                        <fragment data-markdown class="tiny left">
+                            Kis, Peintner, Aguzzi, Hund, Nimura. *W3C Web of Things (WoT) Scripting API.* 2020.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4>From Legal Reasoning to the WoT</h4>
+                        
+                        <img src="./wot_arg.png" width="750px"\>
+
+                        <fragment data-markdown class="tiny left">
+                            Kis, Peintner, Aguzzi, Hund, Nimura. *W3C Web of Things (WoT) Scripting API.* 2020.
+                        </fragment>
+                    </section>
+
+
+                    https://www.youtube.com/watch?v=MUhUuqd2jt0
+
+                    <section data-markdown>
+                        A Look Ahead: Neuro-Symbolic Approaches
+                    </section>
+
+                    <section>
+                        <h4>Trends towards Neuro-Symbolic AI</h4>
+                        
+                        <img src="./neural_production_systems.png" width="750px"\>
+
+                        <fragment data-markdown class="tiny left">
+                            Goyal, Didolkar, Ke, Blundell, Beaudoin, Heess, Mozer, Bengio. *Neural Production Systems.* 2021 (pre-print).
+                        </fragment>
+                    </section>
+
+                    <!--<section>
+                        <h4>Learning Knowledge and Reasoning About It</h4>
+    
+                        <img src="./process_mining.png" width="175px"\>
+                        <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                            <ul>
+                                <li> Example: process mining
+                                </li>
+                                <li>Mine Petri Nets from event log data</li>
+                                <li>Formally analyze properties like liveness, deadlock-freeness.</li>
+                            </ul>
+                        </div>
+                        <fragment data-markdown class="tiny left">
+                            Van der Aalst, Wil. *Process mining.*
+                        </fragment>
+                    </section>-->
+
+                    <section>
+                        <h4>Argumentation and Neuro-symbolic AI</h4>
+    
+                        <img src="./movies.png" width="325px"\>
+                        <div  style="font-size: 26px; float: right; width: 250px; text-align: center; margin-top: 15px;">
+                            <ul>
+                                <li> Example: explainable recommender systems
+                                </li>
+                                <li>Mine argumentation graphs from (movie) review data</li>
+                                <li>Enforce relaxed monotony principles and facilitate explainability.</li>
+                            </ul>
+                        </div>
+                        <fragment data-markdown class="tiny left">
+                            Rago *et al.* *Argumentation as a Framework for Interactive Explanations for Recommendations*
+                        </fragment>
+                    </section>
+
+
+                    <section>
+                        <h4>Technological Perspective</h4>
+    
+                        Gap between technology ecosystems
+    
+                        <img src="./reasoning_tools.png" style="background-color: #F0EEE3;">
+    
+    
+                    </section>
+
+                    <section>
+                        <h4>Closing the Technology Gap?</h4>
+
+    
+                        <img src="./logica.png" style="background-color: #F0EEE3; width: 70%;">
+    
+    
+                        <fragment data-markdown class="tiny left">
+                            Tretyakov and Skvortsov. [*Logica: organizing your data queries, making them universally reusable and fun*](https://opensource.googleblog.com/2021/04/logica-organizing-your-data-queries.html). 2021. ([Tutorial](https://colab.research.google.com/github/EvgSkv/logica/blob/main/tutorial/Logica_tutorial.ipynb))
+                        </fragment> 
+                    </section>
+
+                <section data-markdown>
+                   Thank you!
+
+                   Questions/Discussion 
+
+                   `{jcnieves,tkampik}@cs.umu.se`
+
+
+            </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

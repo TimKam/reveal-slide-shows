@@ -1,0 +1,2668 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>A Brief Introduction to the Shkop Approach to Formal Argumentation
+        </title>
+
+        <meta name="description" content="Shkop">
+        <meta name="author" content="Dov Gabbay, Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.renderers.edgeLabels.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Gabbay (& Kampik). 2021.</span>
+                    <img class="lu-logo" src="./uni_lu.png" alt="LU logo"/>
+                    <img class="kcl-logo" src="./kcl_logo.png" alt="KCL logo"/>
+                    <img class="bar-ilan-logo" src="./bar_ilan.svg" alt="Bar Ilan logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>A Brief Introduction to Sequential Argumentation - The Shkop Approach
+                    </h3>
+                    <p>
+                        <small><strong>Dov Gabbay</strong></small><br>
+                        <small style="font-size: small;">with T. Kampik</small>
+                        <small>Preliminary Paper: <em>Gabbay, Kampik. A Brief Introduction to the Shkop Approach to Conflict Resolution in Formal Argumentation.</em></small>
+                    </p>
+                </section>  
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Shkop Principle for Resolving Loops
+
+                            * Arises in Talmudic logic, we modify it for argumentation 
+    
+                            * Shkop: if an action causes a loop in a system, do not allow it
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Abraham, Gabbay, Schild. *The handling of loops in talmudic logic, with application to odd and even loops in argumentation*. 2014.    
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <h4>Simple Example: J.K. Rowling</h4>
+
+                        <figure style="border: none; background: none; box-shadow: none; ">
+                            <img style="width: 40%; background-color: #F0EEE3; padding:10px" src="./rowling.jpg"\>
+                            <figcaption style="font-size: medium; ">J.K. Rowling and her father.</figcaption>
+                        </figure>
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Simple Example: J.K. Rowling
+
+                        * Time$_0$: J.K. Rowling gives father signed first edition Harry Potter books  
+                          Implied obligation: do not sell
+
+                        * Time$_1$: Father sells books
+
+                        * Loop: father sells $\rightarrow$ gift cancelled $\rightarrow$ sale not legal  
+                          $\rightarrow$ not sold $\rightarrow$ gift not cancelled
+                        
+                    </section>
+
+                    <section>
+                        <h4>Simple Example: J.K. Rowling</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:50%!important;min-height: 350px !important;" id="af-12a" class="af"></div>
+                                    <p style="font-size:small;">$a$: gift books; $a$ is in</p>
+                                </td>
+                                <td>
+                                    <div style="width:50%!important;min-height: 350px !important;" id="af-12b" class="af"></div>
+                                    <p style="font-size:small;">$b$: sell books; $b$ is out; sale is not "legal"!</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-12a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-12b'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Advanced Example I: Liar's Paradox</h4>
+
+                        "I am lying." = a, modeled by $out(a)$ and $in(a)$;<br>
+                        $in(a)$ activates the attack from $out(a)$ to $in(a)$
+                        <table style="min-height: 200px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-height: 50px !important;" id="af-03aa" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="min-height: 50px !important;" id="af-03a" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-03aa'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            defaultEdgeLabelSize: 20,
+                                            edgeLabelSize: 'proportional',
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#fff' },
+                                        //{ id: "h3", label: "h3", x: 0.5, y: -0.5, size: 0, color: '#fff' },
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 10},   
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-03a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            defaultEdgeLabelSize: 20,
+                                            edgeLabelSize: 'proportional',
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "out(a)", x: 0, y: 0, size: 15, color: '#D7B17C' },
+                                        { id: "b", label: "in(a)", x: 2, y: -1, size: 15, color: '#EABAB9' },     
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' },
+                                        //{ id: "h3", label: "h3", x: 0.5, y: -0.5, size: 0, color: '#fff' },
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", label: "deactivated", target: "b", color: '#D7B17C', type:'curvedArrow', count:0, size: 10},
+                                    { id: "e1", source: "b", label: "activating", target: "a", color: '#73A790', type:'arrow', count:0, size: 10}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+
+                        
+                    </section>
+
+                    <section>
+                        <h4>Advanced Example I: Liar's Paradox</h4>
+                        <div style="font-size:20px;">Map to abstract argumentation framework <br>
+                        1. start with $a(in)$, check annihilator <br>
+                        2. Annihilator is out, hence start with $a(out)$</div>
+
+                        <table style="min-height: 200px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-width:100%!important;min-height: 150px !important;" id="af-03b" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="font-size:20px;">Either: apply sequential approach, such that annihilator is in <br>
+                            Or: since $a(out) = a(in) = a$, and a attacking itself, this figure is reduced in standard formal argumentation to the next figure.</div>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-03b'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            defaultEdgeLabelSize: 15,
+                                            edgeLabelSize: 'proportional',
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a(out)", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "cab", label: "Ctrl.", x: 0.5, y: -0.5, size: 10, color: '#EABAB9' },
+                                        { id: "eab", label: "Exec.", x: 1, y: -1, size: 10, color: '#73A790' },
+                                        { id: "b", label: "a(in)", x: 1.5, y: -1.5, size: 15, color: '#EABAB9' },
+                                        { id: "anab", label: "annihilator", x: 2.5, y: -0.5, size: 10, color: '#EABAB9' },
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", target: "cab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e0a", source: "cab", target: "eab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "eab", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "anab", label: "activation", target: "a", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e5", source: "b", label: "deactivation", target: "anab", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+                        <h4>Advanced Example I: Liar's Paradox</h4>
+
+                        <div style="font-size:20px;">Our only extension is the set that consists of the annihilator <br>
+                        $a$ cannot be in.</div>
+
+                        <table style="min-height: 200px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-width:100%!important;min-height: 150px !important;" id="af-03c" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-03c'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            defaultEdgeLabelSize: 15,
+                                            edgeLabelSize: 'proportional',
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#EABAB9' },
+                                        { id: "b", label: "annihilator", x: 1.5, y: -1.5, size: 15, color: '#73A790' },
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' },
+                                        { id: "h2", label: "", x: -0.5, y: 0.95, size: 0, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e0a", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                        #### Advanced Example II: Activation of Attacks
+
+                        * Security: an attack on an argument activates an attack of the attacker
+
+                        * Intrusion in a server room activates self-destruction of the server
+                    </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Gabbay, Horne, Mauw, Van der Torre. *Argumentation-based Semantics for Attack-Defense Networks*. 2020.  
+                        </fragment>
+
+                    </section>
+
+                    <section>
+                        <h4>Advanced Example II: Activation of Attacks</h4>
+
+
+                        <table style="min-width:900px!important;min-height: 200px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-height: 350px !important;" id="af-13a" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <fragment data-markdown class="tiny left">
+                            Gabbay, Horne, Mauw, Van der Torre. *Argumentation-based Semantics for Attack-Defense Networks*. 2020.  
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-13a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            defaultEdgeLabelSize: 20,
+                                            edgeLabelSize: 'proportional',
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "b", label: "b", x: 2, y: -1, size: 15, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 3, y: 0, size: 15, color: '#73A790' },        
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' },
+                                        { id: "h2", label: "", x: 2.63, y: -0.63, size: 0, color: '#fff' },
+                                        { id: "h3", label: "h3", x: 0.5, y: -0.5, size: 0, color: '#fff' },
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", label: "deactivated", target: "b", color: '#D7B17C', type:'curvedArrow', count:0, size: 10},
+                                    { id: "e1", source: "b", label: "active", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 10},
+                                    { id: "e2", source: "h2", label: "activating", target: "h3", color: '#73A790', type:'curvedArrow', count:0, size: 10},
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+
+                        
+                    </section>
+
+                    <section>
+                        <h4>Advanced Example II: Activation of Attacks</h4>
+                        Map to abstract argumentation framework
+
+                        <table style="min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-width:100%!important;min-height: 350px !important;" id="af-13b" class="af"></div>
+                                    <fragment data-markdown class="tiny left">
+                            Gabbay, Horne, Mauw, Van der Torre. *Argumentation-based Semantics for Attack-Defense Networks*. 2020.  
+                        </fragment> 
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-13b'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            defaultEdgeLabelSize: 15,
+                                            edgeLabelSize: 'proportional',
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "cab", label: "C(a,b)", x: 0.5, y: -0.5, size: 10, color: '#EABAB9' },
+                                        { id: "eab", label: "E(a,b)", x: 1, y: -1, size: 10, color: '#73A790' },
+                                        { id: "b", label: "b", x: 1.5, y: -1.5, size: 15, color: '#EABAB9' },
+                                        { id: "cbc", label: "C(b,c)", x: 2, y: -1, size: 10, color: '#73A790' },
+                                        { id: "ebc", label: "E(b,c)", x: 2.5, y: -0.5, size: 10, color: '#EABAB9' },
+                                        { id: "anab", label: "annihilator", x: 1.5, y: -0.5, size: 10, color: '#EABAB9' },
+                                        { id: "c", label: "c", x: 3, y: 0, size: 15, color: '#73A790' },
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", target: "cab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e0a", source: "cab", target: "eab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "eab", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2", source: "b", target: "cbc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2a", source: "cbc", target: "ebc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "ebc", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "ebc", label: "activation", target: "anab", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e5", source: "anab", label: "deactivation", target: "eab", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+                        <h4>We need an Algorithm</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-height: 350px !important;" id="af-22a" class="af"></div>
+                                    $b$ closes the loop, but is "saved" by $c$.
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-22a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "c", label: "c(3)", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "a", label: "a(1)", x: 0, y: 0.5, size: 15, color: '#EABAB9' },
+                                        { id: "b", label: "b(2)", x: 0.5, y: 0.5, size: 15, color: '#73A790' }
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        We need an algorithm to support this intuition.
+                    </section>
+
+                    <section data-markdown>
+                        #### Outline, Knowledge-based Systems Perspective
+
+                        * We start with an empty knowledge base
+
+                        * We add statements (arguments) one-by-one (total order)
+
+                        * If we can, we remain monotonic
+
+                        * If we do not have a total order, we consider all possible orders that respect the partial order established by the acyclic SCC graph.
+                          This gives us an argumentation semantics.
+
+                        * We go argument-by-argument, not SCC-by-SCC!
+                        
+                    </section>
+
+                    <section>
+                        <h4>Yet Another Example: Knowledge-based Systems</h4>
+
+                        <figure style="border: none; background: none; box-shadow: none; ">
+                            <img style="width: 40%; background-color: #F0EEE3; padding:10px" src="./architecture_example.png"\>
+                            <figcaption style="font-size: medium; ">Landscape of knowledge-based systems.</figcaption>
+                        </figure>
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Example: Knowledge-based Systems
+
+                        * We want to repeatedly draw inferences from an expanding knowledge base
+
+                        * Change of inference is costly (change requirements propagate through landscape)
+
+                        * We only change in face of overwhelming evidence
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Sequential Approach
+
+                        * We start with an empty AF and an empty set of conclusions $E$
+
+                        * We normally expand AF to add one argument $a$ and any number of attacks from or to $a$
+
+                        * We pre-test: do we need to re-arrange our order to respect the partial order of the acyclic SCC graph? If so, we do it!
+
+                        * We *test*: do we have to reject $E$ without any doubt?
+
+                            * If no, we add $a$ to $E$ iff $E \cup \{a\}$ is conflict-free; otherwise, we stay with $E$
+
+                            * If yes, we re-arrange our sequence again  
+                    </section>
+
+                    <section data-markdown>
+                        #### Testing the Current Inference Result
+
+                        * Boolean test function takes the current inference result and the newly added argument 'against' the current argumentation framework
+
+                        * What is a good test function?
+
+                        * Test for strong admissibility, given what we already have inferred 'upstream'
+
+                        * Roughly: 'can we keep the current inference result'?
+                    </section>
+
+                    <section data-markdown>
+                        #### Test for Strong Admissibility
+
+                        * Given $AF = (AR, AT), a \in AR, E \subseteq AR$:
+
+                        * Restrict $AF$ to $AF' \downarrow_{AR'}$ so that $AR'$ only contains arguments that are:
+                        
+                            * Either in $S$
+
+                            * Or reachable from $a$ (or $a$ itself)
+
+                        * Is $E$ attacked by the grounded extension of $AF'$? Then, discard it!
+                    </section>
+
+                    <section>
+                        <h4>Example</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:50%!important;min-height: 350px !important;" id="af-2a" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:50%!important;min-height: 350px !important;" id="af-2b" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }   
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#EABAB9' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Example</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-21a" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-21c" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-21a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#EABAB9' },
+                                    { id: "d", label: "d", x: 2 , y: 0.5, size: 15, color: '#73A790' },
+                                    { id: "inv", label: "", x: 2.25, y: 0.5, size: 0, color: '#fff' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "d", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-21c'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }   
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#EABAB9' },
+                                    { id: "d", label: "d", x: 2 , y: 0.5, size: 15, color: '#73A790' },
+                                    { id: "g", label: "g", x: 3 , y: 0, size: 15, color: '#73A790' },
+                                    { id: "inv", label: "", x: 3.25, y: 0.5, size: 0, color: '#fff' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "d", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Example</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-22ab" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-22c" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-22ab'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#EABAB9' },
+                                    { id: "d", label: "d", x: 2 , y: 0.5, size: 15, color: '#73A790' },
+                                    { id: "e", label: "e", x: 3 , y: 0.5, size: 15, color: '#EABAB9' },
+                                    { id: "g", label: "g", x: 4 , y: 0, size: 15, color: '#73A790' },
+                                    { id: "inv", label: "", x: 4.25, y: 0.5, size: 0, color: '#fff' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "d", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e5", source: "d", target: "e", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e6", source: "g", target: "e", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-22c'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }   
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#fff' },
+                                    { id: "d", label: "d", x: 2 , y: 0.5, size: 15, color: '#fff' },
+                                    { id: "e", label: "e", x: 3 , y: 0.5, size: 15, color: '#fff' },
+                                    { id: "g", label: "g", x: 4 , y: 0, size: 15, color: '#fff' },
+                                    { id: "f", label: "f", x: 4 , y: 1, size: 15, color: '#fff' },
+                                    { id: "inv", label: "", x: 4.25, y: 0.5, size: 0, color: '#fff' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "c", target: "d", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e5", source: "d", target: "e", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e6", source: "g", target: "e", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e7", source: "f", target: "g", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e8", source: "e", target: "f", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section data-markdown>
+                        #### What if the test fails?
+
+                        * We swap the argument we just added with its predecessor and repeat until we find the right order
+                    </section>
+
+                    <section>
+                        <h4>Example</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:50%!important;min-height: 350px !important;" id="af-2ac" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2bc" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2cc" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2ac'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                        nodes: [
+                                        { id: "d", label: "d", x: 0, y: 0.5, size: 15, color: '#73A790' },
+                                        { id: "e", label: "e", x: 1, y: 0.5, size: 15, color: '#EABAB9' },
+                                        { id: "inv", label: "", x: 1.25, y: 0.5, size: 0, color: '#fff' },
+                                    ],
+                                    edges: [
+                                    { id: "e1", source: "d", target: "e", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2bc'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                        nodes: [
+                                        { id: "d", label: "d", x: 0, y: 0.5, size: 15, color: '#73A790' },
+                                        { id: "e", label: "e", x: 1, y: 0.5, size: 15, color: '#EABAB9' },
+                                        { id: "f", label: "f", x: 2, y: 0, size: 15, color: '#73A790' },
+                                        { id: "inv", label: "", x: 2.25, y: 0.5, size: 0, color: '#fff' },
+                                    ],
+                                    edges: [
+                                    { id: "e1", source: "d", target: "e", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "e", target: "f", color: '#fff', type:'arrow', count:0, size: 3},
+                                    ]
+                                    }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2cc'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "d", label: "d", x: 0, y: 0.5, size: 15, color: '#73A790' },
+                                    { id: "e", label: "e", x: 1, y: 0.5, size: 15, color: '#EABAB9' },
+                                    { id: "f", label: "f", x: 2, y: 0, size: 15, color: '#73A790' },
+                                    { id: "g", label: "g", x: 2, y: 1, size: 15, color: '#EABAB9' },
+                                    { id: "inv", label: "", x: 2.25, y: 0.5, size: 0, color: '#fff' },
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "f", target: "g", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "d", target: "e", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "e", target: "f", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "g", target: "e", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section data-markdown>
+                        #### What if we cannot assume a total order?
+
+                        * We check all orders we can assume
+
+                        * Our approach searches for 'intuitive' orders
+
+                        * Example: $AF = (\\{a, b, c\\}, \\{(a, b), (b, a), (a, c), (b, c)\\})$
+                    </section>
+
+                    <section>
+                        <h4>Example - Order 1</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2a_1" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:50%!important;min-height: 350px !important;" id="af-2b_1" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c_1" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a_1'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b_1'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c_1'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#EABAB9' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#EABAB9' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Example - Order 2</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2a_2" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:70%!important;min-height: 350px !important;" id="af-2b_2" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c_2" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a_2'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b_2'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                    { id: "c", label: "c", x: 0.5, y: 0.5, size: 15, color: '#EABAB9' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c_2'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#fff' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Example - Order 3</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2a_3" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:50%!important;min-height: 350px !important;" id="af-2b_3" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c_3" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a_3'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#73A790' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b_3'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#EABAB9' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#73A790' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c_3'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#EABAB9' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#73A790' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#EABAB9' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Example - Order 4</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2a_4" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:70%!important;min-height: 350px !important;" id="af-2b_4" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c_4" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a_4'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#73A790' }
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b_4'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#73A790' },
+                                    { id: "c", label: "c", x: 0.5, y: 0.5, size: 15, color: '#EABAB9' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c_4'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#fff' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Example - Order 5</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2a_5" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:70%!important;min-height: 350px !important;" id="af-2b_5" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c_5" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a_5'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#73A790' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b_5'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#fff' },
+                                    { id: "c", label: "c", x: 0.5, y: 0.5, size: 15, color: '#fff' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c_5'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#fff' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <h4>Example - Order 6</h4>
+
+                        <table style="min-width:900px!important;min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2a_6" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:70%!important;min-height: 350px !important;" id="af-2b_6" class="af"></div>
+                                </td>
+                                <td>
+                                    <div style="width:100%!important;min-height: 350px !important;" id="af-2c_6" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2a_6'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#73A790' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2b_6'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "c", label: "c", x: 0.5, y: 0.5, size: 15, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#fff' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-2c_6'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 20,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+    
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                    nodes: [    
+                                    { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 15, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 0.5, size: 15, color: '#fff' }
+                                ],  
+                                edges: [
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "a", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "b", target: "c", color: '#fff', type:'arrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+    
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Example - Union
+
+                            * We get: $\\{a\\}, \\{b\\}$
+
+                            * We have to reject the sequences that start with $c$
+    
+                            * Hence, we get $\\{\\{a\\}, \\{b\\}\\}$
+                        </fragment>
+
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Argumentation Semantics
+
+                            * If we cannot assume any order, we get an argumentation semantics
+    
+                            * This argumentation semantics is naive set-based, directional, and universally defined
+    
+                            * It is CF2-like, but does not exhibit a problem that CF2 has with some even-length cycles
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Baroni, Giacomin, Guida. *SCC-recursiveness: a general schema for argumentation semantics.* 2005. 
+                        </fragment>
+
+                    </section>
+
+                    <section>
+                        <h4>Attack-Defense Trees with Activation of Attacks I</h4>
+
+                        <table style="min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-width:100%!important;min-height: 350px !important;" id="af-14b" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-14b'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "cab", label: "C(a,b)", x: 0.5, y: -0.5, size: 10, color: '#fff' },
+                                        { id: "eab", label: "E(a,b)", x: 1, y: -1, size: 10, color: '#fff' },
+                                        { id: "b", label: "b", x: 1.5, y: -1.5, size: 15, color: '#EABAB9' },
+                                        { id: "cbc", label: "C(b,c)", x: 2, y: -1, size: 10, color: '#fff' },
+                                        { id: "ebc", label: "E(b,c)", x: 2.5, y: -0.5, size: 10, color: '#fff' },
+                                        { id: "anab", label: "an(a,b)", x: 1.5, y: -0.5, size: 10, color: '#EABAB9' }, 
+                                        { id: "c", label: "c", x: 3, y: 0, size: 15, color: '#73A790' },
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", target: "cab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e0a", source: "cab", target: "eab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "eab", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2", source: "b", target: "cbc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2a", source: "cbc", target: "ebc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "ebc", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "ebc", target: "anab", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e5", source: "anab", target: "eab", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+                        <h4>Attack-Defense Trees with Activation of Attacks II</h4>
+                        <p style="font-size: large;">
+                        Consider attack-defense tree without attacks that need activation: <br>
+                        Annhilator is out
+                    </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <div style="min-width:100%!important;min-height: 350px !important;" id="af-14a" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-14a'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 15,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 15,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a (1)", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "b", label: "b (2)", x: 1.5, y: -1.5, size: 15, color: '#73A790' },
+                                        { id: "cbc", label: "C(b,c) (3)", x: 2, y: -1, size: 10, color: '#EABAB9' },
+                                        { id: "ebc", label: "E(b,c) (4)", x: 2.5, y: -0.5, size: 10, color: '#73A790' },
+                                        { id: "anab", label: "an(a,b) (5)", x: 1.5, y: -0.5, size: 10, color: '#EABAB9' }, 
+                                        { id: "c", label: "c (6)", x: 3, y: 0, size: 15, color: '#EABAB9' },
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    { id: "e2", source: "b", target: "cbc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2a", source: "cbc", target: "ebc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "ebc", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "ebc", target: "anab", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+                    <section>
+                        <h4>Attack-Defense Trees with Activation of Attacks III</h4>
+
+                        <p style="font-size: large;">
+                            Annhilator is out $\rightarrow$ executor is in: activate attack and expand from therre
+                        </p>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <div style="min-width:100%!important;min-height: 350px !important;" id="af-15b" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-15b'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 15,   
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a (1)", x: 0, y: 0, size: 15, color: '#73A790' },
+                                        { id: "cab", label: "C(a,b) (2)", x: 0.5, y: -0.5, size: 10, color: '#EABAB9' },
+                                        { id: "eab", label: "E(a,b) (3)", x: 1, y: -1, size: 10, color: '#73A790' },
+                                        { id: "b", label: "b (4)", x: 1.5, y: -1.5, size: 15, color: '#EABAB9' },
+                                        { id: "cbc", label: "C(b,c) (5)", x: 2, y: -1, size: 10, color: '#73A790' },
+                                        { id: "ebc", label: "E(b,c) (6)", x: 2.5, y: -0.5, size: 10, color: '#EABAB9' },
+                                        { id: "anab", label: "an(a,b) (7)", x: 1.5, y: -0.5, size: 10, color: '#EABAB9' }, 
+                                        { id: "c", label: "c (8)", x: 3, y: 0, size: 15, color: '#73A790' },
+                                        { id: "h1", label: "", x: 3.5, y: 0, size: 0, color: '#fff' }
+                                    ],
+                                    edges: [
+                                    { id: "e0", source: "a", target: "cab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e0a", source: "cab", target: "eab", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e1", source: "eab", target: "b", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2", source: "b", target: "cbc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e2a", source: "cbc", target: "ebc", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e3", source: "ebc", target: "c", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e4", source: "ebc", target: "anab", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e5", source: "anab", target: "eab", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+        
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                    </section>
+
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Difference to Value-based Argumentation
+
+                            * Value-based: $a$ attacks $b$, but $b$ is preferred over $a$:
+                              cancel attack
+
+                            * Shkop: Establish 'intuitive' order on arguments; sequential perspective on managing uncertainty
+
+                            * Shkop is similar to, but technically different from, 'burdens of persuasions'
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Bench-Capon. *Persuasion in Practical Argument Using Value-based Argumentation Frameworks*. 2003.  
+                            Calegari, Riveret, Sartor. *The burden of persuasion in structured argumentation*. 2021.
+                        </fragment>
+                        
+                    </section>
+                    
+                    <section>
+                        <fragment data-markdown>
+                            #### What is new?
+
+                            * Argumentation with ordered values
+
+                            * Starting point: total order on the arguments in an argumentation framework
+
+                            * If there is a loop: delete all attacks emanating from highest value in the loop that "closes" the loop
+                        </fragment>
+                        
+                    </section>
+
+                    <section>
+                        <fragment>
+                        <h4>The Even-Length Cycle Problem</h4>
+                        <table style="min-height: 600px !important;">
+                            <tr>
+                                <td>
+                                    <div style="min-width:100%!important;min-height: 350px !important;" id="af-1bb" class="af"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-1bb'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 15,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.3
+                                        }
+                                    }
+                                    )
+    
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#73A790' },
+                                        { id: "b", label: "b", x: 1, y: 0, size: 20, color: '#D7B17C' },
+                                        { id: "c", label: "c", x: 2, y: 0, size: 20, color: '#D7B17C' },
+                                        { id: "d", label: "d", x: 2, y: 1, size: 20, color: '#73A790' },
+                                        { id: "e", label: "e", x: 1, y: 1, size: 20, color: '#D7B17C' },
+                                        { id: "f", label: "f", x: 0, y: 1, size: 20, color: '#D7B17C' }
+                                    ],
+                                    edges: [
+                                        { id: "e1", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e2", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e3", source: "c", target: "d", color: '#fff', type:'arrow', count:0, size: 3},
+                                        { id: "e4", source: "d", target: "e", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e5", source: "e", target: "f", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        { id: "e6", source: "f", target: "a", color: '#fff', type:'arrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+    
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
+                        
+                    </section>
+
+                    <section data-markdown>
+                        #### Even-Length Cycle Problem
+
+                        Shkop allows for the following total orders (and only these):
+
+                        * $\langle a, b, c, d, e, f \rangle$
+
+                        * $\langle b, c, d, e, f, a \rangle$
+
+                        * $\langle c, d, e, f, a, b \rangle$
+
+                        * $\langle d, e, f, a, b, c \rangle$
+
+                        * $\langle e, f, a, b, c, d \rangle$
+
+                        * $\langle f, a, b, c, d, e \rangle$
+                    </section>
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Even-Length Cycle Problem
+                        </fragment>
+                        <fragment data-markdown style="font-size: x-large;">
+                        * stage2 semantics fixes the problem by combing SCC-recursion with a much more skeptical semantics on SCC-revel
+
+                        * SCF2 semantics fixes the problem by defining a principle that 'catches' even length cycle issues  
+                            and filtering out extensions that would imply a violation of the principle
+
+                        * Shkop semantics does not need an explicit fix for the even-length cycle problem.
+                            It fixes the problem automatically
+                        </fragment>
+
+                        <fragment data-markdown class="tiny left">
+                            Dvořák & Gaggl. *Stage semantics and the SCC-recursive schema for argumentation semantics.* 2014.  
+                            Cramer & Van der Torre. *SCF2-an argumentation semantics for rational human judgments on argument acceptability.* 2019.     
+                        </fragment>
+
+                    </section>
+                   
+                <section>
+                    <fragment data-markdown>
+                    #### Open Questions
+
+                    * How does the semantics we get compare to SCF2 semantics?
+
+                    * Can we show that the approach is useful in traditional application domains of formal argumentation?  
+                      E.g., legal reasoning
+
+                    * Is this approach relevant for argumentation approaches that
+                        
+                        * Extend abstract argumentation? E.g., value-based argumentation
+
+                        * Are fundamentally different? E.g., gradual argumentation
+                </fragment>
+
+                </section>
+
+
+                <section>
+                    <h4> Thank you. Questions?</h4>
+            </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

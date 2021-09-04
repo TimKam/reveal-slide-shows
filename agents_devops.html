@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Developer Operations and Engineering Multi-Agent Systems</title>
+
+		<meta name="description" content="Developer Operations and Engineering Multi-Agent Systems">
+		<meta name="author" content="Timotheus Kampik, Cleber Jorge Amaral, Jomi Fred Hübner">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+				<div class='footer'>
+					<span class="footer-text">Kampik, Amaral, Hübner. DevOps & EMAS.</span>
+					<img class="wasp-logo" src="./WASP.png" alt="WASP logo"/>
+					<img class="ufsc-logo" src="./ufsc_w.png" alt="UmU logo"/>
+				</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <h3>Developer Operations and Engineering Multi-Agent Systems</h3>
+					<p>
+						<small><strong>Timotheus Kampik</strong></small> <br>
+                        <small>Umeå University</small><br>
+                        <small>Cleber Jorge Amaral</small> <br>
+                        <small>IFSC, UFSC</small><br>
+                        <small>Jomi Fred Hübner</small> <br>
+                        <small>UFSC</small><br>
+					</p>
+				</section>
+
+				<section>
+
+                    <fragment data-markdown>
+                    #### Motivation
+
+                    * Gap: academic Agent-Oriented Programming (AOP) frameworks & engineering reality
+                    * Lack of intuitive, practical entry point for non-experts
+                    * Reference point: *Machine Learning* community
+                    * This is well-known, and we are some among many who explore this issue
+                    </fragment>
+                    <fragment data-markdown class="tiny left"><br>
+                            Mascardi et al. "Engineering Multi-Agent Systems: State of Affairs and the Road Ahead."  
+                            Logan. "An agent programming manifesto." 
+                    </fragment>
+
+                </section>
+                
+                <section>
+                    <h4>A Process-Oriented Perspective</h4>
+
+                    <img src="./Dev_Ops.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+
+                </section>
+
+                <section>
+
+                    <h4>DevOps Ecosystem</h4>
+
+                    <img src="./devops_tech.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none; width: 80%;">
+                    
+                    <fragment data-markdown class="tiny left"><br>
+                        ![https://programmerblog.net/what-is-devop/](https://programmerblog.net/what-is-devop/)
+                    </fragment>
+                </section>
+
+
+                <section>
+                    <h4>Why DevOps?</h4>
+
+                    <img src="./knight_capital.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+                    
+                </section>
+
+                <section>
+                    <h4>Why EMAS?</h4>
+                    
+                    <img src="./knight_capital.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+                </section>
+
+
+                <section>
+                    <h4>DevOps and EMAS</h4>
+                    <table class="comparison">
+                        <tr>
+                            <td><strong>Autonomy Level</strong></td>
+                            <td><strong>Example</strong></td>
+                            <td><strong>Approach</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Organization</td>
+                            <td>Avoid handovers</td>
+                            <td>DevOps</td>
+                        </tr>
+                        <tr>
+                            <td>Integration</td>
+                            <td>Avoid manual deployments & QA   </td>
+                            <td>DevOps</td>
+                        </tr>
+                        <tr>
+                            <td>Operations</td>
+                            <td>Avoid manual resource provisioning</td>
+                            <td>DevOps</td>
+                        </tr>
+                        <tr>
+                            <td>Artifact</td>
+                            <td>Avoid manual low-level business decisions</td>
+                            <td>EMAS</td>
+                        </tr>
+                    </table>
+                    
+                </section>
+
+
+                <section>
+                    <h4>DevOps and EMAS</h4>
+
+                    <img src="./AgDevOps-Concepts.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
+
+                    
+                </section>
+
+                <section>
+                    <h4>DevOps and EMAS</h4>
+                    <table class="comparison">
+                        <tr>
+                            <td><strong>Existing Approach</strong></td>
+                            <td><strong>Feature</strong></td>
+                            <td><strong>Potential novelty</strong></td>
+                        </tr>
+                        <tr>
+                            <td>TDD</td>
+                            <td>Goal-oriented TDD</td>
+                            <td>Higher, declarative abstraction</td>
+                        </tr>
+                        <tr>
+                            <td>Staging system  </td>
+                            <td>Cross-organizational staging system</td>
+                            <td>Continuous deployments to one MAS  by different organizations</td>
+                        </tr>
+                        <tr>
+                            <td>Beta deployments of subsystems; A/B testing</td>
+                            <td>Beta agents in production environments</td>
+                            <td>Interaction between beta agents and stable agents</td>
+                        </tr>
+                        <tr>
+                            <td>Operations monitoring</td>
+                            <td>Explainable monitoring</td>
+                            <td>System-centered vs. agent-centered perspective</td>
+                        </tr>
+                    </table>
+                    
+                </section>
+
+                <section>
+                <fragment data-markdown>
+                #### What's new in this?
+
+                * Focus on **process**
+
+                * Let us take Logan's advocacy of *modular* EMAS tools and frameworks one step further:
+                    Suggest **minimally viable abstractions**
+                </fragment>
+                <fragment data-markdown class="tiny left"><br>
+                    Mascardi et al. "Engineering Multi-Agent Systems: State of Affairs and the Road Ahead."  
+                    Logan. "An agent programming manifesto." 
+                </fragment>
+
+                </section>
+
+                <section data-markdown>
+                    #### What can be next?
+
+                    * Example: goal-oriented testing
+
+                    * New [Jason feature](https://github.com/jason-lang/jason/tree/master/src/test/jason/asl), presumably novel to AOP in general
+
+                    * Can we write goal-oriented tests for any software artifact?
+
+                    * Can we make this contribution AOP-agnostic?
+                </section>
+
+				<section>
+						<h1>Thanks!</h1>
+						<small data-markdown>
+							*This work was partially supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation and partially funded by Project AG-BR of Petrobras and by the program PrInt CAPES-UFSC 'Automação 4.0'.*
+						</small>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>JS-son - Agent-Oriented Programming in JavaScript</title>
+		<title>Minimally Viable Agent-Oriented Programming Abstractions</title>
 
-		<meta name="description" content="JS-son - Agent-Oriented Programming in JavaScript">
+		<meta name="description" content="Minimally Viable Agent-Oriented Programming Abstractions">
 		<meta name="author" content="Timotheus Kampik">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,8 +50,9 @@
                     <h3>Minimally Viable Agent-Oriented Programming Abstractions</h3>
                     <h6>A Perspective from the JS-son JavaScript Library</h6>
 					<p>
-						<small><strong>Timotheus Kampik et al.</strong></small> <br>
-						<small>Umeå University</small>
+						<small><strong>Timotheus Kampik</strong></small> <br>
+                        <small>Umeå University</small><br>
+                        <small><strong>...and many others!</strong></small>
 					</p>
 				</section>
 
@@ -97,6 +98,10 @@
 
                 <section>
                     And we can deploy JS-son agents just about everywhere!
+
+                    <fragment class="tiny left"><br>
+                        Example: Y. Mualla et al. "Human-agent explainability: an experimental case study on the filtering of explanations". 
+                     </fragment>
                 </section>
 
                 <section data-background-iframe="https://people.cs.umu.se/~tkampik/demos/uav/?seed=5&scenario=s2&mode=cont&speed=3&controls=true" data-background-interactive>
@@ -106,13 +111,11 @@
 				</section>
 
                 <section data-markdown>
-                    Local example, see [here on Google Colab](https://colab.research.google.com/drive/1_viwoWyOIl8SH61WEAnEpndbR18WHPf3" data-background-interactive)
+                    [Data science/Jupyter](https://colab.research.google.com/drive/1_viwoWyOIl8SH61WEAnEpndbR18WHPf3).
                 </section>
-                <!--<section data-background-iframe="https://colab.research.google.com/drive/1_viwoWyOIl8SH61WEAnEpndbR18WHPf3" data-background-interactive></section>-->
-                    
+                
                 <section data-background-iframe="https://people.cs.umu.se/~tkampik/demos/sound-on-the-fly/" data-background-interactive>
                 </section>
-				
 
                 <section data-markdown>
                     But which *abstractions* are actually useful?
@@ -126,7 +129,7 @@
                     ![](https://academic.signavio.com/p/model/9e299b68352447af8a74934c1ecebd18/png?inline&authkey=6d854f9fd2fc48e154bac993e92b5a485f46badec9f818cbba9b1f7d54bbd)
                 </section>
 
-				<section>
+				<!--<section>
                     <h4>Design Principles I</h4>
                         <fragment data-markdown>
                             * Usability over intellectual elegance
@@ -136,10 +139,10 @@
                         <fragment data-markdown class="tiny left"><br>
                             Inspired by the [Agile Manifesto](https://agilemanifesto.org/)
                         </fragment>
-				</section>
+				</section>-->
 
 				<section>
-						<h4>Design Principles II</h4>
+						<h4>Design Idea</h4>
 						<table class="comparison">
 							<tr>
 								<td><strong>Functional Programming</strong></td>
@@ -203,6 +206,7 @@
                     ```JavaScript
                     (beliefs, goals) => 
                         doSomething.then(goals => goals)
+                    ```
                 </section>
 
                 <section data-markdown>
@@ -213,12 +217,11 @@
                             (beliefs, goalValue) => ({ action: {
                                 type: 'openDoor',
                                 forWhom: goalValue.forWhom
-                        } })) ]
+                        } }))
                     ```
 
                     * Defines procedures that are attached to a goal
                     * Plan results are fed back to environment/artifacts/other agents
-                    ```
                 </section>
 
                 <section data-markdown>
@@ -232,17 +235,14 @@
                 </section>
 
                 <section>
-                    TODO React integration
-                </section>
-
-                <section>
                     <fragment data-markdown>
                         #### Agent Interface 
                 
                         * W3C WoT Scripting API
                         * Beliefs are superset of properties
-                        * Goals are superset of affordances
-                        * Agent has goal autonomy
+                        * How do goals relate to affordances?
+                            * Agent has goal autonomy
+                            * Affordance of artifacts an agent controls are affected
                     </fragment>
                     <fragment data-markdown class="tiny left"><br>
                         TK, A Gomez, A Ciortea, S Mayer. "Autonomous Agents on the Edge of Things"
@@ -250,7 +250,10 @@
                 </section>
 
                 <section>
-                    TODO WoT Scripting API integration
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/MUhUuqd2jt0?start=200" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <fragment data-markdown class="tiny left"><br>
+                        TK, A Gomez, A Ciortea, S Mayer. "Autonomous Agents on the Edge of Things"
+                    </fragment>
                 </section>
 			
 

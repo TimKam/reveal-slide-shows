@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Explainable Reasoning in Face of Contradictions: From Humans to Machines
+        </title>
+
+        <meta name="description" content="Explainable Reasoning in Face of Contradictions: From Humans to Machines">
+        <meta name="author" content="Dov Gabbay, Timotheus Kampik">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <script src="./js/sigma.min.js"></script>
+        <script src="./js/sigma.renderers.parallelEdges.min.js"></script>
+        <script src="./js/sigma.layout.noverlap.min.js"></script>
+        <script src="./js/sigma.plugins.animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+                <div class='footer'>
+                    <span class="footer-text">Gabbay (& Kampik). EXTRAAMAS 2021.</span>
+                    <img class="lu-logo" src="./uni_lu.png" alt="LU logo"/>
+                    <img class="kcl-logo" src="./kcl_logo.png" alt="KCL logo"/>
+                    <img class="bar-ilan-logo" src="./bar_ilan.svg" alt="Bar Ilan logo"/>
+                </div>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h3>Explainable Reasoning in Face of Contradictions: From Humans to Machines
+                    </h3>
+                    <p>
+                        <small><strong>Dov Gabbay</strong> </small><br>
+                        <small>Paper: Kampik & Gabbay. <em>Explainable Reasoning in Face of Contradictions: From Humans to Machines.</em></small>
+                    </p>
+                </section>  
+
+                    <section data-markdown>
+                        #### Outline
+
+                        * We claim that a key characteristic of intelligent behavior is the ability to make and **explain** decisions in the face of contradictions.
+
+                        * We motivate this claim by looking at research in micro-economic theory and behavioral economics.
+
+                        * We outline a set of future research directions.
+                        
+                    </section>
+
+                    <section    >
+                        <h4>What is (Artificial) Intelligence?</h4>
+
+                        <figure style="border: none; background: none; box-shadow: none;">
+                        <img class="scenario-img" src="./Deep_Blue.jpg">    
+                        <img class="scenario-img" src="./Go.JPG">
+                        <img class="scenario-img" src="./starcraft.jpg">
+                        <figcaption style="font-size: medium; ">Moving target that captures the public imagination</figcaption>
+                    </figure>
+                        
+                    </section>
+
+                    <section>
+                        <h4>What is (Artificial) Intelligence?</h4> 
+
+                        <figure style="border: none; background: none; box-shadow: none;">
+                            <img src="./belief_revision.png"\>
+                            <figcaption style="font-size: medium; ">Principle-based reasoning and principle-based belief revision</figcaption>
+                        </figure>
+                        
+                        
+                    </section>
+
+
+                    <section>
+                        <fragment data-markdown>
+                            #### Example: British Nationality Act
+
+                            * $\Delta$
+    
+                            * Query from $\Delta$: can ${\cal A}$ get British passport?
+    
+                            * Program: **Prolog**; today we could use *Logica*
+                        </fragment> 
+                        <fragment data-markdown class="tiny left">
+                            Sergot et al. *The British Nationality Act as a logic program*. 1986.  
+                            Tretyakov and Skvortsov (Google). *Logica Open Source Project*. 2021.
+                        </fragment>
+                    </section>
+
+                    <section>
+                        <h4> $\Delta$: can ${\cal A}$ get British passport?</h4>    
+                        <fragment data-markdown style="font-size:30px;">
+                        * Answer: yes  
+                          Give trace of proof from $\Delta$
+                        * Answer: no  
+                          Explanation: trace of attempted proof with output of what is missing
+
+                        * (1) $a \rightarrow b$
+                        * (2) $a$
+                        * $?_{(1), (2)} b = $ yes, from (1), (2)
+                        * $?_{(1)} b = $ no, (2) is needed
+                    </fragment>
+                    </section>
+
+                    <section>
+                    <fragment data-markdown>
+                        #### Choice
+                    
+                        * Test for cancer inconclusive
+
+                        * Program: **Default**; we infer:
+
+                        * ${\cal H}$ is consistent to assume ${\cal A}$ has cancer
+
+                        * ${\cal H}$ is consistent to assume ${\cal A}$ does not have cancer
+
+                        * What we choose depends on our preference;  
+                          e.g., if we assume a cancer diagnosis, can we retire now with full pension?
+
+                    </fragment>
+                    <fragment data-markdown class="tiny left">
+                       Gabbay. Logic for AI and Information Technology (580pp). 2007.
+                    </fragment>
+                    </section>
+
+                    <section data-markdown>
+                        #### What happens if data is inconsistent?
+                        
+                        * All queries can be answered with `yes`
+
+                        * We cannot explain without making a choice
+
+                        * We need priorities
+
+                        * We take a look at micro-economic decision theory and continue the example
+
+                    </section>
+
+                    <section data-markdown>
+                        #### What happens if data is inconsistent?
+                        
+                        * When data is inconsistent, any conclusion can be derived.
+                        
+                        * So we need priorities on the conclusions and we choose what we want.
+                        
+                        * When more data arrived or when we restore consistency by deleting contradictions, we can reason again. There is a chance our priorities will change. 
+                        
+                        * What does it mean to be rational in this case?
+
+                    </section>
+
+                    <section>
+                        <h4>Humans reason according to priorities</h4>
+                        <figure style="width:325px!important; float:left">
+                            <img src="./friedman.jpg" width="325px"\>
+                            <figcaption style="font-size: medium; ">Milton Friedman</figcaption>
+                        </figure>
+                        
+                                <div  style="font-size: 26px; float: right; width: 450px; text-align: center; margin-top: 15px;">
+                                    <ul>
+                                        <li>Human Reasoning has been studied for centuries</li>
+                                        <li>How should we make decisions?
+                                        </li>
+                                        <li>How should we treat doubt?</li>
+                                        <li>Example: the Talmud and Shev Shema'tata.</li>
+                                        <li>Line from religious to legal reasoning</li>
+                                        <li>Line from religious reasoning to economic theory?</li>
+                                    </ul>
+                                </div>
+                    </section>
+
+                    <section data-markdown>
+                        #### Economic Rationality
+
+                        * Assumptions of economic rationality, **ceteris paribus** (if everything else equal):
+
+                            * "Rational Economic Man" acts according to clear preferences
+
+                            * Has consistent preferences over time
+                            
+                    </section>
+
+                    <!--<section>
+                        <fragment data-markdown>
+                        #### Clear Preferences
+                        </fragment>
+    
+                        <br>
+                        <fragment data-markdown style="font-size: 33.6px">
+                        * Standard economic model for individual decision-making
+
+                        * Chooses from $A = \\{a, ..., n\\}$
+                        
+                        * Choice function: takes $A$, returns $S^* \in 2^A$
+    
+                        * Clear preferences: choice $S^\*$ implies $S^*$ is strictly preferred over all other elements in $2^A$
+                        </fragment>
+    
+                        <fragment data-markdown class="tiny left">
+                            Rubinstein, Ariel. *Modeling bounded rationality.* 
+                        </fragment>
+                </section>-->
+
+
+                <section>
+                    <h4>Clear Preferences</h4>
+                    $a$: ${\cal A}$ has cancer; $b$: ${\cal A}$ does not have cancer
+                    <div style="width:50%!important;min-height: 250px !important;" id="af-1bb" class="af"></div>
+                    We want to retire now with full pension: $\{a\} \succeq \{b\}$ and we infer $a$.
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-1bb'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 15,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#EABAB9' },
+                                ],
+                                edges: [
+                                    { id: "e1", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                </section>
+    
+                <!--<section>
+                    <fragment data-markdown>
+                    #### Consistent Preferences (Reference Independence)
+                    </fragment>
+    
+                    <fragment data-markdown style="font-size: 33.6px">
+                    * Set of choice options $A, A'$, such that $A \subseteq A'$
+                    
+                    * Rational man's choices $A^{\*} \subseteq A$ and $A'^{\*} \subseteq A'$
+                    
+                    * If $A'^{\*} \subseteq A$ then $A^{\*} = A'^{\*}$
+                    </fragment>
+    
+                    <fragment data-markdown class="tiny left">
+                        Rubinstein, Ariel. *Modeling bounded rationality.*
+                    </fragment>
+                </section>-->
+
+                <section>
+                    <h4>Consistent Preferences</h4>
+                    <p style="font-size: 28.6px">
+                        Guide and help explain our inference process.</p>
+                    <p style="font-size: 28.6px">
+                    $p$: Do we want to launch product $p'$?  <br>
+                    (1): No objections: $\{p\}$    <br>
+                    (2): inconsistent objections, we stay with $\{p\}$
+                    </p>
+
+                    <table style="min-width:900px!important;">
+                        <tr>
+                            <td>
+                                <div style="width:50%!important;min-height: 250px !important;" id="af-1a1" class="af"></div>
+                                
+                            </td>
+                            <td>
+                                <div style="width:70%!important;min-height: 250px !important;" id="af-1b1" class="af"></div>
+                                
+                            </td>
+                        </tr>
+                        </table>    
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-1a1'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 15,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "p", label: "p", x: 0, y: 0, size: 25, color: '#73A790' }
+                                ],
+                                edges: [
+                                   
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-1b1'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 15,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.05
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "p", label: "p", x: 0, y: 0, size: 25, color: '#73A790' },
+                                    { id: "a", label: "a", x: 0, y: 1.5, size: 25, color: '#EABAB9' },
+                                    { id: "b", label: "b", x: 1, y: 0, size: 25, color: '#EABAB9' },
+                                    { id: "c", label: "c", x: 1, y: 1.5, size: 25, color: '#EABAB9' }
+                                ],
+                                edges: [
+                                    { id: "e3", source: "a", target: "p", color: '#fff', type:'arrow', count:0, size: 3},
+                                    { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "c", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                </section>
+                
+                <section>
+                <h4>Bounded Rationality</h4>
+                <img src="./kahneman_2.png" width="225px"\>
+                        <div  style="font-size: 26px; float: right; width: 450px; text-align: center; margin-top: 15px;">
+                            <ul>
+                                <li> By now, we know that economic rationality is not a good model of human (intelligent) decision-making. 
+                                </li>
+                                <li> Lacks a model of knowledge.
+                                </li>
+                                <li>Economists try to adjusts their models accordingly.</li>
+                                <li>From Kahneman's empirical insights, Tversky built models for relaxing rationality</li>
+                                <li>With formal argumentation, we can draw inferences in face of contradictions that are economically rational.</li>
+                            </ul>
+                        </div>
+                        <fragment data-markdown class="tiny left">
+                            Kahneman, Daniel. *Maps of bounded rationality.*  2003.
+                            Rubinstein, Ariel. *Modeling bounded rationality.* 1998.
+                        </fragment>
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Beyond Consistent Preferences: Airline Example
+                    
+                    * ${\cal A}$ buys business class ticket, is entitled to 2 suitcases
+                    
+                    * On check-in: first class is overbooked, system suggests:  
+                        a) Take compensation and take next flight  
+                        b) Change to economy, get only 1 suitcase
+
+                    * The system can explain, but you cannot argue with it!
+                    </fragment>
+                        <fragment data-markdown class="tiny left">
+                            Gabbay et al. *Controlled Revision – A Preliminary Account*. 2003.
+                        </fragment>
+                </section>
+
+                <section>
+                    <h4>Attacks Explain Constraints for Preference Optimization</h4>
+
+                    <p style="font-size: 33.6px">
+                        a: fly economy; b: fly business <br>
+                        c: take 2 suitcases; d: take compensation; e: arrive on time
+                    </p>
+                    
+                    <div style="width:50%!important;min-height: 250px !important;" id="af-1bc" class="af"></div>
+
+                    <p style="font-size: 33.6px">
+                    Can we persuade the system to relax soft constraints?  
+                    Example: $\{a, c, e\}$ as a 'reasonable' compromise
+                    </p>    
+
+                    <script>
+                        // Ask sigma to draw it
+                        window.addEventListener('load', (
+                            event) => {
+                                s = new sigma(
+                                {
+                                    renderer: {
+                                    container: document.getElementById('af-1bc'),
+                                    type: 'canvas'
+                                    },
+                                    settings: {
+                                        edgeLabelSize: 'fixed',
+                                        defaultLabelSize: 30,
+                                        minArrowSize: 10,
+                                        maxNodeSize: 15,
+                                        maxEdgeLabelSize: 20,
+                                        defaultLabelColor: '#fff',
+                                        defaultEdgeSize: 3,
+                                        maxEdgeSize: 3,
+                                        mouseWheelEnabled: true,
+                                        sideMargin: 0.3
+                                    }
+                                }
+                                )
+
+                                // Create a graph object
+                                window.carGraphInitial = {
+                                nodes: [
+                                    { id: "a", label: "a", x: 1, y: 0, size: 20, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 0, size: 20, color: '#EABAB9' },
+                                    { id: "c", label: "c", x: 1, y: 1, size: 20, color: '#73A790' },
+                                    { id: "d", label: "d", x: 0.5, y: 1, size: 20, color: '#EABAB9' },
+                                    { id: "e", label: "e", x: 0, y: 1, size: 20, color: '#73A790' },
+                                ],
+                                edges: [
+                                    { id: "e1", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e2", source: "b", target: "a", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e3", source: "a", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e4", source: "a", target: "d", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                    { id: "e5", source: "b", target: "e", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                ]
+                                }
+                                // Load the graph in sigma
+                                s.graph.read(carGraphInitial)
+
+                                // Start the algorithm:
+                            s.refresh()
+                            }
+                        )
+                    </script>
+                </section>
+
+               
+
+                <section data-markdown>
+                    #### Research Directions
+
+                    * We cannot reason with the system and persuade it to relax the constraints
+
+                    * For this we need to call the manager
+
+                    * Our machine reasoner should be able to make a human-like decision, but according to consistent principles
+                </section>
+
+                <section>
+                    <h4>Human-like decision, according to consistent principles</h4> 
+
+                    <figure style="border: none; background: none; box-shadow: none;">
+                        <img src="./car.jpg" width="70%">
+                        <figcaption style="font-size: medium; ">Robotic Taxi, one passenger. <br>
+                        Driving straight will kill 3 people, veering into the wall will kill one. <br>
+                        We want to stop time and argue with the robot driver.</figcaption>
+                    </figure>
+                    
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Automated Reasoning and (Bounded) Economic Rationality
+
+                    * How can we apply principles of (boundedly) rational decision-making to automated (non)-monotonic reasoning?
+
+                    * How should we relax these principles?
+                </fragment>
+                    <fragment data-markdown class="tiny left">
+                        Kampik & Gabbay. *Explainable Reasoning in Face of Contradictions: From Humans to Machines*. 2021.
+                        Kampik & Gabbay. *Towards DiArg - An Argumentation-based Dialogue Reasoner*. 2020.
+                        Kampik & Nieves. *Abstract Argumentation and the Rational Man*. 2021.
+                    </fragment>
+                </section>
+
+                    
+                </section>
+
+                <section>
+                    <fragment data-markdown>
+                    #### Principle-based Automated Reasoning and Intuitive Rationality
+
+                    * What principles do humans find intuitive?
+
+                    * Are these principles generally applicable, or are there domain-specific or population-specific differences?
+                    </fragment>
+                    <fragment data-markdown class="tiny left">
+                        Cramer & Guillaume. *Empirical cognitive study on abstract argumentation semantics*. 2018.
+                        Cramer & Guillaume. *Empirical study on human evaluation of complex argumentation frameworks*. 2019.
+                        Van der Torre & Vesic. *The principle-based approach to abstract argumentation semantics*. 2017.
+                        Baroni & Giacomin. *On principle-based evaluation of extension-based argumentation semantics*. 2007.
+                    </fragment>
+                </section>
+                <section>
+                    <fragment data-markdown>
+                    #### Learning Reasoning Principles
+
+                    * More and more works integrate symbolic reasoning and machine learning
+
+                    * We can learn formal models that satisfy reasoning principles (like monotony properties)
+
+                    * What practical guarantees can we get from these principles?
+
+                    * How can we learn principles? Can we tie principles to rewards?
+                </fragment>
+                    <!--<fragment data-markdown class="tiny left">
+                        Cabrio & Villata. "Five Years of Argument Mining: a Data-driven Analysis." 
+                    </fragment>-->
+
+                </section>
+
+
+                <section>
+                    <h1>Questions?</h1>
+                    <small data-markdown>
+                        Special Issue in the Journal of Applied Logics - IfCoLog Journal:  
+                        *Explainable Reasoning in Face of Contradictions: Cross-disciplinary Perspectives*
+                    </small>
+                    <fragment data-markdown>
+                        [Link to the paper](https://people.cs.umu.se/tkampik/reports/Kampik_Gabbay_reasoning_contradictions.pdf)
+                    </fragment>
+            </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/math/math.js', async: true }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'))
+            } )
+
+        </script>
+
+    </body>
+</html>

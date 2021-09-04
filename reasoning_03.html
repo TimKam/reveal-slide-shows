@@ -87,23 +87,14 @@
                     </section>
 
                     <section>
-                        <h4>What is (Artificial) Intelligence?</h4>
-
-                        <img class="scenario-img" src="./Deep_Blue.jpg">    
-                        <img class="scenario-img" src="./Go.JPG">
-                        <img class="scenario-img" src="./starcraft.jpg">
-                        
-                    </section>
-
-                    <section>
-                        <h4>What is (Artificial) Intelligence?</h4> 
+                        <h4>Principle-based Reasoning</h4> 
 
                         <img src="./belief_revision.png" style="border: none; background-color: #F0EEE3; padding: 15px; box-shadow: none;">
                         
                     </section>
 
                     <section>
-                        <h4>What is AI in the reald world?</h4> 
+                        <h4>Reasoning in Intelligent Systems</h4> 
 
                         <img src="./what_is_ai.png" style="border: none; background: none; box-shadow: none; width: 50%; background-color: #F0EEE3; padding: 15px;">
                         
@@ -217,6 +208,7 @@
                 </fragment>
                 </section>
 
+                <!--
                 <section>
                     <h4>Modern Knowledge-Based Systems</h4>
 
@@ -228,7 +220,7 @@
 
                     <a style="font-size: 12px;" src="https://www.redhat.com/en/technologies/jboss-middleware/decision-manager">https://www.redhat.com/en/technologies/jboss-middleware/decision-manager</a>
                         
-                </section>
+                </section>-->
 
                 <section data-markdown>
                     #### Example: Decision Model and Notation (DMN)
@@ -407,7 +399,7 @@
                 </section>
 
                 <section data-markdown>
-                    #### Example II
+                    #### Example
                     
                     * Change: new passport reported: ``UK``
 
@@ -468,7 +460,8 @@
                                         edgeLabelSize: 'fixed',
                                         defaultLabelSize: 30,
                                         minArrowSize: 10,
-                                        maxNodeSize: 25,
+                                        maxmaxNodeSize: 25,
+                                        maxNodeSize: 20,
                                         maxEdgeLabelSize: 20,
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
@@ -482,9 +475,9 @@
                                 // Create a graph object
                                 window.carGraphInitial = {
                                 nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
-                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#73A790' }
+                                    { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#73A790' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 1, size: 20, color: '#73A790' }
                                 ],
                                 edges: [
                                     { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
@@ -514,7 +507,7 @@
                                         edgeLabelSize: 'fixed',
                                         defaultLabelSize: 30,
                                         minArrowSize: 10,
-                                        maxNodeSize: 25,
+                                        maxNodeSize: 20,
                                         maxEdgeLabelSize: 20,
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
@@ -528,9 +521,9 @@
                                 // Create a graph object
                                 window.carGraphInitial = {
                                 nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 1, size: 20, color: '#fff' }
                                 ],
                                 edges: [
                                     { id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
@@ -574,7 +567,7 @@
                                         edgeLabelSize: 'fixed',
                                         defaultLabelSize: 30,
                                         minArrowSize: 10,
-                                        maxNodeSize: 25,
+                                        maxNodeSize: 20,
                                         maxEdgeLabelSize: 20,
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
@@ -588,10 +581,10 @@
                                 // Create a graph object
                                 window.carGraphInitial = {
                                 nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                    { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' },
-                                    { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#fff' }
+                                    { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#fff' },
+                                    { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#fff' },
+                                    { id: "c", label: "c", x: 1, y: 1, size: 20, color: '#fff' },
+                                    { id: "d", label: "d", x: 1, y: 0, size: 20, color: '#fff' }
                                 ],
                                 edges: [
                                     { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
@@ -691,8 +684,8 @@
                 </section>
 
 
-                <section data-markdown>
-                    #### Example III - Weak Reference Independence
+                <!--<section data-markdown>
+                    #### Example  - Weak Reference Independence
                     
                     * Decision: recommend launch of product $p_a$: yes or no?
 
@@ -702,86 +695,73 @@
     
                     &rarr; recommend $a$
     
-                </section>
+                </section>-->
     
-                <section>
-                    <fragment>
-                        <h4>Example III</h4>
-                        <div id="af-2aa" class="af" style="width:50%!important;min-height: 250px !important;"></div>
-                    </fragment>
     
-                    
-    
-                    <script>
-                        // Ask sigma to draw it
-                        window.addEventListener('load', (
-                            event) => {
-                                s = new sigma(
-                                {
-                                    renderer: {
-                                    container: document.getElementById('af-2aa'),
-                                    type: 'canvas'
-                                    },
-                                    settings: {
-                                        edgeLabelSize: 'fixed',
-                                        defaultLabelSize: 30,
-                                        minArrowSize: 10,
-                                        maxNodeSize: 25,
-                                        maxEdgeLabelSize: 20,
-                                        defaultLabelColor: '#fff',
-                                        defaultEdgeSize: 3,
-                                        maxEdgeSize: 3,
-                                        mouseWheelEnabled: true,
-                                        sideMargin: 0.05
-                                    }
-                                }
-                                )
-    
-                                // Create a graph object
-                                window.carGraphInitial = {
-                                nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
-                                    //{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                    // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
-                                ],
-                                edges: [
-                                    //{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    //{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
-                                    //{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
-                                ]
-                                }
-                                // Load the graph in sigma
-                                s.graph.read(carGraphInitial)
-    
-                                // Start the algorithm:
-                            s.refresh()
-                            }
-                        )
-                    </script>
-    
-                </section>
-    
-                <section data-markdown>
-                    #### Example III
-                    
-                    Our boss asks us to collect more stakeholder opinions (arguments)
-    
-                </section>
     
                     <section>
                         <fragment>
-                        <h4>Example III</h4> 
+                        <h4>Example</h4> 
                             <table style="min-width:900px!important;min-height: 900px !important;">
                                 <tr>
                                     <td>
-                                        <div style="width:50%!important;min-height: 250px !important;" id="af-2b" class="af"></div>
+                                        <div id="af-2aa" class="af" style="width:100%!important;min-height: 350px !important;"></div>
                                     </td>
                                     <td>
-                                        <div style="width:50%!important;min-height: 250px !important;" id="af-2c" class="af"></div>
+                                        <div style="width:50%!important;min-height: 350px !important;" id="af-2b" class="af"></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:100%!important;min-height: 350px !important;" id="af-2c" class="af"></div>
                                     </td>
                                 </tr>
                             </table>
                         </fragment>
+                        <script>
+                            // Ask sigma to draw it
+                            window.addEventListener('load', (
+                                event) => {
+                                    s = new sigma(
+                                    {
+                                        renderer: {
+                                        container: document.getElementById('af-2aa'),
+                                        type: 'canvas'
+                                        },
+                                        settings: {
+                                            edgeLabelSize: 'fixed',
+                                            defaultLabelSize: 30,
+                                            minArrowSize: 10,
+                                            maxNodeSize: 20,
+                                            maxEdgeLabelSize: 20,
+                                            defaultLabelColor: '#fff',
+                                            defaultEdgeSize: 3,
+                                            maxEdgeSize: 3,
+                                            mouseWheelEnabled: true,
+                                            sideMargin: 0.05
+                                        }
+                                    }
+                                    )
+        
+                                    // Create a graph object
+                                    window.carGraphInitial = {
+                                    nodes: [
+                                        { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#73A790' },
+                                        //{ id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                        // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
+                                    ],
+                                    edges: [
+                                        //{ id: "e0", source: "a", target: "b", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        //{ id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
+                                        //{ id: "e2", source: "polo", target: "porsche", color: '#fff', type:'curvedArrow', count:0, size: 3}
+                                    ]
+                                    }
+                                    // Load the graph in sigma
+                                    s.graph.read(carGraphInitial)
+        
+                                    // Start the algorithm:
+                                s.refresh()
+                                }
+                            )
+                        </script>
                         <script>
                             // Ask sigma to draw it
                             window.addEventListener('load', (
@@ -796,7 +776,7 @@
                                             edgeLabelSize: 'fixed',
                                             defaultLabelSize: 30,
                                             minArrowSize: 10,
-                                            maxNodeSize: 25,
+                                            maxNodeSize: 20,
                                             maxEdgeLabelSize: 20,
                                             defaultLabelColor: '#fff',
                                             defaultEdgeSize: 3,
@@ -810,8 +790,8 @@
                                     // Create a graph object
                                     window.carGraphInitial = {
                                     nodes: [
-                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
-                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                        { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#73A790' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#fff' },
                                         // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
                                     ],
                                     edges: [
@@ -841,7 +821,7 @@
                                             edgeLabelSize: 'fixed',
                                             defaultLabelSize: 30,
                                             minArrowSize: 10,
-                                            maxNodeSize: 25,
+                                            maxNodeSize: 20,
                                             maxEdgeLabelSize: 20,
                                             defaultLabelColor: '#fff',
                                             defaultEdgeSize: 3,
@@ -855,10 +835,10 @@
                                     // Create a graph object
                                     window.carGraphInitial = {
                                     nodes: [
-                                        { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                        { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
-                                        { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' },
-                                        { id: "d", label: "d", x: 1, y: 0, size: 25, color: '#fff' }
+                                        { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#fff' },
+                                        { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#fff' },
+                                        { id: "c", label: "c", x: 1, y: 1, size: 20, color: '#fff' },
+                                        { id: "d", label: "d", x: 1, y: 0, size: 20, color: '#fff' }
                                     ],
                                     edges: [
                                         { id: "e1", source: "b", target: "c", color: '#fff', type:'curvedArrow', count:0, size: 3},
@@ -879,7 +859,7 @@
                     </section>
     
                     <section>
-                        <h4>Example III</h4>
+                        <h4>Example</h4>
                         <ul>
                             <li>If all newly added arguments are not valid conclusions, $a$ should remain a valid conclusion.</li>
                             <li>
@@ -950,7 +930,7 @@
                                     edgeLabelSize: 'fixed',
                                     defaultLabelSize: 30,
                                     minArrowSize: 10,
-                                    maxNodeSize: 25,
+                                    maxNodeSize: 20,
                                     maxEdgeLabelSize: 20,
                                     defaultLabelColor: '#fff',
                                     defaultEdgeSize: 3,
@@ -964,8 +944,8 @@
                             // Create a graph object
                             window.carGraphInitial = {
                             nodes: [
-                                { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#73A790' },
-                                { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#fff' },
+                                { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#73A790' },
+                                { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#fff' },
                                 // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
                             ],
                             edges: [
@@ -996,7 +976,7 @@
                                     edgeLabelSize: 'fixed',
                                     defaultLabelSize: 30,
                                     minArrowSize: 10,
-                                    maxNodeSize: 25,
+                                    maxNodeSize: 20,
                                     maxEdgeLabelSize: 20,
                                     defaultLabelColor: '#fff',
                                     defaultEdgeSize: 3,
@@ -1010,9 +990,9 @@
                             // Create a graph object
                             window.carGraphInitial = {
                             nodes: [
-                                { id: "a", label: "a", x: 0, y: 0, size: 25, color: '#fff' },
-                                { id: "b", label: "b", x: 0, y: 1, size: 25, color: '#73A790' },
-                                { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#73A790' },
+                                { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#fff' },
+                                { id: "b", label: "b", x: 0, y: 1, size: 20, color: '#73A790' },
+                                { id: "c", label: "c", x: 1, y: 1, size: 20, color: '#73A790' },
                                 // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
                             ],
                             edges: [
@@ -1051,13 +1031,13 @@
                     <table style="min-width:900px!important;min-height: 900px !important;">
                         <tr>
                             <td>
-                                <div style="width:25%!important;min-height: 350px !important;" id="daf-2a" class="af"></div>
+                                <div style="width:50%!important;min-height: 350px !important;" id="daf-2a" class="af"></div>
                             </td>
                             <td>
-                                <div style="width:25%!important;min-height: 350px !important;" id="daf-2b" class="af"></div>
+                                <div style="width:50%!important;min-height: 350px !important;" id="daf-2b" class="af"></div>
                             </td>
                             <td>
-                                <div style="width:50%!important;min-height: 350px !important;" id="daf-2c" class="af"></div>
+                                <div style="width:100%!important;min-height: 350px !important;" id="daf-2c" class="af"></div>
                             </td>
                         </tr>
                     </table>
@@ -1075,7 +1055,7 @@
                                         edgeLabelSize: 'fixed',
                                         defaultLabelSize: 30,
                                         minArrowSize: 10,
-                                        maxNodeSize: 10,
+                                        maxNodeSize: 20,
                                         maxEdgeLabelSize: 20,
                                         defaultLabelColor: '#fff',
                                         defaultEdgeSize: 3,
@@ -1089,7 +1069,9 @@
                                 // Create a graph object
                                 window.carGraphInitial = {
                                 nodes: [
-                                    { id: "a", label: "a", x: 0, y: 0, size: 10, color: '#73A790' },
+                                    { id: "a", label: "a", x: 0, y: 0, size: 20, color: '#73A790' },
+                                    { id: "b", label: " ", x: 0, y: 1, size: 25, color: '#2A4765' },
+                                    { id: "c", label: " ", x: 0, y: 2, size: 25, color: '#2A4765' } 
                                     // { id: "c", label: "c", x: 1, y: 1, size: 25, color: '#fff' }
                                 ],
                                 edges: [
@@ -1117,7 +1099,7 @@
                                     edgeLabelSize: 'fixed',
                                     defaultLabelSize: 30,
                                     minArrowSize: 10,
-                                    maxNodeSize: 10,
+                                    maxNodeSize: 20,
                                     maxEdgeLabelSize: 20,
                                     defaultLabelColor: '#fff',
                                     defaultEdgeSize: 3,
@@ -1161,7 +1143,7 @@
                                     edgeLabelSize: 'fixed',
                                     defaultLabelSize: 30,
                                     minArrowSize: 10,
-                                    nodeSize: 10,
+                                    maxNodeSize: 20,
                                     maxEdgeLabelSize: 20,
                                     defaultLabelColor: '#fff',
                                     defaultEdgeSize: 3,
@@ -1201,11 +1183,11 @@
                 </section>
 
                 <section data-markdown>
-                    #### Learning Principles
+                    #### Learning and Principle-based Reasoning
                 </section>
 
                 <section data-markdown>
-                    #### Learning Principles
+                    #### Learning and Principle-based Reasoning
 
                     * We know that we can mine knowledge and reason about it
 

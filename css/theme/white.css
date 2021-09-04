@@ -7,6 +7,117 @@
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff; }
 
+  .reveal .footer {
+    position: absolute;
+    bottom: 1em;
+    font-size: 0.5em;
+    text-align: center;
+    left: 0;
+    right: 0; }
+  
+  .reveal .wasp-logo {
+    width: 20em;
+    float: left; }
+  
+  .reveal .kcl-logo {
+    width: 7.5em;
+    float: left; }
+  
+  .reveal .lu-logo {
+    width: 7.5em;
+    float: left;
+    padding-left: 2em;
+    padding-right: 2em; }
+  
+  .reveal .bar-ilan-logo {
+    width: 15em;
+    margin-right: 4em;
+    float: right;
+    color: white; }
+  
+  .reveal .umu-logo {
+    width: 5em;
+    margin-right: 2em;
+    float: right; }
+  
+  .reveal .ufsc-logo {
+    width: 5em;
+    margin-right: 5em;
+    float: right; }
+  
+  .reveal .footer-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2em; }
+  
+  .tiny {
+    font-size: 18px !important; }
+  
+  li {
+    font-size: 80% !important;
+    margin-top: 20px; }
+  
+  .comparison {
+    font-size: 25px; }
+  
+  .alg {
+    font-family: monospace;
+    font-size: 34px !important; }
+  
+  .scenario-img {
+    width: 210px;
+    height: 250px; }
+  
+  img.active-1 {
+    border-color: red !important; }
+  
+  img.active-2 {
+    border-color: red !important;
+    border-style: dashed !important; }
+  
+  .active-1, .active-2 {
+    color: red; }
+  
+  .full-image {
+    height: 50%;
+    width: 50%; }
+  
+  .footnote {
+    font-size: 18px !important; }
+  
+  .double {
+    height: 200px !important; }
+  
+  td.double {
+    padding: 0 !important;
+    border: none !important; }
+  
+  .left-al {
+    text-align: left; }
+  
+  .smaller {
+    font-size: 32px; }
+  
+  .fit-image {
+    max-width: 70% !important; }
+  
+  .white-bg {
+    background-color: white !important; }
+  
+  .reveal .signavio-logo {
+    width: 5em;
+    float: left;
+    margin-left: 2em; }
+  
+  .af {
+    height: 200px;
+    width: 525px; }
+  
+  .af-split {
+    height: 200px;
+    width: 450px; }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -75,6 +186,9 @@ body {
 .reveal p {
   margin: 20px 0;
   line-height: 1.3; }
+
+.semi-larger {
+  font-size: 30px; }
 
 /* Ensure certain elements are never larger than the slide itself */
 .reveal img,
